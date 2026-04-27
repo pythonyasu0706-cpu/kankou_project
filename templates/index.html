@@ -1,6 +1,8 @@
 <!-- templates/index.html -->
 {% extends "base.html" %}
 
+{% set title = "福岡観光サイトTOP" %}
+
 <!-- TOPページは画像が大きく出るためヘッダー不要 -->
 {% set show_header = false %}
 
@@ -29,13 +31,11 @@
     <div class="wave wave-back">
         <div class="wave-inner">
             <svg viewBox="0 0 1440 120">
-                <path
-                    d="M0,60 C180,120 360,0 540,60 C720,120 900,0 1080,60 C1260,120 1440,0 1440,60 L1440,120 L0,120 Z"
+                <path d="M0,60 C180,120 360,0 540,60 C720,120 900,0 1080,60 C1260,120 1440,0 1440,60 L1440,120 L0,120 Z"
                     fill="#4fd1c5" />
             </svg>
             <svg viewBox="0 0 1440 120">
-                <path
-                    d="M0,60 C180,120 360,0 540,60 C720,120 900,0 1080,60 C1260,120 1440,0 1440,60 L1440,120 L0,120 Z"
+                <path d="M0,60 C180,120 360,0 540,60 C720,120 900,0 1080,60 C1260,120 1440,0 1440,60 L1440,120 L0,120 Z"
                     fill="#4fd1c5" />
             </svg>
         </div>
@@ -44,13 +44,11 @@
     <div class="wave wave-front">
         <div class="wave-inner">
             <svg viewBox="0 0 1440 120">
-                <path
-                    d="M0,60 C180,120 360,0 540,60 C720,120 900,0 1080,60 C1260,120 1440,0 1440,60 L1440,120 L0,120 Z"
+                <path d="M0,60 C180,120 360,0 540,60 C720,120 900,0 1080,60 C1260,120 1440,0 1440,60 L1440,120 L0,120 Z"
                     fill="#0ABAB5" />
             </svg>
             <svg viewBox="0 0 1440 120">
-                <path
-                    d="M0,60 C180,120 360,0 540,60 C720,120 900,0 1080,60 C1260,120 1440,0 1440,60 L1440,120 L0,120 Z"
+                <path d="M0,60 C180,120 360,0 540,60 C720,120 900,0 1080,60 C1260,120 1440,0 1440,60 L1440,120 L0,120 Z"
                     fill="#0ABAB5" />
             </svg>
         </div>
@@ -85,13 +83,5 @@
 {% block page_js %}
 <script src="{{ url_for('static', filename='js/top.js') }}"></script>
 {% endblock %}
-
-<!-- フッターナビ -->
-<nav class="bottom-nav">
-    <a href="{{ url_for('index') }}">🏠<span>TOP</span></a>
-    <a href="{{ url_for('spots') }}">📍<span>観光</span></a>
-    <a href="{{ url_for('foods') }}">🍜<span>グルメ</span></a>
-    <a href="{{ url_for('access') }}">🚃<span>アクセス</span></a>
-</nav>
 
 {% endblock %}

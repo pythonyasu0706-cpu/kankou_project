@@ -1,27 +1,7 @@
-/* static/css/components.css */
-/* :root {
-    --color-main: #0ABAB5;
-    --color-bg: #fff;
-    --color-text: #333333;
-    --color-accent: rgb(197, 161, 73);
-
-    --space-xs: 4px;
-    --space-sm: 8px;
-    --space-md: 16px;
-    --space-lg: 32px;
-
-    --font-base: 16px;
-    --font-lg: 20px;
-    --font-xl: 28px;
-
-    --radius-md: 8px;
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-    --transition: all 0.3s ease;
-} */
+/* 部品のCSS ハンバーガーメニュー, ヘッダー, ナビゲーション, パンくず, フッター, 天気予報 */
 
 /* ===================
-    partials/hamburger.html
+    partials/hamburger.html 開始
 =================== */
 /* ハンバーガーメニュー */
 .hamburger {
@@ -48,7 +28,7 @@
     height: 40px;
     /* /* margin-left: 10px; */
     margin-top: 15px;
-} 
+}
 
 .header a {
     display: inline-block;
@@ -118,7 +98,11 @@
 }
 
 /* ===================
-    partials/page_header.html
+    partials/hamburger.html 終了
+=================== */
+
+/* ===================
+    partials/page_header.html 開始
 =================== */
 /* 共通ページヘッダー ハンバーガーメニューのある白いとこ */
 .header {
@@ -153,10 +137,10 @@
 
 /* モデルコースページにのみ現状は言っているサブタイトル */
 .intro-text {
-margin-top: 15px;
-font-size: 0.95rem;
-font-weight: 300;
-color: var(--color-bg);
+    margin-top: 15px;
+    font-size: 0.95rem;
+    font-weight: 300;
+    color: var(--color-bg);
 }
 
 /* 各ページヘッダー終わり */
@@ -169,17 +153,21 @@ partials/footer.html 開始
     background: #0ABAB5;
     color: #fff;
     padding: 40px 20px 20px;
-    border-top: 3px solid #089e9a; /* footer仕切り線を少し濃い色で */
+    border-top: 3px solid #089e9a;
+    /* footer仕切り線を少し濃い色で */
     margin-top: 12px;
 }
-
 
 .footer-inner {
     max-width: 990px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    text-align: center;
 }
 
 /* ロゴ */
@@ -187,19 +175,39 @@ partials/footer.html 開始
     width: 150px;
 }
 
+.footer-nav {
+    margin: 0;
+    padding: 0;
+}
+
 /* ナビ */
 .footer-nav ul {
     display: flex;
-    gap: 20px;
+    justify-content: center;
+    /* text-align: center; */
+    align-items: center;
     list-style: none;
     padding: 0;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.footer-nav ul li {
     margin: 0;
+    /* liの余白をリセット */
+    padding: 0;
+    /* liの内側の余白をリセット */
 }
 
 .footer-nav a {
     color: #fff;
     text-decoration: none;
     font-size: 14px;
+    display: inline-block;
+    width: auto;
+    margin-top: 0;
+    background: none;
+    padding: 0;
 }
 
 .footer-nav a:hover {
@@ -216,7 +224,7 @@ partials/footer.html 開始
 .footer-sns a {
     color: #fff;
     font-size: 20px;
-    margin-left: 15px;
+    gap: 30px;
 }
 
 .footer-sns a:hover {
@@ -234,29 +242,35 @@ partials/footer.html 開始
 
 /* ===== スマホ対応 ===== */
 @media screen and (max-width: 768px) {
-.footer-inner {
-    flex-direction: column;
-    text-align: center;
-    gap: 20px;
+    .footer-inner {
+        margin: auto;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .footer-nav ul {
+        flex-direction: column;
+        /* align-items: center; */
+        gap: 10px;
+    }
+
+    .footer-nav ul li:not(:last-child) {
+        border-right: none;
+        margin-right: 0;
+        padding-right: 0;
+    }
+
+    .footer-sns {
+        display: flex;
+    }
+
+    .footer-sns a {
+        margin: 0 10px;
+    }
 }
 
-.footer-nav ul {
-    flex-direction: column;
-    gap: 10px;
-}
-
-.footer-nav ul li:not(:last-child) {
-    border-right: none;
-    margin-right: 0;
-    padding-right: 0;
-}
-
-.footer-sns a {
-    margin: 0 10px;
-}
-}
 /* ===================
-    partials/footer.html 開始
+    partials/footer.html 終了
 =================== */
 
 /* ===================
@@ -267,53 +281,14 @@ partials/footer.html 開始
     height: 400px;
 }
 
-
-
-
-/* Wether */
-
-
-/* body.clear { background: #fff7d6; }
-body.rain { background: #d6e6ff; }
-
-
-.weather-box {
-    text-align: center;
-}
-
-.weather-box a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-decoration: none;
-    color: inherit;
-    line-height: 1;
-}
-
-.weather-box p {
-    margin: 0;
-    line-height: 1;
-}
-
-.weather-box img {
-    width: 50px;
-    height: auto;
-    margin: -8px 0;
-} */
-
 /* ===================
-    Weather Icon
+    天気用CSS in partials/humberger.html 開始
 =================== */
-
-/* #tenjin-weather {
-    display: inline-block;
-    margin-left: 10px;
-} */
-
 /* 天気 */
 .header-weather {
     position: absolute;
-    right: 90px;  /* ハンバーガーとの距離 */
+    right: 90px;
+    /* ハンバーガーとの距離 */
     top: 50%;
     transform: translateY(-50%);
     gap: 4px;
@@ -337,22 +312,14 @@ body.rain { background: #d6e6ff; }
     margin-bottom: -2px;
 }
 
-/* アイコン */
-/* .header-weather img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-} */
 .header-weather img {
-    width: 32px;   /* 好きに調整：18〜24くらいがちょうどいい */
+    width: 32px;
+    /* 好きに調整：18〜24くらいがちょうどいい */
     height: 32px;
-    display: inline-block; /* 余白の原因を潰す */
+    display: inline-block;
+    /* 余白の原因を潰す */
     vertical-align: middle;
 }
-
-/* .header-weather span {
-    font-size: 14px;
-} */
 
 /* 温度 */
 #weather-temp {
@@ -368,9 +335,12 @@ body.rain { background: #d6e6ff; }
     display: flex;
     align-items: center;
     gap: 5px;
-    background: none;  /* ←これ重要 */
-    padding: 0;        /* ←これ重要 */
-    box-shadow: none;  /* ←これ重要 */
+    background: none;
+    /* ←これ重要 */
+    padding: 0;
+    /* ←これ重要 */
+    box-shadow: none;
+    /* ←これ重要 */
 }
 
 .weather-inline {
@@ -387,6 +357,7 @@ body.rain { background: #d6e6ff; }
     border: none !important;
     box-shadow: none !important;
 }
+
 /* アイコン */
 .weather-inline img {
     width: 18px;
@@ -413,10 +384,13 @@ body.rain { background: #d6e6ff; }
     opacity: 0.8;
 }
 
+/* ===================
+    天気用CSS in partials/humberger.html 終了
+=================== */
 
-
-
-
+/* ===================
+    パンくず in macros/breadcrumb.html 開始
+=================== */
 
 /* パンくず */
 .pankz {
@@ -448,3 +422,7 @@ body.rain { background: #d6e6ff; }
     display: inline;
     border-radius: 0;
 }
+
+/* ===================
+    パンくず in macros/breadcrumb.html 終了
+=================== */
