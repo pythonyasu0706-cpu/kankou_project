@@ -297,6 +297,12 @@ partials/footer.html 開始
     line-height: 1.2;
 }
 
+/* style.cssをリセット これがないとハンバーガー押した時にかぶる */
+.header-weather a {
+    padding-right: 0;
+    margin-right: 15px;
+}
+
 .weather-header-link {
     display: flex;
     flex-direction: column;
@@ -338,11 +344,8 @@ partials/footer.html 開始
     align-items: center;
     gap: 5px;
     background: none;
-    /* ←これ重要 */
     padding: 0;
-    /* ←これ重要 */
     box-shadow: none;
-    /* ←これ重要 */
 }
 
 .weather-inline {
