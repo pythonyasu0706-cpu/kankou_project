@@ -1,43 +1,7 @@
-/* デートコースページ用CSS */
-/* ==========================================
-    🎨 デザイン変数
-   ========================================== */
-/* :root {
-    --color-main: #0ABAB5;
-    /* ティファニーブルー */
-/* --color-accent: rgb(197, 161, 73); */
-/* ゴールド */
-/* --color-bg: #fdfcfb;
-    --color-text: #444444;
-    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --radius: 12px;
-} */
-
+/* モデルデートコース用CSS */
 /* ==========================================
     全体レイアウト
    ========================================== */
-/* body {
-    margin: 0;
-    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-    color: var(--color-text);
-    background-color: var(--color-bg);
-    line-height: 1.7;
-} */
-
-/* 福田さん作成header適用後不要 */
-/* header {
-    background-color: var(--color-main);
-    color: white;
-    padding: 40px 20px;
-    text-align: center;
-} */
-/* 福田さん作成header適用後不要 */
-/* .intro-text {
-    margin-top: 15px;
-    font-size: 0.95rem;
-    font-weight: 300;
-} */
-
 .container {
     max-width: 650px;
     margin: 0 auto;
@@ -139,7 +103,7 @@
 
 .spot-card {
     padding: 20px;
-    border-radius: var(--radius-md); 
+    border-radius: var(--radius-md);
     /* 12px */
     box-shadow: var(--shadow-main);
     /* 0 4px 12px rgba(0, 0, 0, 0.08); */
@@ -252,4 +216,65 @@
 /* タイムラインの最後（Goal）にある縦線を消す */
 .course-step:last-child .timeline-left::before {
     display: none;
+}
+
+/* ==========================================
+    ── ここから下がスマホ用 ──
+   ========================================= */
+@media (max-width: 480px) {
+
+    /* 1. コンテナを画面幅いっぱいに広げる（最重要！） */
+    .container {
+        width: 100%;
+        max-width: none;
+        /* PC版の650px制限を解除 */
+        padding: 20px 30px;
+        /* 左右の余白を最小限にする */
+        box-sizing: border-box;
+        /* パディングを含めた幅計算にする */
+    }
+
+    /* 2. タイムラインの左側エリアをさらにスリムにする */
+    .timeline-left {
+        width: 40px;
+    }
+
+    /* 3. コンテンツエリアを右側いっぱいに広げる */
+    .course-content {
+        padding-left: 5px;
+        flex: 1;
+        /* 残りの幅をすべてカードに使う */
+    }
+
+    /* 4. カードがはみ出さないように設定 */
+    .spot-card {
+        width: 100%;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+
+    /* 5. 画像の高さをスマホ向けに調整 */
+    .spot-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* 画像が潰れるのを防ぐ */
+    }
+
+    /* 6. テキストサイズを微調整 */
+    .spot-name {
+        font-size: 1rem;
+    }
+
+    .transport-node {
+        width: 40px;
+        font-size: 16px;
+    }
+
+    header h1 {
+        font-size: 1.5rem;
+        /* PCより小さくして1行に収める */
+        white-space: nowrap;
+        /* 絶対に改行させない指定 */
+    }
 }

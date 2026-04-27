@@ -184,7 +184,6 @@ partials/footer.html 開始
 .footer-nav ul {
     display: flex;
     justify-content: center;
-    /* text-align: center; */
     align-items: center;
     list-style: none;
     padding: 0;
@@ -194,11 +193,10 @@ partials/footer.html 開始
 
 .footer-nav ul li {
     margin: 0;
-    /* liの余白をリセット */
     padding: 0;
-    /* liの内側の余白をリセット */
 }
 
+/* style.cssをリセット */
 .footer-nav a {
     color: #fff;
     text-decoration: none;
@@ -250,8 +248,12 @@ partials/footer.html 開始
 
     .footer-nav ul {
         flex-direction: column;
-        /* align-items: center; */
         gap: 10px;
+    }
+
+    /* 各おすすめスポットとかご当地グルメとかの間を開ける */
+    .footer-nav li a {
+        margin: 10px;
     }
 
     .footer-nav ul li:not(:last-child) {
