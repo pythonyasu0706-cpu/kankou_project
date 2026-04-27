@@ -2,7 +2,9 @@
 {% extends "contact/base.html" %}
 
 {% block content %}
-    <div class="box01"><h1>確認画面</h1></div>
+<div class="box01">
+    <h1>確認画面</h1>
+</div>
 <div class="box03">
     <ul>
         <li>資料請求：{{form.catalog.data | join('、')}}</li>
@@ -13,42 +15,38 @@
         <li>郵便番号：{{form.zipcode.data}}</li>
         <li>都道府県：{{form.area.data}}</li>
         <li>住所：{{form.address.data}}</li>
-        <!-- <li>パスワード：{{form.password.data}}</li>
-        <li>確認用：{{form.confirm_password.data}}</li> -->
         <li>Email：{{form.email.data}}</li>
         <li>電話番号：{{form.tel.data}}</li>
     </ul>
-<form method="POST" action="{{ url_for('result') }}">
-    {{ form.hidden_tag() }}
+    <form method="POST" action="{{ url_for('result') }}">
+        {{ form.hidden_tag() }}
 
-    {% for item in form.catalog.data %}
-    {% endfor %}
+        {% for item in form.catalog.data %}
+        {% endfor %}
 
-    <!-- hiddenで値保持 -->
-    {% for item in form.catalog.data %}
-    <input type="hidden" name="catalog" value="{{ item }}">
-    {% endfor %}
-    <input type="hidden" name="title" value="{{ form.title.data }}">
-    <input type="hidden" name="note" value="{{ form.note.data }}">
-    <input type="hidden" name="name" value="{{ form.name.data }}">
-    <input type="hidden" name="kana" value="{{ form.kana.data }}">
-    <input type="hidden" name="zipcode" value="{{ form.zipcode.data }}">
-    <input type="hidden" name="area" value="{{ form.area.data }}">
-    <input type="hidden" name="address" value="{{ form.address.data }}">
-    <input type="hidden" name="password" value="{{ form.password.data }}">
-    <input type="hidden" name="confirm_password" value="{{ form.confirm_password.data }}">
-    <input type="hidden" name="email" value="{{ form.email.data }}">
-    <input type="hidden" name="tel" value="{{ form.tel.data }}">
-    <input type="hidden" name="agree" value="y">
-    <div class="submit-area">
-        <button type="button" class="back-btn" onclick="history.back()">
-            戻る
-        </button>
+        <!-- hiddenで値保持 -->
+        {% for item in form.catalog.data %}
+        <input type="hidden" name="catalog" value="{{ item }}">
+        {% endfor %}
+        <input type="hidden" name="title" value="{{ form.title.data }}">
+        <input type="hidden" name="note" value="{{ form.note.data }}">
+        <input type="hidden" name="name" value="{{ form.name.data }}">
+        <input type="hidden" name="kana" value="{{ form.kana.data }}">
+        <input type="hidden" name="zipcode" value="{{ form.zipcode.data }}">
+        <input type="hidden" name="area" value="{{ form.area.data }}">
+        <input type="hidden" name="address" value="{{ form.address.data }}">
+        <input type="hidden" name="email" value="{{ form.email.data }}">
+        <input type="hidden" name="tel" value="{{ form.tel.data }}">
+        <input type="hidden" name="agree" value="y">
+        <div class="submit-area">
+            <button type="button" class="back-btn" onclick="history.back()">
+                戻る
+            </button>
 
-        <button type="submit" class="send-btn">
-            送信する
-        </button>
-    </div>
-</form>
+            <button type="submit" class="send-btn">
+                送信する
+            </button>
+        </div>
+    </form>
 </div>
 {% endblock %}

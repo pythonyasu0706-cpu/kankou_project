@@ -2,7 +2,7 @@
 from wtforms import Form
 from flask_wtf import FlaskForm
 from wtforms.fields import (
-    StringField,IntegerField,PasswordField,DateField,
+    StringField,IntegerField,DateField,
     RadioField,SelectField,BooleanField,TextAreaField,
     EmailField,SubmitField
 )
@@ -143,12 +143,6 @@ class UserInfoForm(FlaskForm):
     area = SelectField('都道府県: ', choices=PREFECTURES,  validators=[DataRequired('都道府県を選択してください')])
 #:複数行テキスト
     address = TextAreaField('住所', validators=[DataRequired('住所は入力必須です')])
-    #パスワード：パスワード入力
-    password = PasswordField('パスワード: ',validators=[Length(1, 10 ,'パスワードの長さは1文字以上10文字以内です'),
-                                                DataRequired('パスワードは入力必須です'),
-                                                EqualTo('confirm_password','パスワードが一致しません')])
-    #確認用:パスワード入力
-    confirm_password = PasswordField('パスワード確認: ',validators=[DataRequired('入力必須です')])
     #Email:メールアドレス入力
     email = EmailField('メールアドレス:',validators=[DataRequired('メールアドレスは入力必須です'),Email('メールアドレスのフォーマットではありません')])
     #電話番号
@@ -166,13 +160,3 @@ class UserInfoForm(FlaskForm):
     )
     #ボタン
     submit = SubmitField('送信')
-
-    #  ▼▼▼ リスト5.14で追加 ▼▼▼ 
-    # カスタムバリデータ
-    # 英数字と記号が含まれているかチェックする
-    def validate_password(self, password):
-        if not(any(c.isalpha() for c in password.data)and \
-            any(c.isdigit()for c in password.data)and \
-                any(c in '!@#$%^&*()'for c in password.data)):
-            raise ValidationError('パスワードには【英数字と記号:!@#$%^&*()】を含める必要があります')
-    #  ▲▲▲ リスト5.14で追加 ▲▲▲ 
