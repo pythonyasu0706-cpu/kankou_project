@@ -1,0 +1,9 @@
+<!-- imageのpathをjinjaに埋め込むときに楽にするマクロ -->
+{% macro image(path, alt="", class_name="img", width=None, height=None, loading="lazy") %}
+<img src="{{ url_for('static', filename='images/' + path) }}"
+    alt="{{ alt }}"
+    class="{{ class_name }}"
+    {% if width %}width="{{ width }}"{% endif %}
+    {% if height %}height="{{ height }}"{% endif %}
+    loading="{{ loading }}">
+{% endmacro %}

@@ -1,0 +1,52 @@
+/* ==================
+    全体共通
+================== */
+
+:root {
+    /* =========================
+    カラー
+========================= */
+    --color-main: #0ABAB5;
+    --color-main-hover: ;
+    --color-main-bg: #fdfcfb;
+    --color-bg: #fff;
+    --color-surface: ;
+    --color-text: #333333;
+    --color-accent: rgb(197, 161, 73);
+    --color-border: ;
+    --color-error: #ff4d4f;
+    --color-success: ;
+
+    /* =========================
+    余白
+========================= */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 64px;
+
+    /* =========================
+    フォント
+========================= */
+    --font-base: 16px;
+    --font-sm: 14px;
+    --font-lg: 20px;
+    --font-xl: 28px;
+
+    /* =========================
+    角丸・影
+========================= */
+    --radius-sm: 4px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --shadow-main: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+    /* =========================
+    ⏱ アニメーション
+========================= */
+    --transition: all 0.3s ease;
+}

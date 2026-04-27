@@ -1,0 +1,16 @@
+<!-- templates/macros/breadcrumb.html -->
+{% macro breadcrumb(items) %}
+<nav class="pankz">
+    <ul>
+        {% for item in items %}
+            <li>
+                {% if item.url %}
+                    <a href="{{ item.url }}">{{ item.label }}</a>
+                {% else %}
+                    <span>{{ item.label }}</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</nav>
+{% endmacro %}
