@@ -185,3 +185,21 @@ img {
         width: 100%;
     }
 }
+
+
+/* ==================
+        ふわっとアニメーション
+================== */
+
+/* 最初は見えない */
+.fadeanimation {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* 表示されたらふわっと */
+.fadeanimation.show {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}

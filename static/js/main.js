@@ -29,7 +29,7 @@
 
 
 /* ===================
-    Weather Icon用のJS
+    Weather Icon用のJS 開始
 =================== */
 const API_KEY = "7e61ea741a419369742bac830ec6bc60";
 const CITY = "Fukuoka";
@@ -99,4 +99,37 @@ document.addEventListener("DOMContentLoaded", () => {
         { lat: 33.5898, lon: 130.4207 },
         "hakata-weather"
     );
+});
+/* ===================
+    Weather Icon用のJS 終了
+=================== */
+
+// ふわっとでるアニメーション
+document.addEventListener("DOMContentLoaded", function () {
+
+    // ① main内の全要素に fadeanimation をつける
+    // ▼ アクセスページのメイン画像内の文字ズレ回避のためにheroを追加
+    document.querySelectorAll("main *:not(.hero):not(.hero *)")
+        .forEach(el => {
+            el.classList.add("fadeanimation");
+        });
+
+    // ② スクロール検知
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("show");
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        root: null,
+        rootMargin: "0px 0px -100px 0px",
+        threshold: 0
+    });
+
+    // ③ 監視開始
+    document.querySelectorAll(".fadeanimation")
+        .forEach(el => observer.observe(el));
+
 });
