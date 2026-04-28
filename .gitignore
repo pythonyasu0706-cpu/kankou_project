@@ -6,3 +6,10 @@ __pycache__/
 .DS_Store
 # APIキーなどの秘密情報を防止
 .env
+
+flask_env/
+venv/
+.vscode/
+__pycache__/
+.env
+instance/
