@@ -3,6 +3,9 @@ from flask import Flask, render_template, session, redirect, url_for, request
 from flask_wtf import FlaskForm
 # forms.pyをimport
 from forms import UserInfoForm
+import smtplib
+from email.mime.text import MIMEText
+from email.utils import formatdate
 
 # Flozen-Flask
 # from flask_frozen import Freezer
@@ -134,10 +137,15 @@ def course():
         ]
     )
 
-@app.route("/map")
-def map_course():
+@app.route("/course/detail")
+def course_detail():
     return render_template(
-        "partials/map_course.html"
+        "course_detail.html",
+        breadcrumb_items=[
+            {"label": "Home", "url": url_for("index")},
+            {"label": "モデルコース", "url": url_for("course")},
+            {"label": "コースの詳細"}
+        ]
     )
 
 @app.route("/access")
@@ -174,15 +182,29 @@ def result():
     form = UserInfoForm()
 
     if form.validate_on_submit():
-        return render_template(
-            'contact/result.html', 
-            form=form,
-            breadcrumb_items=[
-            {"label": "Home", "url": url_for("index")},
-            {"label": "お問い合わせフォーム", "url": url_for("contact")},
-            {"label": "確認画面"}
-        ]
-    )
+        # メール送信処理
+        msg = MIMEText(f"""
+        名前: {form.name.data}
+        メール: {form.email.data}
+        お問い合わせ内容:
+        {form.note.data}
+        """
+        )
+    
+        msg['Subject'] = 'お問い合わせ'
+        msg['From'] = 'python.yasu0706@gmail.com'
+        msg['To'] = 's10ak025@gmail.com'
+
+        smtp = smtplib.SMTP("smtp.gmail.com", 587)
+        smtp.starttls()
+        smtp.login(
+            "python.yasu0706@gmail.com",
+            "Googleアプリパスワード"
+        )
+
+        smtp.send_message(msg)
+        smtp.quit()
+        return render_template('contact/result.html', form=form)
 
     return redirect(url_for('contact'))
 

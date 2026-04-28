@@ -1,6 +1,28 @@
 /* =========================
+    リセット
+========================= */
+/* * {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+} */
+
+/* =========================
     ベース
 ========================= */
+/* body {
+    font-family: "Hiragino Kaku Gothic ProN", "メイリオ", sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: red;
+} */
 
 img {
     max-width: 100%;
@@ -11,7 +33,20 @@ img {
 .icon {
     width: 20px;
     height: 20px;
+    flex-shrink: 0;
+    /* ← 潰れ防止 */
 }
+
+/* =========================
+    ヘッダー
+========================= */
+/* 福田さん作成header適用後不要 */
+/* header {
+    background: #0ABAB5;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+} */
 
 /* =========================
     ヒーロー
@@ -49,6 +84,33 @@ img {
 }
 
 /* =========================
+    セクション（カードUI）
+========================= */
+
+/* section {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+} */
+
+
+/* style.cssで管理 */
+/* 見出し
+h2 {
+    text-align: center;
+    margin: 30px 0 10px;
+}
+
+h3 {
+    border-left: 5px solid #0ABAB5;
+    padding-left: 10px;
+} */
+
+/* =========================
     ルート（カード内）
 ========================= */
 .route {
@@ -81,6 +143,31 @@ img {
     margin: 5px 0 10px;
 }
 
+.transport-grid {
+    display: flex;
+    gap: 10px;
+}
+
+.transport-card {
+    flex: 1;
+    /* ← これが重要（均等幅） */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* 中央寄せ */
+    gap: 8px;
+
+    padding: 12px;
+    border-radius: 8px;
+    background: #0ABAB5;
+    color: #fff;
+}
+
+.transport-card .icon {
+    width: 18px;
+    height: 18px;
+}
+
 /* =========================
     ボタン（統一）
 ========================= */
@@ -93,12 +180,10 @@ a,
     border-radius: 6px;
     text-decoration: none;
     text-align: center;
-    transition: 0.2s;
-}
 
-.map-btn {
     margin-top: 10px;
     margin-bottom: 20px;
+    transition: 0.2s;
 }
 
 a:hover,
@@ -133,7 +218,7 @@ a:hover,
     }
 
     section {
-        margin: 10px;
+        /* margin: 10px; */
         padding: 15px;
     }
 
@@ -149,6 +234,21 @@ a:hover,
         font-size: 15px;
     }
 
+    .transport-card {
+        display: flex;
+        /* ← ここ変える */
+        align-items: center;
+        /* 縦中央 */
+        gap: 10px;
+        /* 間隔 */
+
+        width: 100%;
+        box-sizing: border-box;
+        margin: 10px 0 20px;
+        padding: 15px;
+        /* 見た目用（なければ追加） */
+    }
+
     /* ルート縦化 */
     .route {
         flex-direction: column;
@@ -157,8 +257,23 @@ a:hover,
     }
 
     .route-box {
-        width: 100%;
-        padding: 12px;
+        .map-btn {
+            display: flex;
+            /* ← 横並び */
+            align-items: center;
+            /* 縦中央 */
+            justify-content: flex-start;
+            /* ← 左寄せ */
+            gap: 10px;
+            /* アイコンと文字の間 */
+
+            background: #0ABAB5;
+            color: #fff;
+            padding: 12px 15px;
+            border-radius: 6px;
+
+            margin: 10px 0 20px;
+        }
     }
 
     .arrow {
@@ -171,10 +286,12 @@ a:hover,
     }
 
     /* ボタンフル幅 */
-    a,
+    /* a, */
     .map-btn {
         display: block;
         width: 100%;
+        box-sizing: border-box;
+        margin: 10px 0 20px;
     }
 }
 
@@ -183,9 +300,37 @@ a:hover,
 ========================= */
 @media screen and (max-width: 768px) and (orientation: landscape) {
 
-    a,
+    /* a, */
     .map-btn {
         display: block;
         width: 100%;
+        box-sizing: border-box;
+        margin: 10px 0 20px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .transport-wrapper {
+        display: block;
+    }
+
+    .transport-card {
+        display: flex;
+        flex-direction: column;
+        /* ← 縦並び */
+        align-items: center;
+        /* 中央揃え */
+        justify-content: center;
+
+        width: 100%;
+        padding: 15px;
+        margin: 10px 0;
+        gap: 5px;
+    }
+
+    .transport-card .icon {
+        width: 22px;
+        height: 22px;
     }
 }
