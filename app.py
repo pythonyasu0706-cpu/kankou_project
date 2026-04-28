@@ -204,6 +204,19 @@ def result():
         )
 
         smtp.send_message(msg)
+        # ===== 自動返信メール =====
+        reply = MIMEText("""
+        お問い合わせありがとうございます。
+
+        内容を確認し、後ほどご連絡いたします。
+        """)
+
+        reply['Subject'] = '【受付完了】お問い合わせありがとうございます'
+        reply['From'] = 'python.yasu0706@gmail.com'
+        reply['To'] = form.email.data  # ←ここがユーザーのメール
+
+        smtp.send_message(reply)
+
         smtp.quit()
         return render_template('contact/result.html', form=form)
 
