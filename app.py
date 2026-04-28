@@ -6,6 +6,7 @@ from forms import UserInfoForm
 import smtplib
 from email.mime.text import MIMEText
 from email.utils import formatdate
+import os
 
 # Flozen-Flask
 # from flask_frozen import Freezer
@@ -15,7 +16,7 @@ from email.utils import formatdate
 app = Flask(__name__)
 # flozen-flask
 # freezer = Freezer(app)
-app.config['SECRET_KEY'] = 'abc123'
+app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
 # ================
 # ルーティング
@@ -198,8 +199,8 @@ def result():
         smtp = smtplib.SMTP("smtp.gmail.com", 587)
         smtp.starttls()
         smtp.login(
-            "python.yasu0706@gmail.com",
-            "Googleアプリパスワード"
+            os.environ.get("EMAIL_USER"),
+            os.environ.get("EMAIL_PASS")
         )
 
         smtp.send_message(msg)
