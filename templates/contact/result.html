@@ -4,7 +4,7 @@
 {% set title = "お問い合わせフォーム入力確認画面" %}
 
 {% block contact_content %}
-<div class="box04">
+<div class="box01">
     <h1>送信完了</h1>
 </div>
 <div class="box03">
@@ -41,5 +41,11 @@
         <input type="hidden" name="tel" value="{{ form.tel.data }}">
         <input type="hidden" name="agree" value="y">
     </form>
+    <div class="submit-area">
+    <a href="{{ url_for('index') }}" class="top-btn">
+    トップページへ
+    </a>
+    <br>
+    </div>
 </div>
 {% endblock %}

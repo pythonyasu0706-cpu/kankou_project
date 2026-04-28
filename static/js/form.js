@@ -32,4 +32,19 @@ document.addEventListener("DOMContentLoaded", function () {
         // チェック変更時
         agreeCheck.addEventListener("change", toggleSubmitButton);
     }
+
+    // エラー位置スクロール
+    const firstError = document.querySelector(".error-msg");
+
+    if (firstError) {
+        const field = firstError.closest(".form-group");
+
+        field.scrollIntoView({
+            behavior: "smooth",
+            // block: "center"
+            block: "start"
+        });
+
+        field.focus?.();
+    }
 });
