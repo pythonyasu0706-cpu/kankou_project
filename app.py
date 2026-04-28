@@ -194,7 +194,7 @@ def result():
     
         msg['Subject'] = 'お問い合わせ'
         msg['From'] = 'python.yasu0706@gmail.com'
-        msg['To'] = 'katsuki0007@gmail.com'
+        msg['To'] = 's10ak025@gmail.com'
 
         smtp = smtplib.SMTP("smtp.gmail.com", 587)
         smtp.starttls()
