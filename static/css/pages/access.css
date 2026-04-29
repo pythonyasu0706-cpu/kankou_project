@@ -1,6 +1,14 @@
+/* static/css/pages/access.css */
+
 /* =========================
     ベース
 ========================= */
+
+.container {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 0;
+}
 
 img {
     max-width: 100%;
@@ -11,6 +19,7 @@ img {
 .icon {
     width: 20px;
     height: 20px;
+    flex-shrink: 0;
 }
 
 /* =========================
@@ -19,6 +28,7 @@ img {
 .hero {
     position: relative;
     overflow: hidden;
+    margin-top: 0;
 }
 
 .hero img {
@@ -38,7 +48,6 @@ img {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-
     color: #fff;
     font-size: 26px;
     font-weight: bold;
@@ -49,7 +58,7 @@ img {
 }
 
 /* =========================
-    ルート（カード内）
+    ルート・カード
 ========================= */
 .route {
     display: flex;
@@ -63,7 +72,6 @@ img {
     display: flex;
     align-items: center;
     gap: 6px;
-
     background: #f9f9f9;
     border: 1px solid #ddd;
     padding: 10px 14px;
@@ -81,10 +89,26 @@ img {
     margin: 5px 0 10px;
 }
 
+.transport-grid {
+    display: flex;
+    gap: 10px;
+}
+
+.transport-card {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 8px;
+    background: #0ABAB5;
+    color: #fff;
+}
+
 /* =========================
-    ボタン（統一）
+    ボタン
 ========================= */
-a,
 .map-btn {
     display: inline-block;
     background: #0ABAB5;
@@ -93,99 +117,69 @@ a,
     border-radius: 6px;
     text-decoration: none;
     text-align: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
     transition: 0.2s;
 }
 
-.map-btn {
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
-a:hover,
 .map-btn:hover {
     background: #089c98;
 }
 
 /* =========================
-    スマホ対応（縦）
+    レスポンシブ (スマホ)
 ========================= */
 @media screen and (max-width: 480px) {
+
+    /* 1. コンテナを画面幅いっぱいに広げる（最重要！） */
+    .container {
+        width: 100%;
+        max-width: none;
+        padding: 10px;
+        /* 超重要！！！！！これがないとなぜかheaderを押し上げる */
+        box-sizing: border-box;
+    }
 
     body {
         font-size: 14px;
     }
 
-    header {
-        padding: 12px;
-    }
-
-    header h1 {
-        font-size: 20px;
-    }
-
-    .hero img {
-        height: 180px;
-    }
-
     .hero-text {
         font-size: 18px;
-        padding: 8px 12px;
     }
 
     section {
-        margin: 10px;
         padding: 15px;
     }
 
-    h2 {
-        font-size: 18px;
+    /* カードを縦に並べる */
+    .transport-grid {
+        flex-direction: column;
     }
 
-    h3 {
-        font-size: 16px;
+    .transport-card {
+        width: 100%;
+        flex-direction: column;
+        gap: 5px;
+        box-sizing: border-box;
     }
 
-    h4 {
-        font-size: 15px;
-    }
-
-    /* ルート縦化 */
+    /* ルート要素の縦化 */
     .route {
         flex-direction: column;
         align-items: stretch;
-        gap: 10px;
-    }
-
-    .route-box {
-        width: 100%;
-        padding: 12px;
     }
 
     .arrow {
         transform: rotate(90deg);
         text-align: center;
+        margin: 5px 0;
     }
 
-    .route-time {
-        font-size: 13px;
-    }
-
-    /* ボタンフル幅 */
-    a,
+    /* ボタンを全幅に */
     .map-btn {
         display: block;
         width: 100%;
-    }
-}
-
-/* =========================
-    スマホ横対応
-========================= */
-@media screen and (max-width: 768px) and (orientation: landscape) {
-
-    a,
-    .map-btn {
-        display: block;
-        width: 100%;
+        box-sizing: border-box;
     }
 }

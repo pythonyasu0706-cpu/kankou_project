@@ -1,0 +1,50 @@
+/* course_detail.css */
+
+/* 親要素を画面の高さ(100vh)いっぱいにする */
+.course-wrapper {
+    display: flex;
+    height: 100vh; /* 画面の高さに合わせる */
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* リスト部分（左側またはマップの上に配置） */
+.route-list {
+    flex: 0 0 350px; /* 幅を350pxに固定 */
+    height: 100%;
+    overflow-y: auto;
+    background: rgba(255, 255, 255, 0.9); /* 少し透過させるとオシャレ */
+    z-index: 10; /* マップより上に持ってくる */
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    padding: 20px;
+    transition: all 0.3s ease; /* スライドのアニメーション */
+    position: relative;
+}
+
+.route-list ul li {
+    list-style: none;
+}
+
+/* マップ部分 */
+#map {
+    flex: 1; /* 残りの幅をすべて使う */
+    height: 100%;
+}
+
+/* 閉じた状態のクラス */
+.route-list.closed {
+    margin-left: -350px; /* 幅の分だけ左に隠す */
+    opacity: 0;
+}
+
+/* スマホ対応：リストを下に持ってくる、または隠す */
+@media screen and (max-width: 768px) {
+    .course-wrapper {
+        flex-direction: column;
+    }
+    .route-list {
+        flex: 0 0 40%;
+        width: 100%;
+    }
+}

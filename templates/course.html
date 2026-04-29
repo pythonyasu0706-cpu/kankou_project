@@ -81,7 +81,6 @@
             </div>
             <div class="course-content">
                 <div class="spot-card">
-                    <!-- <img src="../static/images/course/date3.png" alt="デート3" class="spot-img"> -->
                     {{ image('course/date3.png', 'デート3', 'spot-img') }}
                     <span class="time">16:00</span>
                     <span class="spot-name">福岡タワー</span>
@@ -147,6 +146,11 @@
             <div class="course-content"></div>
         </div>
     </div>
+    <p>
+        <a href="{{ url_for('course_detail') }}" class="detail-link">
+            このコースの詳細を見る →
+        </a>
+    </p>
 </div>
 
 {% endblock %}

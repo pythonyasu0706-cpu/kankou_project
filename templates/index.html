@@ -6,78 +6,187 @@
 <!-- TOPページは画像が大きく出るためヘッダー不要 -->
 {% set show_header = false %}
 
+<!-- ページ専用CSS置き場 -->
 {% block page_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/top.css') }}">
 {% endblock %}
 
 {% block content %}
 
-<div class="hero">
-    <!-- 背景 -->
-    <div class="slider">
-        <img src="{{ url_for('static', filename='images/top/fukuoka.jpg')}}" alt='福岡の風景' class='active'>
-        <img src="{{ url_for('static', filename='images/top/momochihama.jpg')}}">
-        <img src="{{ url_for('static', filename='images/top/nakasu.jpg')}}">
-        <img src="{{ url_for('static', filename='images/top/maizuru_park.jpg')}}">
-        <img src="{{ url_for('static', filename='images/top/dontaku.jpg')}}">
-    </div>
-
-    <!-- ★ タイトルここ ★ -->
-    <div class="title">
-        <img src="{{ url_for('static', filename='images/top/title-edit.png')}}">
-    </div>
-
-    <!-- 波 -->
-    <div class="wave wave-back">
-        <div class="wave-inner">
-            <svg viewBox="0 0 1440 120">
-                <path d="M0,60 C180,120 360,0 540,60 C720,120 900,0 1080,60 C1260,120 1440,0 1440,60 L1440,120 L0,120 Z"
-                    fill="#4fd1c5" />
-            </svg>
-            <svg viewBox="0 0 1440 120">
-                <path d="M0,60 C180,120 360,0 540,60 C720,120 900,0 1080,60 C1260,120 1440,0 1440,60 L1440,120 L0,120 Z"
-                    fill="#4fd1c5" />
-            </svg>
+<div class="top-container">
+    <div class="hero">
+        <!-- 背景 -->
+        <div class="slider">
+            <img src="{{ url_for('static', filename='images/top/fukuoka.jpg')}}" alt='福岡の風景' class='active'>
+            <img src="{{ url_for('static', filename='images/top/momochihama.jpg')}}">
+            <img src="{{ url_for('static', filename='images/top/nakasu.jpg')}}">
+            <img src="{{ url_for('static', filename='images/top/maizuru_park.jpg')}}">
+            <img src="{{ url_for('static', filename='images/top/dontaku.jpg')}}">
         </div>
-    </div>
 
-    <div class="wave wave-front">
-        <div class="wave-inner">
-            <svg viewBox="0 0 1440 120">
-                <path d="M0,60 C180,120 360,0 540,60 C720,120 900,0 1080,60 C1260,120 1440,0 1440,60 L1440,120 L0,120 Z"
-                    fill="#0ABAB5" />
-            </svg>
-            <svg viewBox="0 0 1440 120">
-                <path d="M0,60 C180,120 360,0 540,60 C720,120 900,0 1080,60 C1260,120 1440,0 1440,60 L1440,120 L0,120 Z"
-                    fill="#0ABAB5" />
-            </svg>
+        <!-- タイトルここ -->
+        <div class="title">
+            <img src="{{ url_for('static', filename='images/logo/title_logo.png')}}">
         </div>
-    </div>
 
-    <!-- 飛行機 -->
-    <div class="plane">
-        <div class="trail"></div>
-        <img src="{{ url_for('static', filename='icon/airplane_top.svg')}}">
-    </div>
+        <!-- 波 -->
+        <div class="wave wave-back">
+            <div class="wave-inner">
+                <svg viewBox="0 0 1440 120">
+                    <path
+                        d="M0,60 C180,90 360,30 540,60 C720,90 900,30 1080,60 C1260,90 1440,65 1440,65 L1440,120 L0,120 Z" />
+                </svg>
+                <svg viewBox="0 0 1440 120">
+                    <path
+                        d="M0,60 C180,90 360,30 540,60 C720,90 900,30 1080,60 C1260,90 1440,65 1440,65 L1440,120 L0,120 Z" />
+                </svg>
+            </div>
+        </div>
 
+        <div class="wave wave-front">
+            <div class="wave-inner">
+                <svg viewBox="0 0 1440 120">
+                    <path
+                        d="M0,65 C150,95 300,35 450,65 C600,95 750,35 900,65 C1050,95 1200,35 1350,65 C1420,80 1440,65 1440,65 L1440,120 L0,120 Z" />
+                </svg>
+                <svg viewBox="0 0 1440 120">
+                    <path
+                        d="M0,65 C150,95 300,35 450,65 C600,95 750,35 900,65 C1050,95 1200,35 1350,65 C1420,80 1440,65 1440,65 L1440,120 L0,120 Z" />
+                </svg>
+            </div>
+        </div>
+
+        <!-- 飛行機 -->
+        <div class="plane">
+            <div class="trail"></div>
+            <img src="{{ url_for('static', filename='icon/airplane_top.svg')}}">
+        </div>
+
+    </div>
 </div>
 
+<!-- トップ画像の下のナビゲーション -->
+<nav class="nav-container">
+    <ul class="nav-list">
+        <li class="nav-item">
+            <a href="#">
+                <img src="{{ url_for('static', filename='icon2/fukuoka.png')}}" alt="" class="nav-icon">
+                <!-- <img src="static/icon2/fukuoka.png" alt="" class="nav-icon"> -->
+                <span class="nav-text">おすすめスポット</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#">
+                <img src="{{ url_for('static', filename='icon2/folk.svg')}}" alt="" class="nav-icon">
+                <!-- <img src="static/icon2/folk.svg" alt="" class="nav-icon"> -->
+                <span class="nav-text">ご当地グルメ</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#">
+                <img src="{{ url_for('static', filename='icon2/couple.svg')}}" alt="" class="nav-icon">
+                <!-- <img src="static/icon2/couple.svg" alt="" class="nav-icon"> -->
+                <span class="nav-text">モデルデートコース</span>
+            </a>
+        </li>
+        </li>
+        <li class="nav-item">
+            <a href="#">
+                <img src="{{ url_for('static', filename='icon2/car.svg')}}" alt="" class="nav-icon">
+                <!-- <img src="static/icon2/car.svg" alt="" class="nav-icon"> -->
+                <span class="nav-text">アクセス</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="#">
+                <img src="{{ url_for('static', filename='icon2/mail.svg')}}" alt="" class="nav-icon">
+                <!-- <img src="static/icon2/mail.svg" alt="" class="nav-icon"> -->
+                <span class="nav-text">お問い合わせ</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
 <!-- 特集（カードスライダー風） -->
+<!-- <img class="pick-logo" src="static/images/top/pick.png"> -->
+<img src="{{ url_for('static', filename='images/top/pick.png')}}" class="pick-logo">
+<section class="information">
+
+    <div class="info-list">
+
+        <div class="info-item">
+            <span class="info-date" data-date="2026-04-28">2026.05.通年</span>
+            <p class="info-text">中洲屋台エリア 夜のグルメスポットが人気</p>
+        </div>
+
+        <div class="info-item">
+            <span class="info-date" data-date="2026-04-28">2026.05.中旬</span>
+            <p class="info-text">海の中道でネモフィラ見頃シーズン</p>
+        </div>
+
+        <div class="info-item">
+            <span class="info-date" data-date="2026-04-28">2026.05.05</span>
+            <p class="info-text">どんたく最終日・ステージイベント多数開催</p>
+        </div>
+
+        <div class="info-item">
+            <span class="info-date" data-date="2026-04-28">2026.05.04</span>
+            <p class="info-text">博多どんたくパレード開催（市内各所）</p>
+        </div>
+
+        <div class="info-item">
+            <span class="info-date" data-date="2026-04-28">2026.05.03</span>
+            <p class="info-text">
+            <p class="info-text">博多どんたく港まつり開催｜約200万人が訪れる福岡最大の祭り</p>
+            </p>
+        </div>
+
+
+        <div class="info-item">
+            <span class="info-date" data-date="2026-04-25">2026.04.25</span>
+            <p class="info-text">お問い合わせを追加しました</p>
+        </div>
+
+        <div class="info-item">
+            <span class="info-date" data-date="2026-04-24">2026.04.24</span>
+            <p class="info-text">アクセスを追加しました</p>
+        </div>
+
+        <div class="info-item">
+            <span class="info-date" data-date="2026-04-23">2026.04.23</span>
+            <p class="info-text">モデルデートコースを追加しました</p>
+        </div>
+        <div class="info-item">
+            <span class="info-date" data-date="2026-04-22">2026.04.22</span>
+            <p class="info-text">ご当地グルメを追加しました</p>
+        </div>
+
+        <div class="info-item">
+            <span class="info-date" data-date="2026-04-21">2026.04.21</span>
+            <p class="info-text">おすすめスポットを追加しました</p>
+        </div>
+
+        <div class="info-item">
+            <span class="info-date" data-date="2026-04-20">2026.04.20</span>
+            <p class="info-text">サイトを公開しました</p>
+        </div>
+    </div>
+</section>
+
+<img class="pick-logo" src="static/images/top/pick.png">
 <section class="section">
-    <h2 class="section-title">特集</h2>
 
     <div class="card">
-        <!-- <img src="{{ url_for('static', filename='images/feature1.jpg') }}"> -->
-        <h3>福岡おすすめデート</h3>
-        <p>20代カップル向けの1日プラン</p>
+        <img class="card-sla" src="static/images/top/couple2.jpg">
+        <h3>福岡１日デートプラン</h3>
+        <p>迷ったらこれ。昼は自然・夜は夜景、20代カップル向け絶景スポットを巡る、大人の王道デートコース。</p>
     </div>
 
     <div class="card">
-        <!-- <img src="{{ url_for('static', filename='images/feature2.jpg') }}"> -->
-        <h3>絶品グルメ特集</h3>
-        <p>博多ラーメン・もつ鍋など</p>
+        <img class="card-sla" src="static/images/top/yata.jpg">
+        <h3>絶対外さない福岡ご当地グルメ</h3>
+        <p>博多ラーメンやもつ鍋など、地元で愛される名店を厳選。</p>
     </div>
-
 </section>
 
 {% block page_js %}

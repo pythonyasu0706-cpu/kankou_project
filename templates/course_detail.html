@@ -1,0 +1,36 @@
+<!-- templates/partials/course_detail.html -->
+{% extends "base.html" %}
+
+{% set title = "福岡大人デートモデルコース" %}
+
+{% block page_header %}
+{% include "partials/page_header.html" %}
+{% endblock %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/course_detail.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="course-wrapper">
+    <div class="route-list">
+        <h1>このコースの詳細</h1>
+    
+        <button onclick="toggleRoute()" class="btn" style="width:100%; margin-bottom:20px;">
+            ルートを表示/非表示
+        </button>
+        
+        <ul>
+            <li>福岡空港:グルメ情報</li>
+            <li>ももち浜：夕方のおすすめ時間帯</li>
+            <li>福岡タワー：夜景ベストタイミング</li>
+        </ul>
+    </div>
+    <div id="map"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/map_course.js') }}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2n1f9uxcxM_PZL1qtcRyWEQ8ZMO4v7qg&callback=initMap" async defer></script>
+{% endblock %}

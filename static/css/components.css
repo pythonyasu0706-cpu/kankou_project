@@ -196,6 +196,11 @@ partials/footer.html 開始
     padding: 0;
 }
 
+.footer-logo a {
+    margin: 0;
+    padding: 0;
+}
+
 /* style.cssをリセット */
 .footer-nav a {
     color: #fff;

@@ -22,131 +22,53 @@
         </div>
     </div>
 
-    <div class="container mgt50">
-        <!-- <div class="container mgt50"> -->
-        <div class="row ">
+        <div class="container mgt50">
+        {% for food in foods %}
 
+        <div class="row {% if not loop.first %}mgt50{% endif %}">
+
+            {% if loop.index % 2 == 1 %}
             <!-- 左テキスト・右画像 -->
             <div class="col-md-7">
-                <h4>博多ラーメン</h4>
-                <p>丹念に炊き上げた豚骨スープは、見た目以上にクリーミーで奥深い味わい。博多ならではの「替え玉」で、最後の一口まで自分流の楽しみ方を。</p>
+                <h4>{{ food.title }}</h4>
+                <p>{{ food.text }}</p>
             </div>
             <div class="col-md-5">
-
-                <img src="static/images/food/ramen01.jpg" alt="ラーメン1" class="spot-img" loading="lazy">
-
+                {{ image(food.image, food.alt, 'food-img') }}
             </div>
 
-
-        </div>
-
-
-        <div class="row mgt50">
-
-
+            {% else %}
             <!-- 右テキスト・左画像 -->
             <div class="col-md-5">
-
-                <img src="static/images/food/motsunabe01.jpg" alt="もつ鍋" class="spot-img" loading="lazy">
-
+                {{ image(food.image, food.alt, 'food-img') }}
             </div>
             <div class="col-md-7">
-                <h4>もつ鍋</h4>
-                <p>選び抜かれた新鮮な牛もつと、甘みを増した野菜が共演する滋味深い味わい。素材の旨みが溶け出した秘伝のスープが、二人の心と身体を芯から温めてくれます。</p>
+                <h4>{{ food.title }}</h4>
+                <p>{{ food.text }}</p>
             </div>
-
+            {% endif %}
         </div>
-
-
-        <div class="row mgt50">
-
-
-            <!-- 左テキスト・右画像 -->
-            <div class="col-md-7">
-                <h4>明太子</h4>
-                <p>弾けるような粒立ちと、奥深い旨みのあとにくる心地よい刺激。炊き立ての白米にはもちろん、お酒の肴としても愛され続ける福岡が誇る至福の逸品。</p>
-            </div>
-            <div class="col-md-5">
-
-                <img src="static/images/food/mentai01.jpg" alt="明太子" class="spot-img" loading="lazy">
-
-            </div>
-
-
-        </div>
-
+        {% endfor %}
     </div>
 </section>
 
 <!-- ギャラリー・グルメ -->
 <section class="gallery">
     <div class="gallery-image">
-        <!-- <img src="images/images_foods/ramen02.jpg" alt="グルメ２"> -->
-
-        <img src="static/images/food/ramen02.jpg" alt="グルメ２" class="spot-img" loading="lazy">
-
+        {{ image('food/ramen02.jpg', 'グルメ２', 'food-img') }}
     </div>
     <div class="gallery-content wrapper">
         <h2 class="title">～Gallery～</h2>
         <ul class="gallery-thumbnails">
-
+            {% for g in gallery %}
             <li>
-
-                <img src="static/images/food/ramen02.jpg" alt="グルメ2" class="spot-img" loading="lazy">
-
+                {{ image(g.image, g.alt, 'food-img') }}
             </li>
-
-            <li>
-
-                <img src="static/images/food/ramen03.jpg" alt="グルメ3" class="spot-img" loading="lazy">
-
-            </li>
-
-            <li>
-
-                <img src="static/images/food/ramen5000yen.jpg" alt="グルメ4" class="spot-img" loading="lazy">
-
-            </li>
-
-            <li>
-
-                <img src="static/images/food/motsunabe02.jpg" alt="グルメ5" class="spot-img" loading="lazy">
-
-            </li>
-
-            <li>
-
-                <img src="static/images/food/motsunabe03.jpg" alt="グルメ6" class="spot-img" loading="lazy">
-
-            </li>
-
-            <li>
-
-                <img src="static/images/food/motsunabe04.jpg" alt="グルメ7" class="spot-img" loading="lazy">
-
-            </li>
-
-            <li>
-
-                <img src="static/images/food/mentai02.jpg" alt="グルメ8" class="spot-img" loading="lazy">
-
-            </li>
-
-            <li>
-
-                <img src="static/images/food/mentai03.jpg" alt="グルメ9" class="spot-img" loading="lazy">
-
-            </li>
-
-            <li>
-
-                <img src="static/images/food/mentai04.jpg" alt="グルメ10" class="spot-img" loading="lazy">
-
-            </li>
-
+            {% endfor %}
         </ul>
     </div>
 </section>
+
 {% endblock %}
 
 <!-- block scriptsは絶対block contentの外！！ -->
