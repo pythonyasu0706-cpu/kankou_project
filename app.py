@@ -3,12 +3,9 @@ from flask import Flask, render_template, session, redirect, url_for, request
 from flask_wtf import FlaskForm
 # forms.pyをimport
 from forms import UserInfoForm
-import smtplib
-from email.mime.text import MIMEText
-from email.utils import formatdate
-from dotenv import load_dotenv
-load_dotenv()
+import resend
 import os
+
 
 # Flozen-Flask
 # from flask_frozen import Freezer
@@ -20,6 +17,7 @@ app = Flask(__name__)
 # freezer = Freezer(app)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 
+
 # ================
 # ルーティング
 # ================
@@ -27,8 +25,10 @@ app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 def index():
     return render_template("index.html")
 
+
 @app.route("/spots")
 def spots():
+
 
     spots = [
         {
@@ -51,6 +51,7 @@ def spots():
         }
     ]
 
+
     spots_gallery = [
         {"image": "spot/dontaku.jpg", "alt": "スポット2"},
         {"image": "spot/jazz.jpg", "alt": "スポット3"},
@@ -63,9 +64,10 @@ def spots():
         {"image": "spot/tenjinNishikouoen.jpg", "alt": "スポット10"}
     ]
 
+
     return render_template(
-        "spots.html", 
-        spots=spots, 
+        "spots.html",
+        spots=spots,
         gallery=spots_gallery,
         breadcrumb_items=[
             {"label": "Home", "url": url_for("index")},
@@ -73,11 +75,13 @@ def spots():
         ]
     )
 
+
 @app.route("/spots/<name>")
 def spot_detail(name):
-    return f"{name}の詳細" 
+    return f"{name}の詳細"
     # 上はテスト用本番は下を使用
     # return render_template("spot_detail.html", name=name)
+
 
 @app.route("/foods")
 def foods():
@@ -102,6 +106,7 @@ def foods():
         }
     ]
 
+
     foods_gallery = [
         {"image": "food/ramen02.jpg", "alt": "グルメ2"},
         {"image": "food/ramen03.jpg", "alt": "グルメ3"},
@@ -114,9 +119,10 @@ def foods():
         {"image": "food/mentai04.jpg", "alt": "グルメ10"}
     ]
 
+
     return render_template(
-        "foods.html", 
-        foods=foods, 
+        "foods.html",
+        foods=foods,
         gallery=foods_gallery,
         breadcrumb_items=[
             {"label": "Home", "url": url_for("index")},
@@ -124,11 +130,13 @@ def foods():
         ]
     )
 
+
 @app.route("/foods/<name>")
 def food_detail(name):
-    return f"{name}の詳細" 
+    return f"{name}の詳細"
     # 上はテスト用本番は下を使用
     # return render_template("spot_detail.html", name=name)
+
 
 @app.route("/course")
 def course():
@@ -139,6 +147,7 @@ def course():
             {"label": "モデルコース"}
         ]
     )
+
 
 @app.route("/course/detail")
 def course_detail():
@@ -151,6 +160,7 @@ def course_detail():
         ]
     )
 
+
 @app.route("/access")
 def access():
     return render_template(
@@ -161,23 +171,27 @@ def access():
         ]
     )
 
+
 # お問い合わせ
 # 入力ページ
 @app.route('/contact', methods=['GET','POST'])
 def contact():
     form = UserInfoForm()
 
+
     if form.validate_on_submit():
         return render_template('contact/confirm.html', form=form)
 
+
     return render_template(
-        'contact/contact.html', 
+        'contact/contact.html',
         form=form,
         breadcrumb_items=[
             {"label": "Home", "url": url_for("index")},
             {"label": "お問い合わせフォーム"}
         ]
     )
+
 
 # 確認
 @app.route('/contact/confirm', methods=['POST'])
@@ -186,93 +200,95 @@ def confirm():
     if not form.validate_on_submit():
         return redirect(url_for('contact'))
 
+
     return render_template('contact/confirm.html', form=form)
+
 
 # メール送信
 @app.route('/contact/send', methods=['POST'])
 def send():
     form = UserInfoForm()
 
+
     if not form.validate_on_submit():
         return redirect(url_for('contact'))
 
 
-    # 管理者宛
-    msg = MIMEText(f"""
--------------------------
-資料請求: {', '.join(form.catalog.data) if form.catalog.data else 'なし'}
-件名: {form.title.data}
-お名前: {form.name.data}
-メール: {form.email.data}
-電話番号: {form.tel.data}
-住所: {form.address.data}
-お問い合わせ内容:
-{form.note.data}
--------------------------
-""")
-    msg['Subject'] = 'お問い合わせ受信'
-    msg['From'] = os.environ.get("EMAIL_USER")
-    msg['To'] = 's10ak025@gmail.com'
-
-    # 自動返信
-    reply = MIMEText(f"""
-{form.name.data} 様
-
-このたびは福岡観光協会のお問い合わせフォームより
-お問い合わせいただきありがとうございます。
-
-以下の内容で受け付けました。
-
--------------------------
-資料請求: {', '.join(form.catalog.data) if form.catalog.data else 'なし'}
-件名: {form.title.data}
-お問い合わせ内容:
-{form.note.data}
--------------------------
-
-内容を確認のうえ、担当者より順次ご返信させていただきます。
-なお、内容によってはご返信まで数日いただく場合がございます。
-
-
-あらかじめご了承くださいますようお願い申し上げます。
-
-
-────────────────────
-福岡観光協会
-お問い合わせ窓口（自動返信メール）
-────────────────────
-""")
-
-    reply['Subject'] = '【福岡観光協会】お問い合わせ受付完了'
-    reply['From'] = os.environ.get("EMAIL_USER")
-    reply['To'] = form.email.data
+    # Resend APIキー
+    resend.api_key = os.environ.get("RESEND_API_KEY")
+    
+    success = True
 
     try:
-        email_user = os.environ.get("EMAIL_USER")
-        email_pass = os.environ.get("EMAIL_PASS")
+        # 管理者宛メール
+        resend.Emails.send({
+            "from": "福岡観光協会 <no-reply@yasumasu.com>",
+            "to": ["python.yasu0706@gmail.com"],
+            "subject": "お問い合わせ通知",
+            "text": f"""
+    福岡観光協会のお問い合わせフォームより
+    以下の内容のお問い合わせがありました。
 
-        if not email_user or not email_pass:
-            return "メール設定が不足しています"
 
-        with smtplib.SMTP("smtp.gmail.com", 587, timeout=15) as smtp:
-            smtp.ehlo()      # サーバーに挨拶
-            smtp.starttls()  # 通信の暗号化（必須）
-            smtp.ehlo()      # 暗号化後にもう一度挨拶
-            smtp.login(email_user, email_pass)
-            smtp.send_message(msg)
-            smtp.send_message(reply)
+    -------------------------
+    資料請求: {', '.join(form.catalog.data) if form.catalog.data else 'なし'}
+    件名: {form.title.data}
+    お名前: {form.name.data}
+    メール: {form.email.data}
+    電話番号: {form.tel.data}
+    住所: {form.address.data}
+    お問い合わせ内容:
+    {form.note.data}
+    -------------------------
+    """
+        })
+    except Exception as e:
+        print("管理者メール失敗:", e)
+        success = False
+
+    try:
+        # 自動返信メール
+        resend.Emails.send({
+            "from": "福岡観光協会 <no-reply@yasumasu.com>",
+            "to": [form.email.data],
+            "subject": "【福岡観光協会】お問い合わせ受付完了",
+            "text": f"""
+    {form.name.data} 様
+
+
+    このたびは福岡観光協会のお問い合わせフォームより
+    お問い合わせいただきありがとうございます。
+
+
+    以下の内容で受け付けました。
+
+
+    -------------------------
+    資料請求: {', '.join(form.catalog.data) if form.catalog.data else 'なし'}
+    件名: {form.title.data}
+    お問い合わせ内容:
+    {form.note.data}
+    -------------------------
+
+
+    内容確認後、担当者よりご連絡いたします。
+    しばらくお待ちください。
+
+
+    福岡観光協会
+    """
+        })
 
     except Exception as e:
-        print(f"Mail Error: {e}")
-        # 本来はここでユーザーにエラーを表示するなどの処理
-        return "メール送信に失敗しました。設定を確認してください。"
+        print("自動返信メール失敗:", e)
+        success = False
 
-    return redirect(url_for('result'))
+    return render_template(
+        'contact/result.html',
+        form=form,
+        success=success
+    )
 
-# 完了
-@app.route('/contact/result')
-def result():
-    return render_template('contact/result.html')
 
 # プライバシー
 @app.route("/privacy")
@@ -286,9 +302,11 @@ def privacy():
         ]
     )
 
+
 # ================
 # 実行
 # ================
 if __name__ == '__main__':
     # freezer.freeze()
     app.run(debug=True, port=5000)
+
