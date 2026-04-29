@@ -402,6 +402,11 @@ input[type="hidden"] {
     margin: 0 !important;
 }
 
+.no-link {
+    color: inherit;
+    text-decoration: none;
+}
+
 /* ==================
     スマホ対応
 ================== */

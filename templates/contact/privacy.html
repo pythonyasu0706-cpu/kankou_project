@@ -4,11 +4,6 @@
 {% set title = "プライバシーポリシー" %}
 
 {% block contact_content %}
-		<ul class="pankz">
-			<li><a href="https://www.hakutake.co.jp/"><span>HOME</span></a></li>
-			<li><span>&gt;</span>プライバシーポリシー</li>
-		</ul><!--.pankz end-->
-	
 		<article>
 			<div class="box02">
 				<h3>個人情報をご提供いただく場合とは</h3>
@@ -31,12 +26,8 @@
 				<p>本ポリシーは、当サイトにおける個人情報について述べたものです。<br>当協会では、個人情報の保護を強化するために、または、日本国の従うべき法令の変更に伴い、本ポリシーを改定することがあります。当協会にリンクされている他のホームページにおける個人情報の安全確保については、当協会が責任を負うことはできません。</p>
 			
 				<h3>お問い合わせ</h3>
-				<p>本ポリシー、個人情報に関するお問合せは、<a class="animsition-link" href="{{ url_for('index') }}">お問い合わせページ</a>にてご連絡願います。</p>
+				<p>本ポリシー、個人情報に関するお問合せは、<a href="{{ url_for('contact') }}">お問い合わせページ</a>にてご連絡願います。</p>
 			</div>
 		</article><!--article end--> 
 
-		<ul class="pankz">
-			<li><a href="#"><span>HOME</span></a></li>
-			<li><span>&gt;</span>プライバシーポリシー</li>
-		</ul><!--.pankz end-->
 {% endblock %}

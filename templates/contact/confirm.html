@@ -14,11 +14,11 @@
         <li>お問い合わせ内容：{{form.note.data}}</li>
         <li>名前（全角）：{{form.name.data}}</li>
         <li>名前（カナ）：{{form.kana.data}}</li>
-        <li>郵便番号：{{form.zipcode.data}}</li>
+        <li>郵便番号：<span class="no-link">{{form.zipcode.data}}</span></li>
         <li>都道府県：{{form.area.data}}</li>
         <li>住所：{{form.address.data}}</li>
         <li>Email：{{form.email.data}}</li>
-        <li>電話番号：{{form.tel.data}}</li>
+        <li>電話番号：<span class="no-link">{{form.tel.data}}</span></li>
     </ul>
 <form method="POST" action="{{ url_for('send') }}">
     {{ form.hidden_tag() }}
