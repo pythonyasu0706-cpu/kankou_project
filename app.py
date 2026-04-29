@@ -178,7 +178,7 @@ def contact():
     )
 
 # 確認
-@app.route('/contact/confirm', methods=['GET'])
+@app.route('/contact/confirm', methods=['POST'])
 def confirm():
     form = UserInfoForm()
     if not form.validate_on_submit():
@@ -213,14 +213,37 @@ def send():
 
         smtp.send_message(msg)
 
-        reply = MIMEText("お問い合わせありがとうございます。")
-        reply['Subject'] = '受付完了'
+        reply = MIMEText(f"""
+{form.name.data} 様
+
+このたびは福岡観光協会のお問い合わせフォームよりご連絡いただき、
+誠にありがとうございます。
+
+以下の内容でお問い合わせを受け付けいたしました。
+
+--------------------
+■お名前：{form.name.data}
+■メールアドレス：{form.email.data}
+■お問い合わせ内容：
+{form.note.data}
+--------------------
+
+内容を確認のうえ、担当者より順次ご返信させていただきます。
+なお、内容によってはご返信まで数日いただく場合がございます。
+
+あらかじめご了承くださいますようお願い申し上げます。
+
+────────────────────
+福岡観光協会
+お問い合わせ窓口（自動返信メール）
+────────────────────
+""")
+        reply['Subject'] = '【福岡観光協会】お問い合わせ・資料請求受付完了のお知らせ'
         reply['From'] = os.environ.get("EMAIL_USER")
         reply['To'] = form.email.data
 
         smtp.send_message(reply)
     
-    session.pop('form_data', None)
     return redirect(url_for('result'))
 
 
