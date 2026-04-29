@@ -6,6 +6,8 @@ from forms import UserInfoForm
 import smtplib
 from email.mime.text import MIMEText
 from email.utils import formatdate
+from dotenv import load_dotenv
+load_dotenv()
 import os
 
 # Flozen-Flask
