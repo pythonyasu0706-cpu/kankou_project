@@ -9,7 +9,9 @@
 </div>
 <div class="box03">
     <ul>
-        <li>資料請求：{{form.catalog.data | join('、')}}</li>
+        <li>資料請求：
+            {{ form.catalog.data | default([], true) | join('、') }}
+        </li>
         <li>件名：{{form.title.data}}</li>
         <li>お問い合わせ内容：{{form.note.data}}</li>
         <li>名前（全角）：{{form.name.data}}</li>
