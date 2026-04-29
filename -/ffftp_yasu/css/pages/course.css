@@ -1,0 +1,258 @@
+/* デートコースページ用CSS */
+/* ==========================================
+    🎨 デザイン変数
+   ========================================== */
+/* :root {
+    --color-main: #0ABAB5;
+    /* ティファニーブルー */
+/* --color-accent: rgb(197, 161, 73); */
+/* ゴールド */
+/* --color-bg: #fdfcfb;
+    --color-text: #444444;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --radius: 12px;
+} */
+
+/* ==========================================
+    全体レイアウト
+   ========================================== */
+/* body {
+    margin: 0;
+    font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    line-height: 1.7;
+} */
+
+/* 福田さん作成header適用後不要 */
+/* header {
+    background-color: var(--color-main);
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+} */
+/* 福田さん作成header適用後不要 */
+/* .intro-text {
+    margin-top: 15px;
+    font-size: 0.95rem;
+    font-weight: 300;
+} */
+
+.container {
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.description {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 50px;
+    border-left: 3px solid var(--color-main);
+    padding-left: 15px;
+}
+
+/* ==========================================
+    タイムライン
+   ========================================== */
+.timeline {
+    position: relative;
+}
+
+.course-step {
+    display: flex;
+}
+
+/* 縦線 */
+.timeline-left {
+    position: relative;
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.timeline-left::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: repeating-linear-gradient(to bottom, var(--color-main), var(--color-main) 5px, transparent 5px, transparent 10px);
+    /* 点線でおしゃれに */
+    transform: translateX(-50%);
+}
+
+/* StartとGoalの共通デザイン */
+.node-start {
+    background: white;
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent);
+    padding: 4px 12px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    z-index: 2;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 数字ボックス */
+.node-number {
+    width: 36px;
+    height: 36px;
+    background-color: var(--color-main);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    z-index: 2;
+    border-radius: 8px;
+}
+
+.person-icon {
+    background: white;
+    border: 1px solid var(--color-main);
+    color: var(--color-main);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    margin: 10px 0;
+    z-index: 2;
+}
+
+/* ==========================================
+    コンテンツカード
+   ========================================== */
+.course-content {
+    flex-grow: 1;
+    padding-left: 20px;
+    padding-bottom: 50px;
+}
+
+.spot-card {
+    padding: 20px;
+    border-radius: var(--radius-md); 
+    /* 12px */
+    box-shadow: var(--shadow-main);
+    /* 0 4px 12px rgba(0, 0, 0, 0.08); */
+}
+
+.spot-img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    /* 画像をきれいに切り抜く */
+    border-radius: calc(var(--radius) - 4px);
+    margin-bottom: 15px;
+}
+
+.time {
+    color: var(--color-main);
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.spot-name {
+    /* display: block; */
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.15rem;
+    font-weight: bold;
+    margin: 5px 0 10px 0;
+    color: #222;
+}
+
+/* footer {
+    text-align: center;
+    padding: 40px;
+    font-size: 0.8rem;
+    color: #999;
+} */
+
+/* ==========================================
+    移動手段（transport-step）のスタイル
+   ========================================== */
+
+.transport-step {
+    display: flex;
+    align-items: center;
+    margin-top: -15px;
+    /* スポットとの隙間を詰める */
+    margin-bottom: 10px;
+    /* 次のスポットとの隙間 */
+}
+
+/* 左側の縦線エリア */
+.transport-step .timeline-left {
+    min-height: 40px;
+    /* 移動区間の線の長さを調整 */
+}
+
+/* 滞在時間タグ（おまけ） */
+.stay-time {
+    display: inline-block;
+    background-color: #f0f0f0;
+    color: #666;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    margin-top: 15px;
+}
+
+.transport-node {
+    /* 1. 幅を親要素(60px)と同じにする */
+    width: 60px;
+    height: 40px;
+
+    /* 2. 背景を白にして点線を隠す */
+    background-color: white;
+
+    /* 3. 横並びにして、中央に配置する */
+    display: flex;
+    flex-direction: row;
+    /* 強制的に横並びにする */
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    /* アイコン同士の隙間を少し詰める */
+
+    /* 4. 位置調整（margin-leftを0にして中央に置く） */
+    position: relative;
+    z-index: 2;
+    margin-left: 0;
+    /* 左に寄りすぎる場合はここを0に */
+
+    border: none;
+    font-size: 20px;
+    /* 横並びなので少しサイズを下げると収まりが良いです */
+}
+
+/* 移動手段のテキスト（徒歩すぐ、など） */
+.transport-text {
+    font-size: 0.8rem;
+    color: var(--color-main);
+    font-weight: bold;
+    margin-left: 10px;
+    /* 丸からの距離 */
+}
+
+/* 右側のコンテンツエリアの余白調整 */
+.transport-step .course-content {
+    padding-bottom: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* タイムラインの最後（Goal）にある縦線を消す */
+.course-step:last-child .timeline-left::before {
+    display: none;
+}

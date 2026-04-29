@@ -1,0 +1,88 @@
+/* ==================
+   変数（必須）
+================== */
+:root {
+    --color-main: #0ABAB5;
+    --color-main-hover: rgba(10, 186, 181, 0.8);
+    --color-bg: #ffffff;
+    --color-text: #333333;
+    --color-accent: #0ABAB5;
+
+    --font-base: 16px;
+    --font-lg: 20px;
+    --font-xl: 28px;
+
+    --space-md: 16px;
+    --space-lg: 32px;
+
+    --radius-md: 8px;
+    --transition: all 0.3s ease;
+}
+
+
+/* ==================
+   全体
+================== */
+body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-size: var(--font-base);
+    line-height: 1.7;
+}
+
+
+/* ==================
+   タイトル
+================== */
+.main-img {
+    background: var(--color-main);
+    color: white;
+    text-align: center;
+    padding: var(--space-lg);
+}
+
+.main-img h3 {
+    font-size: var(--font-xl);
+}
+
+
+/* ==================
+   セクション
+================== */
+.add-bg-history {
+    padding: var(--space-lg) 0;
+}
+
+
+/* ==================
+   見出し
+================== */
+h3 {
+    color: var(--color-main);
+    margin-bottom: var(--space-md);
+}
+
+h4 {
+    color: var(--color-accent);
+    margin-bottom: var(--space-md);
+}
+
+
+/* ==================
+   画像
+================== */
+img {
+    border-radius: var(--radius-md);
+}
+
+
+/* ==================
+   ギャラリー
+================== */
+.mgt50 {
+    margin-top: var(--space-lg);
+}
+
+.txt-center {
+    text-align: center;
+}

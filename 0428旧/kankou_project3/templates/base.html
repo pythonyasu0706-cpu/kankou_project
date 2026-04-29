@@ -1,0 +1,48 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Noto+Sans+JP:wght@300;400;700&display=swap"
+        rel="stylesheet">
+    <!-- main.css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <!-- フッター用CSS component.cssとは別に -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- 全体共通reset.css
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css') }}">
+    全体共通CSS
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    コンポーネント用CSS
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    お問い合わせフォーム用CSS
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/contact.css')}}">
+    デートコース用CSS
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/course.css')}}">
+    アクセスページ用CSS
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/access.css')}}">
+    foods.html + spots.html用
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"> -->
+</head>
+
+<body>
+
+    {% include "partials/hamburger.html" %}
+    {% block page_header %}{% endblock %}
+
+    <main>
+        {% block content %}{% endblock %}
+        {% include "partials/footer.html" %}
+    </main>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>

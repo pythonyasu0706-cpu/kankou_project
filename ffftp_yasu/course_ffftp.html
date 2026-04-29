@@ -1,0 +1,245 @@
+<!-- templates/course.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/base/reset.css">
+    <link rel="stylesheet" type="text/css" href="./css/base/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/base/variables.css">
+    <link rel="stylesheet" type="text/css" href="./css/components.css">
+    <link rel="stylesheet" type="text/css" href="./css/layout.css">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+    <link rel="stylesheet" type="text/css" href="./css/pages/course.css">
+    <link rel="stylesheet" type="text/css" href="./css/weather.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>course</title>
+</head>
+<body>
+<header class="header">
+    <!-- ロゴ -->
+    <div class="logo">
+        <a href="index.html">
+            <img src="./images/logo.jpg" alt="サイトロゴ">
+        </a>
+    </div>
+    
+    <!-- 追加：天気 -->
+    <div class="header-weather">
+        <a href="https://weathernews.jp/onebox/tenki/fukuoka/"
+        target="_blank"
+        class="weather-header-link">
+
+        <span class="weather-title">福岡の天気</span>
+
+        <img id="weather-icon" alt="weather">
+
+        <span id="weather-temp">--℃</span>
+
+    </a>
+    </div>
+
+    <!-- ハンバーガー -->
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</header>
+
+<nav class="nav" id="nav">
+    <ul>
+        <li><a href="index.html">TOP</a></li>
+        <li><a href="spots.html">おすすめスポット</a></li>
+        <li><a href="foods.html">ご当地グルメ</a></li>
+        <li><a href="course.html">モデルデートコース</a></li>
+        <li><a href="access.html">アクセス(空港・駅)</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+    </ul>
+</nav>
+<div class="page-header">
+    <h1 class="page-title">大人デートモデルコース</h1>
+    <p class="intro-text">
+        カップルに贈る、ちょっと背伸びした
+        「大人かわいい福岡よくばりデートプラン」をご紹介！
+    </p>
+</div>
+
+<!-- 本文 -->
+<div class="container">
+    <p class="description">
+        福岡は、都会の利便性と豊かな自然が共存するコンパクトシティです。博多ラーメンやもつ鍋などの絶品グルメ、天神・大名でのトレンド発信、そして少し足を伸ばせば海や山のリゾート感も味わえます。空港から中心部まで地下鉄で約5分という抜群のアクセスも大きな魅力です。
+    </p>
+
+    <div class="timeline">
+        <div class="course-step">
+            <div class="timeline-left">
+                <div class="node-start">Start</div>
+            </div>
+            <div class="course-content"></div>
+        </div>
+
+        <div class="course-step">
+            <div class="timeline-left">
+                <div class="node-number">1</div>
+            </div>
+            <div class="course-content">
+                <div class="spot-card">
+                    <img src="./images/course/date1.png" alt="デート1" class="spot-img">
+                    <!-- {{ image('course/date1.png', 'デート1', 'spot-img') }} -->
+                    <span class="time">12:00</span>
+                    <span class="spot-name">福岡空港：絶品ランチ</span><span id="tenjin-weather"></span>
+                    <p>旅の始まりは空港グルメから。洗練された店内で福岡の味を堪能。</p>
+                    <div class="stay-time">滞在時間 60分</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="transport-step">
+            <div class="timeline-left">
+                <div class="transport-node">🚃🚌</div>
+            </div>
+            <div class="course-content">
+                <span class="transport-text">地下鉄とバスで約40分</span>
+            </div>
+        </div>
+
+        <div class="course-step">
+            <div class="timeline-left">
+                <div class="node-number">2</div>
+            </div>
+            <div class="course-content">
+                <div class="spot-card">
+                    <img src="./images/course/date2.png" alt="デート2" class="spot-img">
+                    <!-- {{ image('course/date2.png', 'デート2', 'spot-img') }} -->
+                    <span class="time">14:30</span>
+                    <span class="spot-name">シーサイドももち</span>
+                    <p>海風を感じながら、人気のクレープやソフトクリームでリフレッシュ。</p>
+                    <div class="stay-time">滞在時間 45分</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="transport-step">
+            <div class="timeline-left">
+                <div class="transport-node">🚶</div>
+            </div>
+            <div class="course-content">
+                <span class="transport-text">徒歩すぐ</span>
+            </div>
+        </div>
+
+        <div class="course-step">
+            <div class="timeline-left">
+                <div class="node-number">3</div>
+            </div>
+            <div class="course-content">
+                <div class="spot-card">
+                    <img src="./images/course/date3.png" alt="デート3" class="spot-img">
+                    <!-- {{ image('course/date3.png', 'デート3', 'spot-img') }} -->
+                    <span class="time">16:00</span>
+                    <span class="spot-name">福岡タワー</span>
+                    <p>地上123mの展望室から、刻々と変わる福岡の街並みを一望。</p>
+                    <div class="stay-time">滞在時間 60分</div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="transport-step">
+            <div class="timeline-left">
+                <div class="transport-node">🚌</div>
+            </div>
+            <div class="course-content">
+                <span class="transport-text">バスで約20分</span>
+            </div>
+        </div>
+
+        <div class="course-step">
+            <div class="timeline-left">
+                <div class="node-number">4</div>
+            </div>
+            <div class="course-content">
+                <div class="spot-card">
+                    <img src="./images/course/date4.png" alt="デート4" class="spot-img">
+                    <!-- {{ image('course/date4.png', 'デート4', 'spot-img') }} -->
+                    <span class="time">18:30</span>
+                    <span class="spot-name">天神：大人の隠れ家ディナー</span>
+                    <p>落ち着いたビストロやイタリアンで、上質な夜のひとときを。</p>
+                    <div class="stay-time">滞在時間 120分</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="transport-step">
+            <div class="timeline-left">
+                <div class="transport-node">🚃</div>
+            </div>
+            <div class="course-content">
+                <span class="transport-text">地下鉄で約12分</span>
+            </div>
+        </div>
+
+        <div class="course-step">
+            <div class="timeline-left">
+                <div class="node-number">5</div>
+            </div>
+            <div class="course-content">
+                <div class="spot-card">
+                    <!-- {{ image('course/date5.png', 'デート5', 'spot-img') }} -->
+                    <img src="./images/course/date5.png" alt="デート5" class="spot-img">
+                    <span class="time">21:00</span>
+                    <span class="spot-name">福岡空港：国内線展望デッキ</span>
+                    <p>旅の締めくくりは滑走路の夜景。宝石のような光に包まれる特別な時間。</p>
+                    <div class="stay-time">滞在時間 30分</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="course-step">
+            <div class="timeline-left">
+                <div class="node-start">Goal</div>
+            </div>
+            <div class="course-content"></div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <div class="footer-inner">
+
+        <div class="footer-logo">
+            <a href="index.html">
+                <img src="./images/logo.jpg" alt="ロゴ">
+            </a>
+        </div>
+
+        <div class="footer-nav">
+            <ul>
+                <li><a href="spots.html">おすすめスポット</a></li>
+                <li><a href="foods.html">ご当地グルメ</a></li>
+                <li><a href="course.html">モデルデートコース</a></li>
+                <li><a href="access.html">アクセス(空港・駅)</a></li>
+                <li><a href="contact.html">お問い合わせ</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-sns">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+
+    </div>
+
+    <div class="footer-copy">
+        <p>&copy; 2026 Fukuoka Slow Trip All rights reserved by GroupB</p>
+    </div>
+</footer>
+<script src="./js/weather.js"></script>
+<script src="https://ajaxzip3.github.io/ajaxzip3.js"></script>
+<script src="./js/main.js"></script>
+</body>
+</html>

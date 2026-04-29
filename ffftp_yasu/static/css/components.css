@@ -1,0 +1,321 @@
+/* static/css/components.css */
+/* :root {
+    --color-main: #0ABAB5;
+    --color-bg: #fff;
+    --color-text: #333333;
+    --color-accent: rgb(197, 161, 73);
+
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+
+    --font-base: 16px;
+    --font-lg: 20px;
+    --font-xl: 28px;
+
+    --radius-md: 8px;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    --transition: all 0.3s ease;
+} */
+
+/* ===================
+    partials/hamburger.html
+=================== */
+/* ハンバーガーメニュー */
+.hamburger {
+    width: 30px;
+    height: 25px;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.hamburger span {
+    display: block;
+    height: 3px;
+    background: #ccc;
+    margin: 5px 0;
+    transition: 0.3s;
+    z-index: 1000;
+}
+
+/* ロゴ　*/
+.logo img {
+    height: 40px;
+    /* /* margin-left: 10px; */
+    /* margin-top: 15px; */
+    margin-right: auto;
+} 
+
+.header a {
+    display: inline-block;
+    height: auto;
+    background-color: transparent;
+    color: #fff;
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+/* クリック後（×に変形） */
+.hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+    z-index: 1000;
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+    z-index: 1000;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+    z-index: 1000;
+}
+
+/* 天気 */
+.header-weather {
+    position: absolute;
+    right: 90px;  /* ハンバーガーとの距離 */
+    top: 50%;
+    transform: translateY(-50%);
+    gap: 4px;
+    line-height: 1.2;
+}
+
+.weather-header-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    gap: 0;
+}
+
+/* タイトル */
+.weather-title {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: -2px;
+}
+
+/* アイコン */
+/* .header-weather img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+} */
+.header-weather img {
+    width: 32px;   /* 好きに調整：18〜24くらいがちょうどいい */
+    height: 32px;
+    display: inline-block; /* 余白の原因を潰す */
+    vertical-align: middle;
+}
+
+/* .header-weather span {
+    font-size: 14px;
+} */
+
+/* 温度 */
+#weather-temp {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 2px;
+    color: #666;
+}
+/* ナビメニュー */
+.nav {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    /* 初期は隠す */
+    width: 250px;
+    height: 100vh;
+    background: #0ABAB5;
+    color: #fff;
+    transition: 0.3s;
+    padding-top: 60px;
+    z-index: 501;
+}
+
+/* 表示状態 */
+.nav.active {
+    right: 0;
+}
+
+.nav a:hover {
+    color: #fff;
+    text-decoration: underline;
+    background: transparent;
+}
+
+.nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.nav li {
+    margin: 5px 20px;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+/* ===================
+    partials/page_header.html
+=================== */
+/* 共通ページヘッダー ハンバーガーメニューのある白いとこ */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: var(--color-bg);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+/* 各ページタイトル用ヘッダー 共通ページヘッダーの下に表示される */
+.page-header {
+    margin-top: 60px;
+    /* 共通ヘッダー分ずらす */
+    background: var(--color-main);
+    width: 100%;
+    text-align: center;
+    padding: 50px 0;
+}
+
+.page-title {
+    color: #fff;
+    font-size: 20px;
+    letter-spacing: 2px;
+}
+
+/* モデルコースページにのみ現状は言っているサブタイトル */
+.intro-text {
+margin-top: 15px;
+font-size: 0.95rem;
+font-weight: 300;
+color: var(--color-bg);
+}
+
+/* 各ページヘッダー終わり */
+
+
+/* ===================
+partials/footer.html 開始
+=================== */
+.footer {
+    background: #0ABAB5;
+    color: #fff;
+    padding: 40px 20px 20px;
+    border-top: 3px solid #089e9a; /* footer仕切り線を少し濃い色で */
+}
+
+
+.footer-inner {
+    max-width: 990px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ロゴ */
+.footer-logo img {
+    width: 150px;
+}
+
+/* ナビ */
+.footer-nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-nav a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-nav a:hover {
+    opacity: 0.7;
+}
+
+.footer-nav ul li:not(:last-child) {
+    border-right: 1px solid rgba(255, 255, 255, 0.5);
+    padding-right: 15px;
+    margin-right: 15px;
+}
+
+/* SNS */
+.footer-sns a {
+    color: #fff;
+    font-size: 20px;
+    margin-left: 15px;
+}
+
+.footer-sns a:hover {
+    opacity: 0.7;
+}
+
+/* コピーライト */
+.footer-copy {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    font-size: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* ===== スマホ対応 ===== */
+@media screen and (max-width: 768px) {
+.footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+}
+
+.footer-nav ul {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-nav ul li:not(:last-child) {
+    border-right: none;
+    margin-right: 0;
+    padding-right: 0;
+}
+
+.footer-sns a {
+    margin: 0 10px;
+}
+}
+/* ===================
+    partials/footer.html 開始
+=================== */
+
+/* ===================
+    partials/map_course.html
+=================== */
+#map {
+    width: 100%;
+    height: 400px;
+}

@@ -1,0 +1,23 @@
+/* statics/layout.css */
+
+/* section {
+    background: #fff;
+    margin: var(--space-lg) auto;
+    padding: var(--space-lg);
+    width: 90%;
+    max-width: 900px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+} */
+
+/* これはアクセスページにもともとあったもの */
+
+section {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}

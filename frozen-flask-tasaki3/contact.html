@@ -1,0 +1,268 @@
+<!-- templates/contact.html -->
+
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <!-- favicon -->
+    <link rel="icon" href="../static/icon/fav_ramen.svg">
+    <!-- Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Noto+Sans+JP:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- 共通 main.css -->
+    <link rel="stylesheet" href="static/css/main.css">
+
+    <!-- フォントアイコン フッター用CSS component.cssとは別に -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- ページ専用CSS置き場 -->
+
+    <link rel="stylesheet" href="static/css/pages/contact.css">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- 全体共通reset.css
+    <link rel="stylesheet" href="static/css/reset.css">
+    全体共通CSS
+    <link rel="stylesheet" href="static/css/style.css">
+    コンポーネント用CSS
+    <link rel="stylesheet" href="static/css/components.css">
+    お問い合わせフォーム用CSS
+    <link rel="stylesheet" href="static/css/pages/contact.css">
+    デートコース用CSS
+    <link rel="stylesheet" href="static/css/pages/course.css">
+    アクセスページ用CSS
+    <link rel="stylesheet" href="static/css/pages/access.css">
+    foods.html + spots.html用
+    <link rel="stylesheet" href="static/css/bootstrap.min.css"> -->
+</head>
+<body>
+    <!-- ハンバーガーメニューは前頁共通 -->
+    <!-- templates/partials/hamburger.html -->
+
+    <!-- ヘッダー -->
+<header class="header">
+        <!-- ロゴ -->
+        <div class="logo">
+            <a href="/">
+                <img src="static/images/logo.jpg" alt="サイトロゴ">
+            </a>
+        </div>
+
+        <!-- ハンバーガー -->
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- メニュー -->
+    <nav class="nav" id="nav">
+        <ul>
+            <li><a href="/">TOP</a></li>
+            <li><a href="/spots">おすすめスポット</a></li>
+            <li><a href="/foods">ご当地グルメ</a></li>
+            <li><a href="/course">モデルデートコース</a></li>
+            <li><a href="/access">アクセス(空港・駅)</a></li>
+            <li><a href="/contact">お問い合わせ</a></li>
+        </ul>
+    </nav>
+    <!-- TOPページはヘッダーが不要のため -->
+
+    <!-- templates/partials/page_header.html -->
+
+    <div class="page-header">
+        <h1 class="page-title">お問い合わせフォーム</h1>
+
+
+    </div>
+
+
+<ul class="pankz">
+    <li><a href="#"><span>HOME</span></a></li>
+    <li>お問い合わせ</li>
+</ul>
+
+<article>
+    <div class="box01">
+
+        <h3>お電話でのお問い合わせ</h3>
+        <p>
+            <span>092-xxx-xxxx</span><br>
+            平日9:00〜17:00（土日祝除く）に対応いたします。
+        </p>
+
+        <h3>ご注意事項</h3>
+        <p style="width: 90%; margin: 25px auto 40px; text-align: justify;">
+            ◇ お問い合わせには、弊社受付時間の平日午前9時から午後5時までの間（土日祝日、盆、年末年始など休日を除く）に順次対応させていただきます。<br>
+            ◇ 詳しくは
+            <a href="{{ url_for('privacy') }}">プライバシーポリシー</a>
+            をご覧ください。
+        </p>
+
+    </div>
+</article>
+
+<div class="formtitle">
+    <h3>資料請求・お問い合わせフォーム</h3>
+</div>
+
+<form method="POST">
+
+    <!-- 資料請求 -->
+    <div class="form-group">
+        <label>資料請求 <span class="badge-optional">任意</span></label>
+
+        <p class="catalog-hint">
+            資料請求をご希望の方はお選びください。
+        </p>
+
+        <div class="catalog-options">
+            <label><input type="checkbox" name="catalog"> 観光イラストマップ</label>
+            <label><input type="checkbox" name="catalog"> 総合ガイドブック </label>
+        </div>
+    </div>
+
+    <!-- 件名 -->
+    <div class="form-group">
+        <label>件名 <span class="required">必須</span></label>
+        <input type="text" name="title">
+    </div>
+
+    <!-- お問い合わせ内容 -->
+    <div class="form-group">
+        <label>お問い合わせ内容 <span class="required">必須</span></label>
+        <textarea name="note"></textarea>
+    </div>
+
+    <!-- 名前 -->
+    <div class="form-group">
+        <label>氏名 <span class="required">必須</span></label>
+        <input type="text" name="name">
+    </div>
+
+    <!-- フリガナ -->
+    <div class="form-group">
+        <label>フリガナ <span class="required">必須</span></label>
+        <input type="text" name="kana">
+    </div>
+
+    <!-- 郵便番号 -->
+    <div class="form-group">
+        <label>郵便番号</label>
+    <input type="text" name="zipcode" class="zipcode">    </div>
+
+    <!-- 住所 -->
+    <div class="form-group">
+        <label>住所 <span class="required">必須</span></label>
+    <select name="area">
+        <option value="">都道府県</option>
+        <option value="北海道">北海道</option>
+        <option value="青森県">青森県</option>
+        <option value="岩手県">岩手県</option>
+        <option value="宮城県">宮城県</option>
+        <option value="秋田県">秋田県</option>
+        <option value="東京都">東京都</option>
+        <option value="神奈川県">神奈川県</option>
+        <option value="大阪府">大阪府</option>
+        <option value="福岡県">福岡県</option>
+        <option value="沖縄県">沖縄県</option>
+    </select>
+</div>
+        <textarea 
+            name="address"
+            class="address-box"
+            placeholder="市区町村以降"
+        ></textarea>
+    </div>
+
+    <!-- パスワード -->
+    <!-- <div class="form-group">
+        <label>パスワード <span class="required">必須</span></label>
+        <input type="password" name="password">
+    </div> -->
+
+    <!-- 確認用 -->
+    <!-- <div class="form-group">
+        <label>確認用パスワード <span class="required">必須</span></label>
+        <input type="password" name="confirm_password">
+    </div> -->
+
+    <!-- メール -->
+    <div class="form-group">
+        <label>メールアドレス <span class="required">必須</span></label>
+        <input type="email" name="email">
+    </div>
+
+    <!-- 電話 -->
+    <div class="form-group">
+        <label>電話番号 <span class="badge-optional">任意</span></label>
+        <input type="tel" name="tel">
+    </div>
+
+    <!-- 同意 -->
+    <div class="agree-box">
+        <label>
+            <input type="checkbox" id="agree-check">
+            プライバシーポリシーに同意する
+        </label>
+    </div>
+
+    <!-- 送信 -->
+    <div class="submit">
+        <button type="submit" id="submit-btn">
+            送信する
+        </button>
+    </div>
+    <br>
+
+</form>
+    <footer class="footer">
+        <div class="footer-inner">
+
+            <div class="footer-logo">
+                <a href="/">
+                    <img src="static/images/logo.jpg" alt="ロゴ">
+                </a>
+            </div>
+
+            <div class="footer-nav">
+                <ul>
+                    <li><a href="/spots">おすすめスポット</a></li>
+                    <li><a href="/foods">ご当地グルメ</a></li>
+                    <li><a href="/course">モデルデートコース</a></li>
+                    <li><a href="/access">アクセス(空港・駅)</a></li>
+                    <li><a href="/contact">お問い合わせ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-sns">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+
+        </div>
+
+        <div class="footer-copy">
+            <p>&copy; 2026 Fukuoka Slow Trip All rights reserved by GroupB</p>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JS（最後に） -->
+    <script src="static/js/main.js"></script>
+
+</body>
+</html>

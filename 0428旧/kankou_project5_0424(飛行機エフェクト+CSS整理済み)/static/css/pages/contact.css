@@ -1,0 +1,402 @@
+@charset "UTF-8";
+/* ==================
+   お問い合わせページ専用
+================== */
+
+/* パンくず */
+.pankz {
+    list-style: none;
+    padding: 10px 0;
+    margin-bottom: 30px;
+    font-size: 14px;
+}
+
+.pankz li {
+    display: inline;
+}
+
+.pankz li::after {
+    content: " > ";
+}
+
+.pankz li:last-child::after {
+    content: "";
+}
+
+/* 説明ボックス */
+.box01 {
+    padding: 30px;
+    margin-bottom: 40px;
+    border-left: none;
+    max-width: 800px;   /* 横幅を制限 */
+    margin: 0 auto;     /* 中央寄せ */
+    text-align: center;
+}
+
+.pankz a,
+.box01 a {
+    background: none;
+    padding: 0;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    display: inline;
+    border-radius: 0;
+}
+
+.box01 h3 {
+    background-color: rgb(245, 245, 245);
+    padding: 10px 12px;
+    border-left: none; /* もし残ってたら消す */
+}
+.box03 h1 {
+    text-align: center;
+    background-color: rgb(245, 245, 245);
+    padding: 10px 12px;
+    margin-bottom: 20px;
+}
+
+.box01 h1 {
+    text-align: center;
+    background-color: rgb(245, 245, 245);
+    padding: 10px 12px;
+    margin-bottom: 20px;
+}
+.box04 h1 {
+    text-align: center;
+    background-color: rgb(245, 245, 245);
+    color: red;
+    padding: 10px 12px;
+    margin-bottom: 20px;
+}
+
+.box02 {
+    padding: 30px;
+    margin-bottom: 40px;
+    border-left: none;
+    max-width: 800px;   /* 横幅を制限 */
+    margin: 0 auto;     /* 中央寄せ */
+}
+
+.box02 h3 {
+    text-align: center;
+    background-color: rgb(245, 245, 245);
+    padding: 10px 12px;
+    border-left: none; /* もし残ってたら消す */
+}
+
+
+/* 電話番号強調 */
+.box01 span {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+
+/* ラベル */
+label {
+    display: block;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* 入力系 */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+    border: 1px solid #007bff;
+    border-radius: 10px;
+    background: #fff;
+    padding: 10px 12px;
+    width: 100%;
+    box-sizing: border-box;
+    outline: none;
+    margin-top: 5px;
+}
+select {
+    width: 150px;
+    padding: 10px;
+    border: 1px solid #007bff;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    transition: var(--transition);
+}
+/* フォーカス */
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--color-main);
+    outline: none;
+}
+
+/* テキストエリア */
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* ボタン */
+input[type="submit"] {
+    margin-top: 30px;
+    padding: 12px;
+    width: 200px;
+    background: #fff;
+    color: var(--color-main);
+    border: 1px solid var(--color-main);
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+/* チェック前（押せない状態） */
+#submit-btn:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* チェック後（押せる状態） */
+#submit-btn:not(:disabled) {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+/* エラー */
+.error {
+    color: red;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+input[type="checkbox"] {
+    accent-color: #1e90ff;
+    width: auto;
+    margin-right: 8px;
+}
+
+.required {
+    display: inline-block;
+    background: red;
+    color: #fff;
+    font-size: 11px;
+    padding: 0 4px;
+    margin-left: 6px;
+    border-radius: 2px;
+    vertical-align: middle;
+}
+.badge-optional {
+    display: inline-block;
+    background: rgb(0, 153, 255);
+    color: #fff;
+    font-size: 11px;
+    padding: 0 4px;
+    margin-left: 6px;
+    border-radius: 2px;
+    vertical-align: middle;
+}
+.agree-box label {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.agree-box input {
+    width: auto;
+    margin-right: 8px;
+}
+
+.address-box {
+    min-height: 30px;
+    resize: none;
+}
+
+.catalog-box {
+    margin-bottom: 20px;
+}
+
+/* タイトル */
+.catalog-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 説明文（改行される） */
+.catalog-hint {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 0px;
+}
+/* チェックボックスだけ横並び */
+.catalog-options {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.catalog-item {
+    list-style: none;   /* ←黒い点対策 */
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.formtitle {
+    padding: 30px;
+    margin-bottom: 40px;
+    border-left: none;
+    max-width: 800px;   /* 横幅を制限 */
+    margin: 0 auto;     /* 中央寄せ */
+}
+
+.formtitle h3 {
+    text-align: center;
+    background-color: rgb(245, 245, 245);
+    padding: 10px 12px;
+    border-left: none; /* もし残ってたら消す */
+}
+
+form {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.submit {
+    text-align: center;
+
+}
+
+.box03 {
+    padding: 30px;
+    margin-bottom: 40px;
+    border-left: none;
+    max-width: 800px;   /* 横幅を制限 */
+    margin: 0 auto;     /* 中央寄せ */
+    text-align: left;
+    list-style: none;   /* ←黒い点対策 */
+
+}
+
+.box03 ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.box03 li {
+    margin-bottom: 10px;
+}
+
+/* ボタン全体を横並び */
+.submit-area {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 40px;
+}
+
+/* 戻るボタン */
+.back-btn {
+    width: 180px;
+    padding: 12px;
+    background: #007bff;
+    color: #fff;
+    border: 1px solid var(--color-main);
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.back-btn:hover {
+    opacity: 0.8;
+}
+
+/* 送信ボタン */
+.send-btn {
+    width: 180px;
+    padding: 12px;
+    background: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.send-btn:hover {
+    opacity: 0.8;
+}
+
+/* ==================
+   スマホ対応
+================== */
+@media screen and (max-width: 768px) {
+
+    /* 全体の余白 */
+    article {
+        padding: 0 15px;
+    }
+
+    .box01 {
+        padding: 20px;
+    }
+
+    /* フォーム幅調整 */
+    form {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 15px;
+    }
+
+    /* 入力欄をスマホで押しやすく */
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    textarea,
+    select {
+        font-size: 16px; /* iPhoneズーム防止 */
+        padding: 12px;
+        border-radius: 6px;
+    }
+
+    /* ボタン大きく */
+    input[type="submit"] {
+        font-size: 16px;
+        padding: 14px;
+    }
+
+    /* パンくず小さく */
+    .pankz {
+        font-size: 12px;
+    }
+
+    /* 見出し調整 */
+    h3 {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+
+    body {
+        font-size: 13px;
+    }
+
+    h3 {
+        font-size: 15px;
+    }
+
+    input,
+    textarea,
+    select {
+        font-size: 16px; /* ここは維持（ズーム防止） */
+    }
+
+}

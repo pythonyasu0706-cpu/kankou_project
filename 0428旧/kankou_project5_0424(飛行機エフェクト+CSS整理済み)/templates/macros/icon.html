@@ -1,0 +1,4 @@
+<!-- アイコン部品化マクロ -->
+{% macro icon(name, alt="", class_name="icon") %}
+<img src="{{ url_for('static', filename='icon/' + name) }}" alt="{{ alt }}" class="{{ class_name }}">
+{% endmacro %}

@@ -1,0 +1,294 @@
+<!-- templates/foods.html -->
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <!-- favicon -->
+    <link rel="icon" href="../static/icon/fav_ramen.svg">
+    <!-- Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Noto+Sans+JP:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- 共通 main.css -->
+    <link rel="stylesheet" href="static/css/main.css">
+
+    <!-- フォントアイコン フッター用CSS component.cssとは別に -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- ページ専用CSS置き場 -->
+
+    <link rel="stylesheet" href="static/css/pages/foods.css">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- 全体共通reset.css
+    <link rel="stylesheet" href="static/css/reset.css">
+    全体共通CSS
+    <link rel="stylesheet" href="static/css/style.css">
+    コンポーネント用CSS
+    <link rel="stylesheet" href="static/css/components.css">
+    お問い合わせフォーム用CSS
+    <link rel="stylesheet" href="static/css/pages/contact.css">
+    デートコース用CSS
+    <link rel="stylesheet" href="static/css/pages/course.css">
+    アクセスページ用CSS
+    <link rel="stylesheet" href="static/css/pages/access.css">
+    foods.html + spots.html用
+    <link rel="stylesheet" href="static/css/bootstrap.min.css"> -->
+</head>
+
+<body>
+    <!-- ハンバーガーメニューは前頁共通 -->
+    <!-- templates/partials/hamburger.html -->
+
+    <!-- ヘッダー -->
+    <header class="header">
+        <!-- ロゴ -->
+        <div class="logo">
+            <a href="/">
+                <img src="static/images/logo.jpg" alt="サイトロゴ">
+            </a>
+        </div>
+
+        <!-- ハンバーガー -->
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- メニュー -->
+    <nav class="nav" id="nav">
+        <ul>
+            <li><a href="/">TOP</a></li>
+            <li><a href="/spots">おすすめスポット</a></li>
+            <li><a href="/foods">ご当地グルメ</a></li>
+            <li><a href="/course">モデルデートコース</a></li>
+            <li><a href="/access">アクセス(空港・駅)</a></li>
+            <li><a href="/contact">お問い合わせ</a></li>
+        </ul>
+    </nav>
+    <!-- TOPページはヘッダーが不要のため -->
+
+    <!-- templates/partials/page_header.html -->
+
+    <div class="page-header">
+        <h1 class="page-title">福岡市のご当地グルメ</h1>
+
+
+    </div>
+
+
+
+    <main>
+
+
+
+
+        <!-- タイトル -->
+        <!-- <section class="main-img">
+    <h3>福岡市のご当地グルメ</h3>
+</section> -->
+
+        <!-- メイン -->
+        <section class="add-bg-history">
+            <div class="gourmet-hero">
+                <div class="hero-overlay">
+                    <div class="txt-center">
+                        <h3>福岡グルメガイド<span>Fukuoka Gourmet Guide</span></h3>
+                        <p class="fs80 head-lead">福岡を代表する絶品グルメ</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mgt50">
+                <!-- <div class="container mgt50"> -->
+
+
+
+                <div class="row ">
+
+
+                    <!-- 左テキスト・右画像 -->
+                    <div class="col-md-7">
+                        <h4>博多ラーメン</h4>
+                        <p>丹念に炊き上げた豚骨スープは、見た目以上にクリーミーで奥深い味わい。博多ならではの「替え玉」で、最後の一口まで自分流の楽しみ方を。</p>
+                    </div>
+                    <div class="col-md-5">
+
+                        <img src="static/images/food/ramen01.jpg" alt="ラーメン1" class="spot-img" loading="lazy">
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="row mgt50">
+
+
+                    <!-- 右テキスト・左画像 -->
+                    <div class="col-md-5">
+
+                        <img src="static/images/food/motsunabe01.jpg" alt="もつ鍋" class="spot-img" loading="lazy">
+
+                    </div>
+                    <div class="col-md-7">
+                        <h4>もつ鍋</h4>
+                        <p>選び抜かれた新鮮な牛もつと、甘みを増した野菜が共演する滋味深い味わい。素材の旨みが溶け出した秘伝のスープが、二人の心と身体を芯から温めてくれます。</p>
+                    </div>
+
+                </div>
+
+
+                <div class="row mgt50">
+
+
+                    <!-- 左テキスト・右画像 -->
+                    <div class="col-md-7">
+                        <h4>明太子</h4>
+                        <p>弾けるような粒立ちと、奥深い旨みのあとにくる心地よい刺激。炊き立ての白米にはもちろん、お酒の肴としても愛され続ける福岡が誇る至福の逸品。</p>
+                    </div>
+                    <div class="col-md-5">
+
+                        <img src="static/images/food/mentai01.jpg" alt="明太子" class="spot-img" loading="lazy">
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- JS -->
+        <!-- <script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/script.js" defer></script> -->
+
+        <!-- ギャラリー・グルメ -->
+        <section class="gallery">
+            <div class="gallery-image">
+                <!-- <img src="images/images_foods/ramen02.jpg" alt="グルメ２"> -->
+
+                <img src="static/images/food/ramen02.jpg" alt="グルメ２" class="spot-img" loading="lazy">
+
+            </div>
+            <div class="gallery-content wrapper">
+                <h2 class="title">～Gallery～</h2>
+                <ul class="gallery-thumbnails">
+
+                    <li>
+
+                        <img src="static/images/food/ramen02.jpg" alt="グルメ2" class="spot-img" loading="lazy">
+
+                    </li>
+
+                    <li>
+
+                        <img src="static/images/food/ramen03.jpg" alt="グルメ3" class="spot-img" loading="lazy">
+
+                    </li>
+
+                    <li>
+
+                        <img src="static/images/food/ramen5000yen.jpg" alt="グルメ4" class="spot-img" loading="lazy">
+
+                    </li>
+
+                    <li>
+
+                        <img src="static/images/food/motsunabe02.jpg" alt="グルメ5" class="spot-img" loading="lazy">
+
+                    </li>
+
+                    <li>
+
+                        <img src="static/images/food/motsunabe03.jpg" alt="グルメ6" class="spot-img" loading="lazy">
+
+                    </li>
+
+                    <li>
+
+                        <img src="static/images/food/motsunabe04.jpg" alt="グルメ7" class="spot-img" loading="lazy">
+
+                    </li>
+
+                    <li>
+
+                        <img src="static/images/food/mentai02.jpg" alt="グルメ8" class="spot-img" loading="lazy">
+
+                    </li>
+
+                    <li>
+
+                        <img src="static/images/food/mentai03.jpg" alt="グルメ9" class="spot-img" loading="lazy">
+
+                    </li>
+
+                    <li>
+
+                        <img src="static/images/food/mentai04.jpg" alt="グルメ10" class="spot-img" loading="lazy">
+
+                    </li>
+
+                </ul>
+            </div>
+        </section>
+
+        <!-- JS -->
+        <!-- <script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script> -->
+
+    </main>
+
+    <!-- templates/partials/footer.html -->
+    <footer class="footer">
+        <div class="footer-inner">
+
+            <div class="footer-logo">
+                <a href="/">
+                    <img src="static/images/logo.jpg" alt="ロゴ">
+                </a>
+            </div>
+
+            <div class="footer-nav">
+                <ul>
+                    <li><a href="/spots">おすすめスポット</a></li>
+                    <li><a href="/foods">ご当地グルメ</a></li>
+                    <li><a href="/course">モデルデートコース</a></li>
+                    <li><a href="/access">アクセス(空港・駅)</a></li>
+                    <li><a href="/contact">お問い合わせ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-sns">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+
+        </div>
+
+        <div class="footer-copy">
+            <p>&copy; 2026 Fukuoka Slow Trip All rights reserved by GroupB</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JS（最後に） -->
+    <script src="static/js/main.js"></script>
+
+</body>
+
+</html>

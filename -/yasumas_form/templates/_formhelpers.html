@@ -1,0 +1,16 @@
+{% macro render_field(field) %}
+  <div class="form-group">
+    <label>
+        {{ field.label.text }}
+        {% if field.flags.required %}
+            <span class="required">必須</span>
+        {% endif %}
+    </label>
+
+    {{ field(**kwargs) }}
+
+    {% for error in field.errors %}
+        <p class="error">{{ error }}</p>
+    {% endfor %}
+  </div>
+{% endmacro %}

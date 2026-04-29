@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/base/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/pages/contact.css">
+    <title>WTForm</title>
+</head>
+<body>
+
+<ul class="pankz">
+    <li><a href="#"><span>HOME</span></a></li>
+    <li>お問い合わせ</li>
+</ul>
+
+<article>
+    <div class="box01">
+
+        <h3>お電話でのお問い合わせ</h3>
+        <p>
+            <span>092-xxx-xxxx</span><br>
+            平日9:00〜17:00（土日祝除く）に対応いたします。
+        </p>
+
+        <h3>ご注意事項</h3>
+        <p style="width: 90%; margin: 25px auto 40px; text-align: justify;">
+            ◇ お問い合わせには、弊社受付時間の平日午前9時から午後5時までの間（土日祝日、盆、年末年始など休日を除く）に順次対応させていただきます。<br>
+            ◇ 詳しくは
+            <a href="{{ url_for('privacy') }}">プライバシーポリシー</a>
+            をご覧ください。
+        </p>
+
+    </div>
+</article>
+
+<div class="formtitle">
+    <h3>資料請求・お問い合わせフォーム</h3>
+</div>
+
+<form method="POST">
+
+    <!-- 資料請求 -->
+    <div class="form-group">
+        <label>資料請求 <span class="badge-optional">任意</span></label>
+
+        <p class="catalog-hint">
+            資料請求をご希望の方はお選びください。
+        </p>
+
+        <div class="catalog-options">
+            <label><input type="checkbox" name="catalog"> 観光イラストマップ</label>
+            <label><input type="checkbox" name="catalog"> 総合ガイドブック </label>
+        </div>
+    </div>
+
+    <!-- 件名 -->
+    <div class="form-group">
+        <label>件名 <span class="required">必須</span></label>
+        <input type="text" name="title">
+    </div>
+
+    <!-- お問い合わせ内容 -->
+    <div class="form-group">
+        <label>お問い合わせ内容 <span class="required">必須</span></label>
+        <textarea name="note"></textarea>
+    </div>
+
+    <!-- 名前 -->
+    <div class="form-group">
+        <label>氏名 <span class="required">必須</span></label>
+        <input type="text" name="name">
+    </div>
+
+    <!-- フリガナ -->
+    <div class="form-group">
+        <label>フリガナ <span class="required">必須</span></label>
+        <input type="text" name="kana">
+    </div>
+
+    <!-- 郵便番号 -->
+    <div class="form-group">
+        <label>郵便番号</label>
+    <input type="text" name="zipcode" class="zipcode">    </div>
+
+    <!-- 住所 -->
+    <div class="form-group">
+        <label>住所 <span class="required">必須</span></label>
+    <select name="area">
+        <option value="">都道府県</option>
+        <option value="北海道">北海道</option>
+        <option value="青森県">青森県</option>
+        <option value="岩手県">岩手県</option>
+        <option value="宮城県">宮城県</option>
+        <option value="秋田県">秋田県</option>
+        <option value="東京都">東京都</option>
+        <option value="神奈川県">神奈川県</option>
+        <option value="大阪府">大阪府</option>
+        <option value="福岡県">福岡県</option>
+        <option value="沖縄県">沖縄県</option>
+    </select>
+</div>
+        <textarea 
+            name="address"
+            class="address-box"
+            placeholder="市区町村以降"
+        ></textarea>
+    </div>
+
+    <!-- パスワード -->
+    <div class="form-group">
+        <label>パスワード <span class="required">必須</span></label>
+        <input type="password" name="password">
+    </div>
+
+    <!-- 確認用 -->
+    <div class="form-group">
+        <label>確認用パスワード <span class="required">必須</span></label>
+        <input type="password" name="confirm_password">
+    </div>
+
+    <!-- メール -->
+    <div class="form-group">
+        <label>メールアドレス <span class="required">必須</span></label>
+        <input type="email" name="email">
+    </div>
+
+    <!-- 電話 -->
+    <div class="form-group">
+        <label>電話番号 <span class="badge-optional">任意</span></label>
+        <input type="tel" name="tel">
+    </div>
+
+    <!-- 同意 -->
+    <div class="agree-box">
+        <label>
+            <input type="checkbox" id="agree-check">
+            プライバシーポリシーに同意する
+        </label>
+    </div>
+
+    <!-- 送信 -->
+    <div class="submit">
+        <button type="submit" id="submit-btn">
+            送信する
+        </button>
+    </div>
+
+</form>
+
+</body>
+</html>

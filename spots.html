@@ -1,0 +1,301 @@
+<!-- templates/spots.html -->
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <!-- favicon -->
+    <link rel="icon" href="../static/icon/fav_ramen.svg">
+    <!-- Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Noto+Sans+JP:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- 共通 main.css -->
+    <link rel="stylesheet" href="static/css/main.css">
+
+    <!-- フォントアイコン フッター用CSS component.cssとは別に -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- ページ専用CSS置き場 -->
+
+    <link rel="stylesheet" href="static/css/pages/foods.css">
+    <link rel="stylesheet" href="static/css/weather.css">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <!-- 全体共通reset.css
+    <link rel="stylesheet" href="static/css/reset.css">
+    全体共通CSS
+    <link rel="stylesheet" href="static/css/style.css">
+    コンポーネント用CSS
+    <link rel="stylesheet" href="static/css/components.css">
+    お問い合わせフォーム用CSS
+    <link rel="stylesheet" href="static/css/pages/contact.css">
+    デートコース用CSS
+    <link rel="stylesheet" href="static/css/pages/course.css">
+    アクセスページ用CSS
+    <link rel="stylesheet" href="static/css/pages/access.css">
+    foods.html + spots.html用
+    <link rel="stylesheet" href="static/css/bootstrap.min.css"> -->
+</head>
+
+<body>
+    <!-- ハンバーガーメニューは前頁共通 -->
+    <!-- templates/partials/hamburger.html -->
+
+    <!-- ヘッダー -->
+    <header class="header">
+        <!-- ロゴ -->
+        <div class="logo">
+            <a href="/">
+                <img src="static/images/logo.jpg" alt="サイトロゴ">
+            </a>
+        </div>
+
+        <!-- ハンバーガー -->
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </header>
+
+    <!-- メニュー -->
+    <nav class="nav" id="nav">
+        <ul>
+            <li><a href="/">TOP</a></li>
+            <li><a href="/spots">おすすめスポット</a></li>
+            <li><a href="/foods">ご当地グルメ</a></li>
+            <li><a href="/course">モデルデートコース</a></li>
+            <li><a href="/access">アクセス(空港・駅)</a></li>
+            <li><a href="/contact">お問い合わせ</a></li>
+        </ul>
+    </nav>
+    <!-- TOPページはヘッダーが不要のため -->
+
+    <!-- templates/partials/page_header.html -->
+
+    <div class="page-header">
+        <h1 class="page-title">福岡市の観光スポット</h1>
+
+
+    </div>
+
+
+
+    <main>
+
+
+
+
+        <!-- <section class="main-img">
+    <h3>福岡市の観光スポット</h3>
+</section> -->
+
+        <section class="add-bg-history">
+            <div class="gourmet-hero">
+                <div class="hero-overlay">
+                    <div class="txt-center">
+                        <h3>福岡観光ガイド<span>FUKUOKA TRAVEL GUIDE</span></h3>
+                        <p class="fs80 head-lead">福岡市の街並みと博多湾の風景</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mgt50">
+
+
+                <div class="row ">
+
+
+                    <!-- 左テキスト・右画像 -->
+                    <div class="col-md-7">
+                        <h4>大濠公園
+                            <span id="ohori-weather"></span>
+                        </h4>
+                        <p>福岡市中央区にある大きな池を中心とした公園。散歩やランニングコースとして人気があり、自然を感じながらゆったり過ごすことができます。</p>
+                    </div>
+                    <div class="col-md-5">
+
+                        <img src="static/images/spot/ohorikouen.jpg" alt="大濠公園1" class="spot-img" loading="lazy">
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="row mgt50">
+
+
+                    <!-- 右テキスト・左画像 -->
+                    <div class="col-md-5">
+
+                        <img src="static/images/spot/momochihama.jpg" alt="福岡タワー1" class="spot-img" loading="lazy">
+
+                    </div>
+                    <div class="col-md-7">
+                        <h4>福岡タワー
+                            <span id="fukuokatower-weather"></span>
+                        </h4>
+                        <p>選び抜かれた新鮮な牛もつと、甘みを増した野菜が共演する滋味深い味わい。素材の旨みが溶け出した秘伝のスープが、二人の心と身体を芯から温めてくれます。</p>
+                    </div>
+
+                </div>
+
+
+                <div class="row mgt50">
+
+
+                    <!-- 左テキスト・右画像 -->
+                    <div class="col-md-7">
+                        <h4>太宰府天満宮
+                            <span id="dazaifu-weather"></span>
+                        </h4>
+                        <p>学問の神様・菅原道真を祀る神社。受験シーズンには多くの参拝客が訪れ、周辺では名物の梅ヶ枝餅も楽しめます。</p>
+                    </div>
+                    <div class="col-md-5">
+
+                        <img src="static/images/spot/dazaifutenmangu.jpg" alt="太宰府天満宮1" class="spot-img" loading="lazy">
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- JS -->
+        <!-- <script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/script.js" defer></script> -->
+
+        <!-- ギャラリー・観光 -->
+        <section class="gallery">
+            <div class="gallery-image">
+                <!-- <img src="images/images_spots/dontaku.jpg" alt="観光地２"> -->
+
+                <img src="static/images/spot/dontaku.jpg" alt="スポット２" class="spot-img" loading="lazy">
+
+            </div>
+            <div class="gallery-content wrapper">
+                <h2 class="title">～Gallery～</h2>
+                <ul class="gallery-thumbnails">
+
+                    <li>
+
+                        <img src="static/images/spot/dontaku.jpg" alt="スポット2" class="spot-img" loading="lazy">
+
+                    </li>
+
+                    <li>
+
+                        <img src="static/images/spot/jazz.jpg" alt="スポット3" class="spot-img" loading="lazy">
+
+                    </li>
+
+                    <li>
+
+                        <img src="static/images/spot/kushdajinjya.jpg" alt="スポット4" class="spot-img" loading="lazy">
+
+                    </li>
+
+                    <li>
+
+                        <img src="static/images/spot/maidurukouen.jpg" alt="スポット5" class="spot-img" loading="lazy">
+
+                    </li>
+
+                    <li>
+
+                        <img src="static/images/spot/marineworld.jpg" alt="スポット6" class="spot-img" loading="lazy">
+
+                    </li>
+
+                    <li>
+
+                        <img src="static/images/spot/nakasu.jpg" alt="スポット7" class="spot-img" loading="lazy">
+
+                    </li>
+
+                    <li>
+
+                        <img src="static/images/spot/nemophila.jpg" alt="スポット8" class="spot-img" loading="lazy">
+
+                    </li>
+
+                    <li>
+
+                        <img src="static/images/spot/nishinakasu.jpg" alt="スポット9" class="spot-img" loading="lazy">
+
+                    </li>
+
+                    <li>
+
+                        <img src="static/images/spot/tenjinNishikouoen.jpg" alt="スポット10" class="spot-img"
+                            loading="lazy">
+
+                    </li>
+
+                </ul>
+            </div>
+        </section>
+
+        <!-- JS
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script> -->
+
+
+    </main>
+
+    <!-- templates/partials/footer.html -->
+    <footer class="footer">
+        <div class="footer-inner">
+
+            <div class="footer-logo">
+                <a href="/">
+                    <img src="static/images/logo.jpg" alt="ロゴ">
+                </a>
+            </div>
+
+            <div class="footer-nav">
+                <ul>
+                    <li><a href="/spots">おすすめスポット</a></li>
+                    <li><a href="/foods">ご当地グルメ</a></li>
+                    <li><a href="/course">モデルデートコース</a></li>
+                    <li><a href="/access">アクセス(空港・駅)</a></li>
+                    <li><a href="/contact">お問い合わせ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-sns">
+                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+
+        </div>
+
+        <div class="footer-copy">
+            <p>&copy; 2026 Fukuoka Slow Trip All rights reserved by GroupB</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/weather.js"></script>
+
+    <!-- JS（最後に） -->
+    <script src="static/js/main.js"></script>
+
+</body>
+
+</html>

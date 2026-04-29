@@ -1,0 +1,30 @@
+<!-- templates/partials/hamburger.html -->
+
+<!-- ヘッダー -->
+<header class="header">
+    <!-- ロゴ -->
+    <div class="logo">
+        <a href="{{ url_for('index') }}">
+            <img src="{{ url_for('static', filename='images/logo.jpg') }}" alt="サイトロゴ">
+        </a>
+    </div>
+
+    <!-- ハンバーガー -->
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</header>
+
+<!-- メニュー -->
+<nav class="nav" id="nav">
+    <ul>
+        <li><a href="{{ url_for('index') }}">TOP</a></li>
+        <li><a href="{{ url_for('spots') }}">おすすめスポット</a></li>
+        <li><a href="{{ url_for('foods') }}">ご当地グルメ</a></li>
+        <li><a href="{{ url_for('course') }}">モデルデートコース</a></li>
+        <li><a href="{{ url_for('access') }}">アクセス(空港・駅)</a></li>
+        <li><a href="{{ url_for('contact') }}">お問い合わせ</a></li>
+    </ul>
+</nav>

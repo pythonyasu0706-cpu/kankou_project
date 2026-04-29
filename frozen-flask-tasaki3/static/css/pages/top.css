@@ -1,0 +1,384 @@
+/* トップページ用CSS static/css/pages/top.css */
+
+/* =========================
+ヒーロー全体
+========================= */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #333;
+    /* 読み込み前の保険 */
+}
+
+/* 背景スライド */
+.slider {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.slider img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+}
+
+.slider img.active {
+    opacity: 1;
+}
+
+/* オーバーレイ（暗さ調整） */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    /* 少しだけ濃くして文字を読みやすく */
+    z-index: 1;
+}
+
+/* =========================
+タイトル（中央）
+========================= */
+.title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    /* 最前面へ */
+    width: 90%;
+    /* スマホ用 */
+    max-width: 700px;
+    /* PCでの最大サイズ */
+    text-align: center;
+}
+
+.title img {
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+    /* ロゴを浮かせる */
+}
+
+/* ヘッダーロゴのサイズ調整 */
+.header .logo img {
+    height: 60px;
+    /* お好みの高さ（40px〜80px程度）に調整 */
+    width: auto;
+    /* アスペクト比を維持 */
+    transition: transform 0.3s ease;
+}
+
+/* ホバーした時に少し大きくする演出（お好みで） */
+.header .logo img:hover {
+    transform: scale(1.05);
+}
+
+/* footer.html 内のロゴ */
+.footer-logo img {
+    height: 80px;
+    /* ヘッダーより少し大きめにすると安定感が出ます */
+    width: auto;
+}
+
+/* 特集タイトルの画像の大きさを調整 */
+/* 特集ロゴ（ピックアップ）のサイズ調整 */
+.pick-logo {
+    display: block;
+    /* 中央揃えしやすくする */
+    margin: 40px auto;
+    /* 上下に余白を作り、左右中央に配置 */
+    width: 300px;
+    /* ここで大きさを調整（好みの数値に変えてください） */
+    max-width: 90%;
+    /* スマホで画面からはみ出さないように */
+    height: auto;
+    /* 縦横比を維持 */
+}
+
+/* =========================
+波
+========================= */
+.wave {
+    position: absolute;
+    bottom: -2px;
+    /* 隙間防止を強化 */
+    width: 100%;
+    z-index: 2;
+    overflow: hidden;
+    line-height: 0;
+    /* 下部の微細な隙間対策 */
+}
+
+.wave-inner {
+    display: flex;
+    width: 200%;
+}
+
+.wave-inner svg {
+    width: 50%;
+    /* 51%から微調整 */
+}
+
+/* 背面の波 */
+.wave-back {
+    opacity: 0.35;
+    filter: blur(1px);
+}
+
+.wave-back .wave-inner {
+    animation: wave 15s linear infinite;
+    /* 少しゆっくりに */
+}
+
+/* 前面の波 */
+.wave-front {
+    z-index: 4;
+}
+
+.wave-front .wave-inner {
+    animation: wave 8s linear infinite;
+}
+
+.wave-inner svg path {
+    fill: #ffffff;
+}
+
+.wave-front svg {
+    height: 130px;
+}
+
+.wave-back svg {
+    height: 150px;
+}
+
+/* グラデーションオーバーレイ */
+.hero::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 180px;
+    /* 波に合わせて少し高く */
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.5) 50%,
+            rgba(255, 255, 255, 1) 100%);
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* =========================
+飛行機
+========================= */
+.plane {
+    position: absolute;
+    bottom: 150px;
+    /* 波より少し上に */
+    left: -150px;
+    z-index: 5;
+    animation: fly 10s linear infinite;
+}
+
+.plane img {
+    width: 80px;
+    filter: brightness(0) invert(1) drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+}
+
+.trail {
+    position: absolute;
+    right: 100%;
+    /* 飛行機の後ろにつくように */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(to left,
+            rgba(255, 255, 255, 0.8),
+            rgba(255, 255, 255, 0));
+}
+
+/* =========================
+ナビゲーション
+========================= */
+.nav-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid rgba(221, 221, 221, 0.3);
+    border-bottom: 1px solid rgba(221, 221, 221, 0.3);
+    background: rgba(0, 0, 0, 0.2);
+    /* 背景を少し暗くして文字を浮かせる */
+    backdrop-filter: blur(5px);
+    /* グラスモーフィズム */
+}
+
+.nav-item {
+    flex: 1;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.nav-item:last-child {
+    border-right: none;
+}
+
+.nav-item a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 10px;
+    margin: 0;
+    text-decoration: none;
+    color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+/* ホバー時：背景を白に、文字を黒に */
+.nav-item a:hover {
+    background-color: #ffffff;
+}
+
+.nav-item a:hover .nav-text,
+.nav-item a:hover .nav-icon {
+    color: #333;
+    filter: brightness(0);
+    /* アイコンが画像の場合、黒にする */
+}
+
+.nav-icon {
+    width: 24px;
+    height: auto;
+    margin-bottom: 8px;
+    filter: brightness(0) invert(1);
+    /* 白にする */
+}
+
+.nav-text {
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+
+/* =========================
+アニメーション定義
+========================= */
+@keyframes fly {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        /* 画面外の左から、画面外の右まで飛ばす */
+        transform: translateX(calc(100vw + 300px)) translateY(-100px) scale(0.7);
+    }
+}
+
+@keyframes wave {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* =========================
+レスポンシブ調整（スマホ全般）
+========================= */
+@media (max-width: 768px) {
+
+    /* 共通の調整（縦・横両方） */
+    .nav-text {
+        font-size: 11px;
+    }
+
+    .plane img {
+        width: 60px;
+    }
+
+    /* ロゴのサイズをスマホ用に調整 */
+    .pick-logo {
+        width: 80%;
+        /* 画面幅に合わせて自動調整 */
+        margin: 30px auto;
+    }
+}
+
+/* =========================
+iPhone X / スマホ 縦持ち用 (Portrait)
+========================= */
+@media (max-width: 480px) and (orientation: portrait) {
+    .wave-front svg {
+        height: 60px;
+    }
+
+    .wave-back svg {
+        height: 80px;
+    }
+
+    .hero::after {
+        height: 100px;
+    }
+
+    /* 下部のグラデーションを少し低く */
+
+    .title img {
+        width: 85%;
+        /* タイトルロゴが画面いっぱいに広がりすぎないよう調整 */
+    }
+}
+
+/* =========================
+iPhone X / スマホ 横持ち用 (Landscape)
+========================= */
+@media (max-width: 896px) and (orientation: landscape) {
+
+    /* 横持ちは高さが足りないので全体的にコンパクトに */
+    .hero {
+        height: 120vh;
+        /* 横向き時はスクロールを許容しないと中身が入りきらないため少し伸ばす */
+    }
+
+    .title {
+        top: 40%;
+        /* 少し上にずらしてナビとの重なりを防ぐ */
+    }
+
+    .title img {
+        max-width: 300px;
+        /* 横向き時は高さを圧迫するのでロゴを小さく */
+    }
+
+    .wave-front svg {
+        height: 40px;
+    }
+
+    .wave-back svg {
+        height: 50px;
+    }
+
+    .plane {
+        bottom: 60px;
+    }
+
+    /* 飛行機の位置を調整 */
+
+    /* ナビゲーションのパディングを詰める */
+    .nav-item a {
+        padding: 10px 0;
+    }
+
+    .nav-icon {
+        width: 20px;
+        margin-bottom: 4px;
+    }
+}

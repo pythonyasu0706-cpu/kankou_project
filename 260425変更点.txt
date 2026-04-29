@@ -1,0 +1,24 @@
+天気アイコンジャバスクリプト版にした。
+それぞれのhtmlに
+<script src="{{ url_for('static', filename='js/weather.js') }}"></script>
+追加
+base.htmlに
+<link rel="stylesheet" href="static/css/weather.css">
+追加
+
+jsファイルweather.js追加
+
+contact.html修正した
+contact.html confirm.html result.html course.htmlをffftp用作成
+
+course.cssを変更
+.spot-name {
+    /* display: block; */←
+    display: inline-flex;←
+    align-items: center;←
+    gap: 8px;←
+    font-size: 1.15rem;
+    font-weight: bold;
+    margin: 5px 0 10px 0;
+    color: #222;
+}

@@ -1,0 +1,293 @@
+<!-- templates/access.html -->
+{% extends "base.html" %}
+
+{% set title = "アクセス | 福岡観光" %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/access.css') }}">
+{% endblock %}
+
+{% block content %}
+
+{% from "macros/icon.html" import icon %}
+{% from "macros/image.html" import image %}
+
+<section class="hero">
+    <!-- <img src="static\images\access\fukuoka.jpg" alt="福岡の風景"> -->
+    {{ image('access/fukuoka.jpg', '福岡の風景', '') }}
+    <div class="overlay"></div>
+    <p class="hero-text">交通アクセス</p>
+</section>
+
+<!-- タイトル -->
+<h2>アクセスマップ</h2>
+
+<!-- =========================
+    交通機関リンク（別枠）
+========================= -->
+<section class="transport-section">
+    <h3>主な公共交通機関リンク</h3>
+
+    <div class="transport-grid">
+
+        <a href="https://www.fukuoka-airport.jp/" target="_blank" class="transport-card">
+            {{ icon('airplane.svg') }}
+            <p>福岡空港</p>
+        </a>
+
+        <a href="https://www.jrkyushu.co.jp/" target="_blank" class="transport-card">
+            {{ icon('train.svg') }}
+            <p>JR九州</p>
+        </a>
+
+        <a href="https://www.nishitetsu.jp/" target="_blank" class="transport-card">
+            {{ icon('train.svg') }}
+            <p>西鉄電車</p>
+        </a>
+
+        <a href="https://subway.city.fukuoka.lg.jp/" target="_blank" class="transport-card">
+            {{ icon('subway.svg') }}
+            <p>福岡市地下鉄</p>
+        </a>
+
+
+        <a href="https://www.nishitetsu.jp/bus/" target="_blank" class="transport-card">
+            {{ icon('bus.svg') }}
+            <p>西鉄バス</p>
+        </a>
+
+    </div>
+</section>
+
+<!-- =========================
+    観光アクセス
+========================= -->
+<section>
+    <h3>観光アクセス</h3>
+
+    <!-- 太宰府 -->
+    <h4>■ 太宰府天満宮</h4>
+
+    <!-- 車ルート -->
+    <div class="route">
+        <div class="route-box">{{ icon('car.svg') }} 博多駅</div>
+        <div class="arrow">▶</div>
+        <div class="route-box">{{ icon('tori.svg') }} 太宰府天満宮</div>
+    </div>
+
+    <p class="route-time">車：約30〜40分</p>
+
+    <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=博多駅&destination=太宰府天満宮&travelmode=driving"
+        target="_blank">
+        経路を確認 →
+    </a>
+
+    <!-- バスルート -->
+    <div class="route">
+        <div class="route-box">{{ icon('bus.svg') }} 博多駅</div>
+        <div class="arrow">▶</div>
+        <div class="route-box">{{ icon('tori.svg') }} 太宰府天満宮</div>
+    </div>
+
+    <p class="route-time">バス：約40〜60分</p>
+
+    <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=博多駅&destination=太宰府天満宮&travelmode=transit"
+        target="_blank">
+        経路を確認 →
+    </a>
+
+
+    <div class="route">
+        <div class="route-box">{{ icon('subway.svg') }} 博多駅</div>
+        <div class="arrow">▶</div>
+        <div class="route-box">{{ icon('subway.svg') }} 天神</div>
+        <div class="arrow">▶</div>
+        <div class="route-box">{{ icon('subway.svg') }} 太宰府駅</div>
+        <div class="arrow">▶</div>
+        <div class="route-box">{{ icon('tori.svg') }} 太宰府天満宮</div>
+    </div>
+
+    <p class="route-time">所要時間：約40〜50分</p>
+
+    <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=博多駅&destination=太宰府天満宮&waypoints=天神|太宰府駅"
+        target="_blank">
+        経路を確認 →
+    </a>
+
+    <!-- 空港→太宰府 -->
+    <div class="route">
+        <div class="route-box">{{ icon('train.svg') }} 福岡空港</div>
+        <div class="arrow">▶</div>
+        <div class="route-box">{{ icon('subway.svg') }} 博多駅</div>
+        <div class="arrow">▶</div>
+        <div class="route-box">{{ icon('tori.svg') }} 太宰府天満宮</div>
+    </div>
+
+    <p class="route-time">所要時間：約45分</p>
+
+    <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=福岡空港&destination=太宰府天満宮&waypoints=博多駅"
+        target="_blank">
+        経路を確認 →
+    </a>
+
+    <!-- 福岡タワー -->
+    <h4>■ 福岡タワー</h4>
+
+    <!-- 車ルート -->
+    <div class="route">
+        <div class="route-box">{{ icon('car.svg') }} 博多駅</div>
+        <div class="arrow">▶</div>
+        <div class="route-box">{{ icon('tower.svg') }} 福岡タワー</div>
+    </div>
+
+    <p class="route-time">車：約20〜30分</p>
+
+    <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=博多駅&destination=福岡タワー&travelmode=driving"
+        target="_blank">
+        経路を確認 →
+    </a>
+
+    <!-- バスルート -->
+    <div class="route">
+        <div class="route-box">{{ icon('bus.svg') }} 天神</div>
+        <div class="arrow">▶</div>
+        <div class="route-box">{{ icon('tower.svg') }} 福岡タワー</div>
+    </div>
+
+    <p class="route-time">バス：約20分</p>
+
+    <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=天神&destination=福岡タワー&travelmode=transit"
+        target="_blank">
+        経路を確認 →
+    </a>
+
+    <!-- 空港→福岡タワー -->
+    <div class="route">
+        <div class="route-box">{{ icon('airplane.svg') }} 福岡空港</div>
+        <div class="arrow">▶</div>
+        <div class="route-box">{{ icon('subway.svg') }} 博多駅</div>
+        <div class="arrow">▶</div>
+        <div class="route-box">{{ icon('subway.svg') }} 天神</div>
+        <div class="arrow">▶</div>
+        <div class="route-box">{{ icon('tower.svg') }} 福岡タワー</div>
+    </div>
+
+    <p class="route-time">所要時間：約40〜50分</p>
+
+    <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=福岡空港&destination=福岡タワー&waypoints=博多駅|天神"
+        target="_blank">
+        経路を確認 →
+    </a>
+</section>
+
+<!-- =========================
+    グルメアクセス
+========================= -->
+<section>
+    <h3>グルメアクセス</h3>
+
+    <div class="route">
+        <div class="route-box">{{ icon('subway.svg') }} 博多駅</div>
+        <div class="arrow">▶</div>
+        <div class="route-box">{{ icon('ramen.svg') }} 中洲屋台</div>
+    </div>
+
+    <p class="route-time">徒歩約15分</p>
+
+    <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=博多駅&destination=中洲屋台" target="_blank">
+        経路を確認 →
+    </a>
+
+    <div class="route">
+        <div class="route-box">{{ icon('subway.svg') }} 博多駅</div>
+        <div class="arrow">▶</div>
+        <div class="route-box">{{ icon('subway.svg') }} 中洲川端駅</div>
+        <div class="arrow">▶</div>
+        <div class="route-box">{{ icon('ramen.svg') }} 中州屋台</div>
+    </div>
+
+    <p class="route-time">電車＋徒歩 約10分</p>
+
+    <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=博多駅&destination=中洲屋台&waypoints=中洲川端駅"
+        target="_blank">
+        経路を確認 →
+    </a>
+
+    <div class="route">
+        <div class="route-box">{{ icon('subway.svg') }} 天神</div>
+        <div class="arrow">▶</div>
+        <div class="route-box">{{ icon('ramen.svg') }} 屋台エリア</div>
+    </div>
+
+    <p class="route-time">徒歩約10分</p>
+
+    <a class="map-btn" href="https://www.google.com/maps/dir/?api=1&origin=天神&destination=屋台エリア%20福岡" target="_blank">
+        経路を確認 →
+    </a>
+
+</section>
+
+<!-- 観光スポット -->
+<section>
+    <h3>主要観光地</h3>
+
+    <h4>太宰府天満宮</h4>
+    <p>西鉄「太宰府駅」徒歩約5分／博多駅から約40分</p>
+
+    <h4>福岡タワー</h4>
+    <p>バス「福岡タワー前」すぐ／天神から約20分</p>
+
+    <h4>大濠公園</h4>
+    <p>地下鉄「大濠公園駅」徒歩約2分／博多駅から約10分</p>
+</section>
+
+<!-- グルメ -->
+<section>
+    <h3>ご当地グルメスポット</h3>
+
+    <h4>中洲屋台</h4>
+    <p>地下鉄「中洲川端駅」徒歩約3分</p>
+
+    <h4>博多ラーメン</h4>
+    <p>博多・天神エリアに多数</p>
+
+    <h4>もつ鍋</h4>
+    <p>中洲・博多エリアに多数</p>
+</section>
+
+<!-- おすすめ飲食店（追加部分） -->
+<section>
+    <h3>おすすめ飲食店</h3>
+
+    <h4>{{ icon('cake.svg') }} 北キツネの大好物 福岡タワー店</h4>
+    <p>話題のスイーツ店。お土産や食べ歩きにおすすめ。</p> <a href="https://www.google.com/maps?q=北キツネの大好物 福岡タワー店" target="_blank">
+        地図で確認 →
+    </a>
+
+    <h4>{{ icon('nabe.svg') }} 博多もつ鍋 おおやま（福岡空港）</h4>
+    <p>福岡空港内で本格的なもつ鍋が楽しめる人気店。</p>
+    <a href="https://www.google.com/maps?q=博多もつ鍋 おおやま 福岡空港" target="_blank">
+        地図で確認 →
+    </a>
+
+    <h4>{{ icon('ramen.svg') }} ラーメン滑走路（国内線3F）</h4>
+    <p>食べ比べに最適。</p>
+    <a href="https://www.google.com/maps?q=ラーメン滑走路 福岡空港" target="_blank">
+        地図で確認 →
+    </a>
+
+    <h4>{{ icon('pasta.svg') }} Bistro いちスタイル</h4>
+    <p>カジュアルに楽しめるビストロ。</p> <a href="https://www.google.com/maps?q=Bistro いちスタイル 福岡" target="_blank">
+        地図で確認 →
+    </a>
+
+    <h4>{{ icon('wine.svg') }} o/sio FUKUOKA</h4>
+    <p>おしゃれなイタリアン。</p>
+    <a href="https://www.google.com/maps?q=o/sio FUKUOKA" target="_blank">
+        地図で確認 →
+    </a>
+
+</section>
+
+
+{% endblock %}

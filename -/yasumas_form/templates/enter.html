@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <h1>WTForm:入力</h1>
+{% endblock %}
+
+{% block content %}
+        <!-- ▼▼▼ リスト5.8追加部分 ▼▼▼ -->
+        <div style="color: red;">
+            {% if form.errors %}
+                <ul>
+                === エラーメッセージ ===
+                {% for k, v in form.errors.items() %}
+                    <li>{{k}}:{{v}}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <!-- ▲▲▲ リスト5.8追加部分 ▲▲▲ -->
+    <!-- <form method="POST"> -->
+    <!-- ▼▼▼ リスト5.10追加部分 ▼▼▼ -->
+    <form method="POST" novalidate>
+    <!-- ▼▼▼ リスト5.10追加部分 ▼▼▼ -->
+        {{ form.note.label }}<br>
+        {{ form.note(style="height:100px;width:150px") }}<br>
+        {{ form.name.label }}<br>
+        {{ form.name(size=20) }}<br>
+        {{ form.kana.label }}<br>
+        {{ form.kana(size=20) }}<br>
+        {{ form.zipcode.label }}<br>
+        {{ form.zipcode() }}<br>
+        <label>住所</label><br>
+        {{ form.area() }}<br>
+        {{ form.address() }}<br>
+        {{ form.password.label }}<br>
+        {{ form.password(size=20) }}<br>
+        {{ form.confirm_password.label }}<br>
+        {{ form.confirm_password(size=20) }}<br>
+        {{ form.email.label }}<br>
+        {{ form.email(placeholder="xxxx@example.com") }}<br>
+        {{ form.tel.label }}<br>
+        {{ form.tel() }}<br>
+        {{ form.submit() }}<br>
+    </form>
+{% endblock %}

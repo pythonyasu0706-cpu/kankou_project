@@ -1,0 +1,23 @@
+<!-- templates/contact/result.html -->
+{% extends "base.html" %}
+
+{% block page_header %}
+{% include "partials/page_header.html" %}
+{% endblock %}
+
+{% set title = "お問い合わせフォーム入力確認画面" %}
+{% block content %}
+    <ul>
+        <li>資料請求{{form.catalog.data}}</li>
+        <li>お問い合わせ内容{{form.note.data}}</li>
+        <li>名前（全角）{{form.name.data}}</li>
+        <li>名前（カナ）{{form.kana.data}}</li>
+        <li>郵便番号{{form.zipcode.data}}</li>
+        <li>都道府県{{form.area.data}}</li>
+        <li>住所{{form.address.data}}</li>
+        <li>パスワード{{form.password.data}}</li>
+        <li>確認用{{form.confirm_password.data}}</li>
+        <li>Email{{form.email.data}}</li>
+        <li>電話番号{{form.tel.data}}</li>
+    </ul>
+{% endblock %}
