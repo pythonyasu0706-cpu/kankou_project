@@ -177,51 +177,80 @@ def contact():
         ]
     )
 
-# 確認 → 完了
-@app.route('/contact/result', methods=['POST'])
-def result():
+# 確認
+@app.route('/contact/confirm', methods=['POST'])
+def confirm():
     form = UserInfoForm()
+    if not form.validate_on_submit():
+        return redirect(url_for('contact'))
 
-    if form.validate_on_submit():
-        # メール送信処理
-        msg = MIMEText(f"""
-        名前: {form.name.data}
-        メール: {form.email.data}
-        お問い合わせ内容:
-        {form.note.data}
-        """
-        )
-    
-        msg['Subject'] = 'お問い合わせ'
-        msg['From'] = 'python.yasu0706@gmail.com'
-        msg['To'] = 's10ak025@gmail.com'
+    return render_template('contact/confirm.html', form=form)
 
-        smtp = smtplib.SMTP("smtp.gmail.com", 587)
-        smtp.starttls()
+# メール送信
+@app.route('/contact/send', methods=['POST'])
+def send():
+    form = UserInfoForm()
+    if not form.validate_on_submit():
+        return redirect(url_for('contact'))
+
+    # メール送信処理
+    msg = MIMEText(f"""
+名前: {form.name.data}
+メール: {form.email.data}
+内容:
+{form.note.data}
+        """)
+
+    msg['Subject'] = 'お問い合わせ'
+    msg['From'] = os.environ.get("EMAIL_USER")
+    msg['To'] = 's10ak025@gmail.com'
+
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=10) as smtp:
         smtp.login(
             os.environ.get("EMAIL_USER"),
             os.environ.get("EMAIL_PASS")
         )
 
         smtp.send_message(msg)
-        # ===== 自動返信メール =====
-        reply = MIMEText("""
-        お問い合わせありがとうございます。
 
-        内容を確認し、後ほどご連絡いたします。
-        """)
+        reply = MIMEText(f"""
+{form.name.data} 様
 
-        reply['Subject'] = '【受付完了】お問い合わせありがとうございます'
-        reply['From'] = 'python.yasu0706@gmail.com'
-        reply['To'] = form.email.data  # ←ここがユーザーのメール
+このたびは福岡観光協会のお問い合わせフォームよりご連絡いただき、
+誠にありがとうございます。
+
+以下の内容でお問い合わせを受け付けいたしました。
+
+--------------------
+■お名前：{form.name.data}
+■メールアドレス：{form.email.data}
+■お問い合わせ内容：
+{form.note.data}
+--------------------
+
+内容を確認のうえ、担当者より順次ご返信させていただきます。
+なお、内容によってはご返信まで数日いただく場合がございます。
+
+あらかじめご了承くださいますようお願い申し上げます。
+
+────────────────────
+福岡観光協会
+お問い合わせ窓口（自動返信メール）
+────────────────────
+""")
+        reply['Subject'] = '【福岡観光協会】お問い合わせ・資料請求受付完了のお知らせ'
+        reply['From'] = os.environ.get("EMAIL_USER")
+        reply['To'] = form.email.data
 
         smtp.send_message(reply)
+    
+    return redirect(url_for('result'))
 
-        smtp.quit()
-        return render_template('contact/result.html', form=form)
 
-    return redirect(url_for('contact'))
-
+# 完了
+@app.route('/contact/result', methods=['GET'])
+def result():
+    return render_template('contact/result.html')
 
 # プライバシー
 @app.route("/privacy")

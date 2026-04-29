@@ -36,7 +36,9 @@
 }
 
 .pankz a,
-.box01 a {
+.box01 a,
+.box02 a,
+.box03 a{
     background: none;
     padding: 0;
     border: none;
@@ -387,6 +389,19 @@ form {
     scroll-margin-top: 150px;
 }
 
+.hidden-fields {
+    display: none;
+}
+
+input[type="hidden"] {
+    display: none !important;
+    background: transparent !important;
+    color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
 /* ==================
     スマホ対応
 ================== */
@@ -434,7 +449,6 @@ form {
     h3 {
         font-size: 16px;
     }
-}
 
 @media screen and (max-width: 768px) {
 
