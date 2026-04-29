@@ -1,0 +1,14 @@
+.course-wrapper {
+    display: flex;
+    height: 100vh;
+}
+
+#map {
+    width: 50%;
+}
+
+.route-list {
+    width: 50%;
+    overflow-y: auto;
+    padding: 20px;
+}

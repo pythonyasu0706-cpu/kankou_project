@@ -1,0 +1,81 @@
+<!-- templates/spots.html -->
+{% extends "base.html" %}
+
+{% set title = "福岡の観光スポット" %}
+
+{% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/foods.css') }}">
+{% endblock %}
+
+{% block content %}
+
+{% from "macros/image.html" import image %}
+
+<!-- メイン -->
+<section class="add-bg-history">
+    <div class="gourmet-hero">
+        <div class="hero-overlay">
+            <div class="txt-center">
+                <h3>福岡観光ガイド<span>FUKUOKA TRAVEL GUIDE</span></h3>
+                <p class="fs80 head-lead">福岡市の街並みと博多湾の風景</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mgt50">
+        {% for spot in spots %}
+
+        <div class="row {% if not loop.first %}mgt50{% endif %}">
+
+            {% if loop.index % 2 == 1 %}
+            <!-- 左テキスト・右画像 -->
+            <div class="col-md-7">
+                <h4>{{ spot.title }}</h4>
+                <p>{{ spot.text }}</p>
+            </div>
+            <div class="col-md-5">
+                {{ image(spot.image, spot.alt, 'spot-img') }}
+            </div>
+
+            {% else %}
+            <!-- 右テキスト・左画像 -->
+            <div class="col-md-5">
+                {{ image(spot.image, spot.alt, 'spot-img') }}
+            </div>
+            <div class="col-md-7">
+                <h4>{{ spot.title }}</h4>
+                <p>{{ spot.text }}</p>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- ギャラリー・観光 -->
+<section class="gallery">
+    <div class="gallery-image">
+        {{ image('spot/dontaku.jpg', 'スポット２', 'spot-img') }}
+    </div>
+    <div class="gallery-content wrapper">
+        <h2 class="title">～Gallery～</h2>
+        <ul class="gallery-thumbnails">
+            {% for g in gallery %}
+            <li>
+                {{ image(g.image, g.alt, 'spot-img') }}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</section>
+
+{% endblock %}
+
+<!-- block scriptsは絶対block contentの外！！ -->
+{% block scripts %}
+<!-- superでmain.jsを継承 -->
+{{ super() }}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ url_for('static', filename='js/food.js') }}"></script>
+{% endblock %}

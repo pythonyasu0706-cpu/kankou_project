@@ -1,0 +1,145 @@
+/* トップページ用CSS static/css/pages/top.css */
+/* body {
+    margin: 0;
+    overflow-x: hidden;
+} */
+
+/* =========================
+ヒーロー全体
+========================= */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* =========================
+背景スライド
+========================= */
+.slider {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.slider img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: 1.5s;
+}
+
+.slider img.active {
+    opacity: 1;
+}
+
+/* =========================
+タイトル（中央）
+========================= */
+.title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+}
+
+.title img {
+    width: 700px;
+}
+
+/* =========================
+波
+========================= */
+.wave {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.wave-inner {
+    display: flex;
+    width: 200%;
+}
+
+.wave-inner svg {
+    width: 50%;
+    height: 140px;
+}
+
+.wave-back {
+    opacity: 0.5;
+}
+
+.wave-back .wave-inner {
+    animation: wave 12s linear infinite;
+}
+
+.wave-front .wave-inner {
+    animation: wave 6s linear infinite;
+}
+
+/* =========================
+飛行機
+========================= */
+.plane {
+    position: absolute;
+    bottom: 120px;
+    left: 0;
+    z-index: 5;
+    animation: fly 8s linear infinite;
+}
+
+.plane img {
+    width: 100px;
+    filter: brightness(0) invert(1);
+    /* 白化 */
+}
+
+/* 軌跡 */
+.trail {
+    position: absolute;
+    left: -140px;
+    top: 50%;
+    width: 140px;
+    height: 4px;
+
+    background: linear-gradient(to left,
+            rgba(255, 255, 255, 0),
+            rgba(255, 255, 255, 0.9),
+            rgba(255, 255, 255, 0.4),
+            rgba(255, 255, 255, 0.1),
+            rgba(255, 255, 255, 0));
+}
+
+/* =========================
+アニメーション
+========================= */
+@keyframes fly {
+    0% {
+        transform: translateX(-150px);
+    }
+
+    50% {
+        transform: translateX(500px);
+    }
+
+    100% {
+        transform: translateX(1600px) translateY(-200px) scale(0.5);
+    }
+}
+
+@keyframes wave {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}

@@ -1,0 +1,60 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='icon/fav_ramen.svg') }}"> <!-- Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Noto+Sans+JP:wght@300;400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- 共通 main.css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base/reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base/variables.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/layout.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+
+    <!-- フォントアイコン フッター用CSS component.cssとは別に -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- ページ専用CSS置き場 -->
+    {% block page_css %}
+    {% endblock %}
+</head>
+
+<body>
+    <!-- ハンバーガーメニューは前頁共通 -->
+    {% include "partials/hamburger.html" %}
+    <!-- TOPページはヘッダーが不要のため -->
+    {% if show_header is not defined or show_header %}
+    {% include "partials/page_header.html" %}
+    {% endif %}
+
+    {% from "macros/breadcrumb.html" import breadcrumb %}
+
+    <main>
+        {% if breadcrumb_items %}
+        {{ breadcrumb(breadcrumb_items) }}
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    {% include "partials/footer.html" %}
+
+    <!-- JS（最後に） -->
+    {% block scripts %}
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% endblock %}
+</body>
+
+</html>

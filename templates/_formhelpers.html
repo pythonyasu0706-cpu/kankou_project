@@ -1,0 +1,44 @@
+{% macro render_field(field) %}
+    <div class="form-group">
+
+    <label>
+        {{ field.label.text }}
+        {% if field.flags.required %}
+            <span class="required">必須</span>
+        {% else %}
+            <span class="badge-optional">任意</span>
+        {% endif %}
+    </label>
+
+    {% if field.type == "SelectMultipleField" %}
+
+        <div class="catalog-box">
+            <!-- タイトル -->
+            <!-- 説明文（改行したい部分） -->
+            <p class="catalog-hint">
+                資料請求をご希望の方はお選びください。
+            </p>
+
+            <!-- チェックボックス（ここだけ横並び） -->
+            <div class="catalog-options">
+                {% for subfield in field %}
+                    <label class="catalog-item">
+                        {{ subfield() }}
+                        {{ subfield.label.text }}
+                    </label>
+                {% endfor %}
+            </div>
+
+        </div>
+
+        {% else %}
+
+        {{ field(class_="field-input") }}
+
+    {% endif %}
+    {% for error in field.errors %}
+        <p class="error error-msg">{{ error }}</p>
+    {% endfor %}
+
+    </div>
+{% endmacro %}

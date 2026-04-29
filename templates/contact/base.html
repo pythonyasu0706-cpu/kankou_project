@@ -1,0 +1,23 @@
+<!-- contact/base.html -->
+<!-- 役割は前頁共通のbase.htmlとcontactの各ページの中間を担う -->
+<!-- base.htmlを継承してこのページをcontactの各ページに継承させるという意味 -->
+{% extends "base.html" %}
+
+{% set title = "お問い合わせ" %}
+
+{% block page_css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/pages/contact.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="contact-container">
+    {% block contact_content %}{% endblock %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<!-- superでmain.jsを継承 -->
+{{ super() }}
+<script src="{{ url_for('static', filename='js/form.js') }}"></script>
+<script src="https://ajaxzip3.github.io/ajaxzip3.js"></script>
+{% endblock %}
