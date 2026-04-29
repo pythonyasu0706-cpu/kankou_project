@@ -387,6 +387,19 @@ form {
     scroll-margin-top: 150px;
 }
 
+.hidden-fields {
+    display: none;
+}
+
+input[type="hidden"] {
+    display: none !important;
+    background: transparent !important;
+    color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
 /* ==================
     スマホ対応
 ================== */

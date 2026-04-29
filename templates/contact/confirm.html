@@ -18,10 +18,10 @@
         <li>Email：{{form.email.data}}</li>
         <li>電話番号：{{form.tel.data}}</li>
     </ul>
-    <form method="POST" action="{{ url_for('send') }}">
-        {{ form.hidden_tag() }}
+<form method="POST" action="{{ url_for('send') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
 
-        <div class="hidden-fields">
+    <div class="hidden-fields">
             <!-- hiddenで値保持 -->
             {% for item in form.catalog.data %}
             <input type="hidden" name="catalog" value="{{ item }}">
