@@ -200,21 +200,27 @@ def send():
         "to": ["python.yasu0706@gmail.com"],
         "subject": "お問い合わせ通知",
         "text": f"""
-名前: {form.name.data}
+福岡観光協会のお問い合わせフォームより
+以下の内容のお問い合わせがありました。
+
+-------------------------
+資料請求: {', '.join(form.catalog.data) if form.catalog.data else 'なし'}
+件名: {form.title.data}
+お名前: {form.name.data}
 メール: {form.email.data}
 電話番号: {form.tel.data}
 住所: {form.address.data}
-
 お問い合わせ内容:
 {form.note.data}
+-------------------------
 """
     })
 
     # 自動返信メール
     resend.Emails.send({
         "from": "onboarding@resend.dev",
-        "to": [form.email.data],
-        # "to": ["python.yasu0706@gmail.com"],
+        # "to": [form.email.data],
+        "to": ["python.yasu0706@gmail.com"],
         "subject": "【福岡観光協会】お問い合わせ受付完了",
         "text": f"""
 {form.name.data} 様
