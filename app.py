@@ -209,8 +209,7 @@ def send():
     msg['From'] = os.environ.get("EMAIL_USER")
     msg['To'] = 's10ak025@gmail.com'
 
-    with smtplib.SMTP("smtp.gmail.com", 587, timeout=10) as smtp:
-        smtp.starttls()
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=10) as smtp:
         smtp.login(
             os.environ.get("EMAIL_USER"),
             os.environ.get("EMAIL_PASS")
