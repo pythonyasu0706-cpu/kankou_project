@@ -252,7 +252,7 @@ def send():
         if not email_user or not email_pass:
             return "メール設定が不足しています"
 
-        with smtplib.SMTP_SSL("smtp.gmail.com", 587, timeout=15) as smtp:
+        with smtplib.SMTP("smtp.gmail.com", 587, timeout=15) as smtp:
             smtp.ehlo()      # サーバーに挨拶
             smtp.starttls()  # 通信の暗号化（必須）
             smtp.ehlo()      # 暗号化後にもう一度挨拶
