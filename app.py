@@ -196,7 +196,8 @@ def send():
     if not form_data:
         return redirect(url_for('contact'))
 
-    form = UserInfoForm(data=form_data)
+    form = UserInfoForm()
+    form.process(data=form_data)
 
     msg = MIMEText(f"""
 名前: {form.name.data}
