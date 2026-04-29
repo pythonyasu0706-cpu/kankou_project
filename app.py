@@ -242,12 +242,10 @@ def send():
 """
     })
 
-    return redirect(url_for('result'))
-
-# 完了
-@app.route('/contact/result', methods=['GET'])
-def result():
-    return render_template('contact/result.html')
+    return render_template(
+        'contact/result.html',
+        form=form
+    )
 
 # プライバシー
 @app.route("/privacy")
