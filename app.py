@@ -166,7 +166,8 @@ def contact():
     form = UserInfoForm()
 
     if form.validate_on_submit():
-        return render_template('contact/confirm.html', form=form)
+        session['form_data'] = request.form.to_dict()
+        return redirect(url_for('confirm'))
 
     return render_template(
         'contact/contact.html', 
@@ -177,26 +178,38 @@ def contact():
         ]
     )
 
-# 確認 → 完了
-@app.route('/contact/result', methods=['POST'])
-def result():
-    form = UserInfoForm()
+# 確認
+@app.route('/contact/confirm', methods=['GET'])
+def confirm():
+    form_data = session.get('form_data')
 
-    if form.validate_on_submit():
-        # メール送信処理
-        msg = MIMEText(f"""
-        名前: {form.name.data}
-        メール: {form.email.data}
-        お問い合わせ内容:
-        {form.note.data}
-        """
-        )
-    
-        msg['Subject'] = 'お問い合わせ'
-        msg['From'] = 'python.yasu0706@gmail.com'
-        msg['To'] = 's10ak025@gmail.com'
+    if not form_data:
+        return redirect(url_for('contact'))
 
-        smtp = smtplib.SMTP("smtp.gmail.com", 587)
+    form = UserInfoForm(data=form_data)
+    return render_template('contact/confirm.html', form=form)
+
+# メール送信
+@app.route('/contact/send', methods=['POST'])
+def send():
+    form_data = session.get('form_data')
+    if not form_data:
+        return redirect(url_for('contact'))
+
+    form = UserInfoForm(data=form_data)
+
+    msg = MIMEText(f"""
+名前: {form.name.data}
+メール: {form.email.data}
+内容:
+{form.note.data}
+        """)
+
+    msg['Subject'] = 'お問い合わせ'
+    msg['From'] = os.environ.get("EMAIL_USER")
+    msg['To'] = 's10ak025@gmail.com'
+
+    with smtplib.SMTP("smtp.gmail.com", 587, timeout=10) as smtp:
         smtp.starttls()
         smtp.login(
             os.environ.get("EMAIL_USER"),
@@ -204,24 +217,22 @@ def result():
         )
 
         smtp.send_message(msg)
-        # ===== 自動返信メール =====
-        reply = MIMEText("""
-        お問い合わせありがとうございます。
 
-        内容を確認し、後ほどご連絡いたします。
-        """)
-
-        reply['Subject'] = '【受付完了】お問い合わせありがとうございます'
-        reply['From'] = 'python.yasu0706@gmail.com'
-        reply['To'] = form.email.data  # ←ここがユーザーのメール
+        reply = MIMEText("お問い合わせありがとうございます。")
+        reply['Subject'] = '受付完了'
+        reply['From'] = os.environ.get("EMAIL_USER")
+        reply['To'] = form.email.data
 
         smtp.send_message(reply)
+    
+    session.pop('form_data', None)
+    return redirect(url_for('result'))
 
-        smtp.quit()
-        return render_template('contact/result.html', form=form)
 
-    return redirect(url_for('contact'))
-
+# 完了
+@app.route('/contact/result', methods=['GET'])
+def result():
+    return render_template('contact/result.html')
 
 # プライバシー
 @app.route("/privacy")
