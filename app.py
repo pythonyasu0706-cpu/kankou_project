@@ -3,7 +3,9 @@ from flask import Flask, render_template, session, redirect, url_for, request
 from flask_wtf import FlaskForm
 # forms.pyをimport
 from forms import UserInfoForm
-import resend
+import smtplib
+from email.mime.text import MIMEText
+from email.utils import formatdate
 import os
 
 # Flozen-Flask
@@ -192,17 +194,9 @@ def send():
     if not form.validate_on_submit():
         return redirect(url_for('contact'))
 
-    # Resend APIキー
-    resend.api_key = os.environ.get("RESEND_API_KEY")
-    # 管理者宛メール
-    resend.Emails.send({
-        "from": "onboarding@resend.dev",
-        "to": ["python.yasu0706@gmail.com"],
-        "subject": "お問い合わせ通知",
-        "text": f"""
-福岡観光協会のお問い合わせフォームより
-以下の内容のお問い合わせがありました。
 
+    # 管理者宛
+    msg = MIMEText(f"""
 -------------------------
 資料請求: {', '.join(form.catalog.data) if form.catalog.data else 'なし'}
 件名: {form.title.data}
@@ -213,16 +207,13 @@ def send():
 お問い合わせ内容:
 {form.note.data}
 -------------------------
-"""
-    })
+""")
+    msg['Subject'] = 'お問い合わせ受信'
+    msg['From'] = os.environ.get("EMAIL_USER")
+    msg['To'] = 's10ak025@gmail.com'
 
-    # 自動返信メール
-    resend.Emails.send({
-        "from": "onboarding@resend.dev",
-        # "to": [form.email.data],
-        "to": ["python.yasu0706@gmail.com"],
-        "subject": "【福岡観光協会】お問い合わせ受付完了",
-        "text": f"""
+    # 自動返信
+    reply = MIMEText(f"""
 {form.name.data} 様
 
 このたびは福岡観光協会のお問い合わせフォームより
@@ -233,25 +224,50 @@ def send():
 -------------------------
 資料請求: {', '.join(form.catalog.data) if form.catalog.data else 'なし'}
 件名: {form.title.data}
-お名前: {form.name.data}
-メール: {form.email.data}
-電話番号: {form.tel.data}
-住所: {form.address.data}
 お問い合わせ内容:
 {form.note.data}
 -------------------------
 
-内容確認後、担当者よりご連絡いたします。
-しばらくお待ちください。
+内容を確認のうえ、担当者より順次ご返信させていただきます。
+なお、内容によってはご返信まで数日いただく場合がございます。
 
+
+あらかじめご了承くださいますようお願い申し上げます。
+
+
+────────────────────
 福岡観光協会
-"""
-    })
+お問い合わせ窓口（自動返信メール）
+────────────────────
+""")
 
-    return render_template(
-        'contact/result.html',
-        form=form
-    )
+    reply['Subject'] = '【福岡観光協会】お問い合わせ受付完了'
+    reply['From'] = os.environ.get("EMAIL_USER")
+    reply['To'] = form.email.data
+
+    try:
+        email_user = os.environ.get("EMAIL_USER")
+        email_pass = os.environ.get("EMAIL_PASS")
+
+        if not email_user or not email_pass:
+            return "メール設定が不足しています"
+
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=10) as smtp:
+            smtp.login(email_user, email_pass)
+            smtp.send_message(msg)
+            smtp.send_message(reply)
+
+    except Exception as e:
+        print(f"Mail Error: {e}")
+        # 本来はここでユーザーにエラーを表示するなどの処理
+        return "メール送信に失敗しました。設定を確認してください。"
+
+    return redirect(url_for('result'))
+
+# 完了
+@app.route('/contact/result')
+def result():
+    return render_template('contact/result.html')
 
 # プライバシー
 @app.route("/privacy")
