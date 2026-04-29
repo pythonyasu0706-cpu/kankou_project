@@ -5,7 +5,8 @@
 ========================= */
 
 .container {
-    overflow: hidden;
+    margin: 0 auto;
+    padding: 0;
 }
 
 img {
@@ -128,6 +129,15 @@ img {
     レスポンシブ (スマホ)
 ========================= */
 @media screen and (max-width: 480px) {
+
+    /* 1. コンテナを画面幅いっぱいに広げる（最重要！） */
+    .container {
+        width: 100%;
+        max-width: none;
+        padding: 10px;
+        /* 超重要！！！！！これがないとなぜかheaderを押し上げる */
+        box-sizing: border-box;
+    }
 
     body {
         font-size: 14px;
