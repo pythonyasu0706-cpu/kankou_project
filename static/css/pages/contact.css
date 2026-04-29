@@ -36,7 +36,9 @@
 }
 
 .pankz a,
-.box01 a {
+.box01 a,
+.box02 a,
+.box03 a{
     background: none;
     padding: 0;
     border: none;
@@ -447,7 +449,6 @@ input[type="hidden"] {
     h3 {
         font-size: 16px;
     }
-}
 
 @media screen and (max-width: 768px) {
 
