@@ -213,8 +213,8 @@ def send():
     # 自動返信メール
     resend.Emails.send({
         "from": "onboarding@resend.dev",
-        # "to": [form.email.data],
-        "to": ["python.yasu0706@gmail.com"],
+        "to": [form.email.data],
+        # "to": ["python.yasu0706@gmail.com"],
         "subject": "【福岡観光協会】お問い合わせ受付完了",
         "text": f"""
 {form.name.data} 様
