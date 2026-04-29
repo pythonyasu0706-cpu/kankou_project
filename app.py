@@ -222,7 +222,7 @@ def send():
     try:
         # 管理者宛メール
         resend.Emails.send({
-            "from": "福岡観光協会 <no-reply@yasumasu.com>",
+            "from": "福岡観光協会 <contact@yasumasu.com>",
             "to": ["python.yasu0706@gmail.com"],
             "subject": "お問い合わせ通知",
             "text": f"""
@@ -249,7 +249,7 @@ def send():
     try:
         # 自動返信メール
         resend.Emails.send({
-            "from": "福岡観光協会 <no-reply@yasumasu.com>",
+            "from": "福岡観光協会 <contact@yasumasu.com>",
             "to": [form.email.data],
             "subject": "【福岡観光協会】お問い合わせ受付完了",
             "text": f"""
