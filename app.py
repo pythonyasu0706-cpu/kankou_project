@@ -166,8 +166,7 @@ def contact():
     form = UserInfoForm()
 
     if form.validate_on_submit():
-        session['form_data'] = request.form.to_dict()
-        return redirect(url_for('confirm'))
+        return render_template('contact/confirm.html', form=form)
 
     return render_template(
         'contact/contact.html', 
@@ -181,24 +180,20 @@ def contact():
 # 確認
 @app.route('/contact/confirm', methods=['GET'])
 def confirm():
-    form_data = session.get('form_data')
-
-    if not form_data:
+    form = UserInfoForm()
+    if not form.validate_on_submit():
         return redirect(url_for('contact'))
 
-    form = UserInfoForm(data=form_data)
     return render_template('contact/confirm.html', form=form)
 
 # メール送信
 @app.route('/contact/send', methods=['POST'])
 def send():
-    form_data = session.get('form_data')
-    if not form_data:
+    form = UserInfoForm()
+    if not form.validate_on_submit():
         return redirect(url_for('contact'))
 
-    form = UserInfoForm()
-    form.process(data=form_data)
-
+    # メール送信処理
     msg = MIMEText(f"""
 名前: {form.name.data}
 メール: {form.email.data}

@@ -21,6 +21,24 @@
     <form method="POST" action="{{ url_for('send') }}">
         {{ form.hidden_tag() }}
 
+        {% for item in form.catalog.data %}
+        {% endfor %}
+
+        <!-- hiddenで値保持 -->
+        {% for item in form.catalog.data %}
+        <input type="hidden" name="catalog" value="{{ item }}">
+        {% endfor %}
+        <input type="hidden" name="title" value="{{ form.title.data }}">
+        <input type="hidden" name="note" value="{{ form.note.data }}">
+        <input type="hidden" name="name" value="{{ form.name.data }}">
+        <input type="hidden" name="kana" value="{{ form.kana.data }}">
+        <input type="hidden" name="zipcode" value="{{ form.zipcode.data }}">
+        <input type="hidden" name="area" value="{{ form.area.data }}">
+        <input type="hidden" name="address" value="{{ form.address.data }}">
+        <input type="hidden" name="email" value="{{ form.email.data }}">
+        <input type="hidden" name="tel" value="{{ form.tel.data }}">
+        <input type="hidden" name="agree" value="y">
+
         <div class="submit-area">
             <button type="button" class="back-btn" onclick="history.back()">
                 戻る
