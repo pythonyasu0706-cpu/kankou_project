@@ -229,8 +229,9 @@
 .nav-list {
     display: flex;
     list-style: none;
+    height: 80px;
     padding: 0;
-    margin: 0;
+    gap: 0;
     border-top: 1px solid rgba(221, 221, 221, 0.3);
     border-bottom: 1px solid rgba(221, 221, 221, 0.3);
     background: rgba(0, 0, 0, 0.2);
@@ -241,7 +242,9 @@
 
 .nav-item {
     flex: 1;
+    min-width: 0;
     border-right: 1px solid rgba(255, 255, 255, 0.2);
+    height: auto;
 }
 
 .nav-item:last-child {
@@ -253,7 +256,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px 10px;
+    height: 80px;
+    padding: 0;
     margin: 0;
     text-decoration: none;
     color: #ffffff;
@@ -400,8 +404,13 @@
 @media (max-width: 768px) {
 
     /* 共通の調整（縦・横両方） */
+    /* スマホ版の際テキストだけに余白を与える */
     .nav-text {
         font-size: 11px;
+        font-weight: bold;
+        letter-spacing: 0.05em;
+        padding: 0 6px;
+        text-align: center;
     }
 
     .plane img {
@@ -471,12 +480,6 @@ iPhone X / スマホ 横持ち用 (Landscape)
     }
 
     /* 飛行機の位置を調整 */
-
-    /* ナビゲーションのパディングを詰める */
-    .nav-item a {
-        padding: 10px 0;
-    }
-
     .nav-icon {
         width: 20px;
         margin-bottom: 4px;
