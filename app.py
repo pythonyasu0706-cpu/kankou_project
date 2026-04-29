@@ -193,8 +193,7 @@ def send():
         return redirect(url_for('contact'))
 
     # Resend APIキー
-    resend.api_key = os.environ.get("re_ft1cU7yP_LAL4obeAUFEFW1BHyLZgQKrY")
-
+    resend.api_key = os.environ.get("RESEND_API_KEY")
     # 管理者宛メール
     resend.Emails.send({
         "from": "onboarding@resend.dev",
