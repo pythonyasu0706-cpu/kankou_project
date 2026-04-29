@@ -58,9 +58,6 @@ a {
     text-decoration: none;
 }
 
-a:hover {
-    background-color: #089c98;
-}
 
 /* スマホ */
 @media (max-width: 600px) {

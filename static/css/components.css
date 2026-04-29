@@ -23,11 +23,21 @@
     z-index: 1000;
 }
 
+.logo {
+    display: flex;
+}
+
+.logo a {
+    width: fit-content;
+    height: fit-content;
+    margin: 0;
+    padding: 0;
+}
+
 /* ロゴ　*/
 .logo img {
-    height: 40px;
-    /* /* margin-left: 10px; */
-    margin-top: 15px;
+    height: 60px;
+    margin: auto;
 }
 
 .header a {
@@ -35,7 +45,7 @@
     height: auto;
     background-color: transparent;
     color: #fff;
-    padding: 8px 15px;
+    /* padding: 8px 15px; */
     border-radius: 5px;
     text-decoration: none;
 }
@@ -288,11 +298,14 @@ partials/footer.html 開始
     height: 400px;
 }
 
+
 /* ===================
     天気用CSS in partials/humberger.html 開始
 =================== */
 /* 天気 */
 .header-weather {
+    display: flex;
+    justify-content: center;
     position: absolute;
     right: 90px;
     /* ハンバーガーとの距離 */
@@ -300,12 +313,19 @@ partials/footer.html 開始
     transform: translateY(-50%);
     gap: 4px;
     line-height: 1.2;
+    margin-top: 5px;
+    margin-right: 15px;
 }
 
 /* style.cssをリセット これがないとハンバーガー押した時にかぶる */
 .header-weather a {
-    padding-right: 0;
-    margin-right: 15px;
+    width: fit-content;
+    background-color: transparent;
+}
+
+.header-weather a:hover {
+    background-color: transparent;
+    opacity: 0.8;
 }
 
 .weather-header-link {
@@ -314,6 +334,8 @@ partials/footer.html 開始
     align-items: center;
     text-decoration: none;
     color: inherit;
+    margin: 0;
+    padding: 0;
     gap: 0;
 }
 
@@ -387,11 +409,6 @@ partials/footer.html 開始
     border-radius: 6px;
     font-size: 0.7rem;
     white-space: nowrap;
-}
-
-/* hoverでリンク感 */
-.weather-inline:hover {
-    opacity: 0.8;
 }
 
 /* ===================
