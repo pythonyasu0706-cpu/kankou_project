@@ -19,7 +19,7 @@ app = Flask(__name__)
 # flozen-flask
 # freezer = Freezer(app)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-app.config['API_KEY'] = os.environ.get('API_KEY')
+# app.config['API_KEY'] = os.environ.get('API_KEY')
 
 # ================
 # ルーティング
@@ -77,7 +77,7 @@ def spots():
     return render_template(
         "spots.html", 
         spots=spots,
-        API_KEY=os.environ.get("API_KEY"),
+        # API_KEY=os.environ.get("API_KEY"),
         gallery=spots_gallery,
         breadcrumb_items=[
             {"label": "Home", "url": url_for("index")},
