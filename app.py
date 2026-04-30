@@ -17,9 +17,7 @@ app = Flask(__name__)
 # flozen-flask
 # freezer = Freezer(app)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-app.config['API_KEY'] = os.environ.get('API_KEY')
-app.config['API_KEY2'] = os.environ.get('API_KEY2')
-
+# app.config['API_KEY'] = os.environ.get('API_KEY')
 
 # ================
 # ルーティング
