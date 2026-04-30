@@ -77,7 +77,7 @@ def spots():
     return render_template(
         "spots.html", 
         spots=spots,
-        API_KEY=os.environ.get("API_KEY") 
+        API_KEY=os.environ.get("API_KEY"),
         gallery=spots_gallery,
         breadcrumb_items=[
             {"label": "Home", "url": url_for("index")},

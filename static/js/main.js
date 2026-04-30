@@ -32,9 +32,9 @@
     Weather Icon用のJS 開始
 =================== */
 
-const API_KEY = window.API_KEY;
 // const API_KEY = "7e61ea741a419369742bac830ec6bc60"
 const CITY = "Fukuoka";
+const API_KEY = window.API_KEY;
 
 if (!API_KEY) {
     console.error("API_KEYが設定されていません");
