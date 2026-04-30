@@ -6,6 +6,8 @@ from forms import UserInfoForm
 import smtplib
 from email.mime.text import MIMEText
 from email.utils import formatdate
+import mysql.connector
+from db import get_db_connection
 import os
 
 # Flozen-Flask
@@ -17,7 +19,7 @@ app = Flask(__name__)
 # flozen-flask
 # freezer = Freezer(app)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-# app.config['API_KEY'] = os.environ.get('API_KEY')
+app.config['API_KEY'] = os.environ.get('API_KEY')
 
 # ================
 # ルーティング
@@ -74,7 +76,8 @@ def spots():
 
     return render_template(
         "spots.html", 
-        spots=spots, 
+        spots=spots,
+        API_KEY=os.environ.get("API_KEY") 
         gallery=spots_gallery,
         breadcrumb_items=[
             {"label": "Home", "url": url_for("index")},
@@ -319,6 +322,29 @@ def privacy():
             {"label": "プライバシーポリシー"}
         ]
     )
+
+# データ保存@app.route("/admin")
+def admin():
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("SELECT * FROM contacts ORDER BY created_at DESC")
+    contacts = cursor.fetchall()
+
+    conn.close()
+    return render_template("admin.html", contacts=contacts)
+
+# データ削除
+@app.route("/delete/<int:id>", methods=["POST"])
+def delete(id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("DELETE FROM contacts WHERE id = %s", (id,))
+    conn.commit()
+
+    conn.close()
+    return redirect(url_for("admin"))
 
 # ================
 # 実行
