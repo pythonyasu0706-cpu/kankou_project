@@ -1,3 +1,6 @@
+const CITY = "Fukuoka";
+
+console.log(API_KEY); //
 
 // ======================
 // ① ヘッダー用（都市）
