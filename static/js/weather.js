@@ -1,6 +1,6 @@
 const CITY = "Fukuoka";
 
-console.log(API_KEY); //
+console.log(API_KEY2); //
 
 // ======================
 // ① ヘッダー用（都市）
@@ -30,7 +30,7 @@ async function getCityWeather() {
 // ② スポット用（座標）
 // ======================
 async function getPlaceWeather(place, elementId) {
-    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${place.lat}&lon=${place.lon}&appid=${API_KEY}&units=metric&lang=ja`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${place.lat}&lon=${place.lon}&appid=${API_KEY2}&units=metric&lang=ja`;
 
     const res = await fetch(url);
     const data = await res.json();
