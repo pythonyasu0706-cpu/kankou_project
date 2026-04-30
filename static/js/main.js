@@ -31,7 +31,6 @@
 /* ===================
     Weather Icon用のJS 開始
 =================== */
-const API_KEY = "7e61ea741a419369742bac830ec6bc60";
 const CITY = "Fukuoka";
 
 // ======================

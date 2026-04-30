@@ -1,5 +1,4 @@
 @charset "UTF-8";
-/* static/css/pages/contact.css */
 /* ==================
     お問い合わせページ専用
 ================== */
@@ -37,7 +36,9 @@
 }
 
 .pankz a,
-.box01 a {
+.box01 a,
+.box02 a,
+.box03 a{
     background: none;
     padding: 0;
     border: none;
@@ -54,26 +55,17 @@
     /* もし残ってたら消す */
 }
 
-.box03 h1 {
+.box01 h1,.box03 h1,.box04 h1 {
     text-align: center;
     background-color: rgb(245, 245, 245);
     padding: 10px 12px;
     margin-bottom: 20px;
+    font-size: 20px;
+    letter-spacing: 10px;
 }
 
-.box01 h1 {
-    text-align: center;
-    background-color: rgb(245, 245, 245);
-    padding: 10px 12px;
-    margin-bottom: 20px;
-}
-
-.box04 h1 {
-    text-align: center;
-    background-color: rgb(245, 245, 245);
-    color: red;
-    padding: 10px 12px;
-    margin-bottom: 20px;
+.box01 h1, .box04 h1 {
+    color:var(--color-main);
 }
 
 .box02 {
@@ -113,7 +105,7 @@ input[type="text"],
 input[type="email"],
 input[type="tel"],
 textarea {
-    border: 1px solid #007bff;
+    border: 1px solid #bbb;
     border-radius: 10px;
     background: #fff;
     padding: 10px 12px;
@@ -126,7 +118,7 @@ textarea {
 select {
     width: 150px;
     padding: 10px;
-    border: 1px solid #007bff;
+    border: 1px solid #bbb;
     margin-top: 5px;
     margin-bottom: 20px;
     border-radius: 10px;
@@ -151,12 +143,12 @@ textarea {
 /* ボタン */
 input[type="submit"],
 button[type="submit"] {
-    margin-top: 30px;
+    /* margin-top: 30px; */
     padding: 12px;
     width: 200px;
-    background: #fff;
-    color: var(--color-main);
-    border: 1px solid var(--color-main);
+    background: var(--color-main);
+    color: #fff;
+    border: none;
     border-radius: 10px;
     font-size: 16px;
     cursor: pointer;
@@ -165,17 +157,19 @@ button[type="submit"] {
 
 /* チェック前（押せない状態） */
 #submit-btn:disabled {
-    background-color: #ccc;
-    color: #666;
+    background-color: #0ABAB580;
+    color: #fff;
     cursor: not-allowed;
     opacity: 0.7;
+    border:none;
 }
 
 /* チェック後（押せる状態） */
 #submit-btn:not(:disabled) {
-    background-color: #007bff;
+    background-color: var(--color-main);
     color: white;
     cursor: pointer;
+    border: none;
 }
 
 
@@ -188,9 +182,33 @@ button[type="submit"] {
 }
 
 input[type="checkbox"] {
-    accent-color: #1e90ff;
+    /* accent-color: #1e90ff;
     width: auto;
-    margin-right: 8px;
+    margin-right: 8px; */
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #999;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+    background: none;
+    border-color: none;
+}
+
+/* チェックマーク */
+input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 4px;
+    width: 6px;
+    height: 9px;
+    border: solid #333;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
 }
 
 .required {
@@ -221,7 +239,6 @@ input[type="checkbox"] {
 }
 
 .agree-box input {
-    width: auto;
     margin-right: 8px;
 }
 
@@ -318,15 +335,16 @@ form {
 .submit-area {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
     margin-top: 40px;
 }
 
 /* 戻るボタン */
 .back-btn {
-    width: 180px;
+    width: 200px;
+    height: 50px;
     padding: 12px;
-    background: #007bff;
+    background: var(--color-main);
     color: #fff;
     border: 1px solid var(--color-main);
     border-radius: 10px;
@@ -343,7 +361,7 @@ form {
 .send-btn {
     width: 180px;
     padding: 12px;
-    background: #007bff;
+    background: var(--color-main);
     color: #fff;
     border: none;
     border-radius: 10px;
@@ -354,6 +372,39 @@ form {
 
 .send-btn:hover {
     opacity: 0.8;
+}
+
+/* トップボタン */
+.top-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: var(--color-main);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.form-group {
+    scroll-margin-top: 150px;
+}
+
+.hidden-fields {
+    display: none;
+}
+
+input[type="hidden"] {
+    display: none !important;
+    background: transparent !important;
+    color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.no-link {
+    color: inherit;
+    text-decoration: none;
 }
 
 /* ==================
@@ -403,7 +454,6 @@ form {
     h3 {
         font-size: 16px;
     }
-}
 
 @media screen and (max-width: 768px) {
 

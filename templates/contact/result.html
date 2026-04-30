@@ -4,12 +4,17 @@
 {% set title = "お問い合わせフォーム入力確認画面" %}
 
 {% block contact_content %}
-<div class="box04">
+<div class="box01">
     <h1>送信完了</h1>
 </div>
 <div class="box03">
+    <p>お問い合わせありがとうございました。</p>
+    <p>以下の内容で受け付けました。</p>
+    
     <ul>
-        <li>資料請求：{{form.catalog.data | join('、')}}</li>
+        <li>資料請求：
+            {{ form.catalog.data | default([], true) | join('、') }}
+        </li>
         <li>件名：{{form.title.data}}</li>
         <li>お問い合わせ内容：{{form.note.data}}</li>
         <li>名前（全角）：{{form.name.data}}</li>
@@ -20,26 +25,12 @@
         <li>Email：{{form.email.data}}</li>
         <li>電話番号：{{form.tel.data}}</li>
     </ul>
-    <form method="POST" action="{{ url_for('result') }}">
-        {{ form.hidden_tag() }}
 
-        {% for item in form.catalog.data %}
-        {% endfor %}
-
-        <!-- hiddenで値保持 -->
-        {% for item in form.catalog.data %}
-        <input type="hidden" name="catalog" value="{{ item }}">
-        {% endfor %}
-        <input type="hidden" name="title" value="{{ form.title.data }}">
-        <input type="hidden" name="note" value="{{ form.note.data }}">
-        <input type="hidden" name="name" value="{{ form.name.data }}">
-        <input type="hidden" name="kana" value="{{ form.kana.data }}">
-        <input type="hidden" name="zipcode" value="{{ form.zipcode.data }}">
-        <input type="hidden" name="area" value="{{ form.area.data }}">
-        <input type="hidden" name="address" value="{{ form.address.data }}">
-        <input type="hidden" name="email" value="{{ form.email.data }}">
-        <input type="hidden" name="tel" value="{{ form.tel.data }}">
-        <input type="hidden" name="agree" value="y">
-    </form>
+    <div class="submit-area">
+    <a href="{{ url_for('index') }}" class="top-btn">
+    トップページへ
+    </a>
+    <br>
+    </div>
 </div>
 {% endblock %}

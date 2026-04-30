@@ -271,4 +271,11 @@
         white-space: nowrap;
         /* 絶対に改行させない指定 */
     }
+
+    .detail-link {
+        width: 60%;
+        padding: 0 auto;
+        margin: 0 auto;
+    }
+
 }

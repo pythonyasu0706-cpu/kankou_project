@@ -17,6 +17,8 @@ app = Flask(__name__)
 # flozen-flask
 # freezer = Freezer(app)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+app.config['API_KEY'] = os.environ.get('API_KEY')
+
 
 # ================
 # ルーティング
@@ -33,19 +35,29 @@ def spots():
             "title": "大濠公園",
             "text": "福岡市中央区にある大きな池を中心とした公園。散歩やランニングコースとして人気があり、自然を感じながらゆったり過ごすことができます。",
             "image": "spot/ohorikouen.jpg",
-            "alt": "大濠公園1"
+            "alt": "大濠公園1",
+            "lat": 33.58650763843376,
+            "lon": 130.3765841848311,
+            "weather_id": "ohori-weather"
         },
         {
             "title": "福岡タワー",
             "text": "選び抜かれた新鮮な牛もつと、甘みを増した野菜が共演する滋味深い味わい。素材の旨みが溶け出した秘伝のスープが、二人の心と身体を芯から温めてくれます。",
             "image": "spot/momochihama.jpg",
-            "alt": "福岡タワー1"
+            "alt": "福岡タワー1",
+            "lat": 33.593644949724855,
+            "lon": 130.35168524200876,
+            "weather_id": "fukuokatower-weather"
         },
         {
             "title": "太宰府天満宮",
             "text": "学問の神様・菅原道真を祀る神社。受験シーズンには多くの参拝客が訪れ、周辺では名物の梅ヶ枝餅も楽しめます。",
             "image": "spot/dazaifutenmangu.jpg",
-            "alt": "太宰府天満宮1"
+            "alt": "太宰府天満宮1",
+            "lat": 33.52178626549702,
+            "lon": 130.5348432124952,
+            "weather_id": "dazaifu-weather"
+
         }
     ]
 
@@ -165,11 +177,13 @@ def access():
 def contact():
     form = UserInfoForm()
 
+
     if form.validate_on_submit():
         return render_template('contact/confirm.html', form=form)
 
+
     return render_template(
-        'contact/contact.html', 
+        'contact/contact.html',
         form=form,
         breadcrumb_items=[
             {"label": "Home", "url": url_for("index")},
@@ -177,37 +191,122 @@ def contact():
         ]
     )
 
-# 確認 → 完了
-@app.route('/contact/result', methods=['POST'])
-def result():
+
+# 確認
+@app.route('/contact/confirm', methods=['POST'])
+def confirm():
+    form = UserInfoForm()
+    if not form.validate_on_submit():
+        return redirect(url_for('contact'))
+
+
+    return render_template('contact/confirm.html', form=form)
+
+
+# メール送信
+@app.route('/contact/send', methods=['POST'])
+def send():
     form = UserInfoForm()
 
-    if form.validate_on_submit():
-        # メール送信処理
-        msg = MIMEText(f"""
-        名前: {form.name.data}
-        メール: {form.email.data}
-        お問い合わせ内容:
-        {form.note.data}
-        """
-        )
-    
-        msg['Subject'] = 'お問い合わせ'
-        msg['From'] = 'python.yasu0706@gmail.com'
-        msg['To'] = 'katsuki0007@gmail.com'
 
-        smtp = smtplib.SMTP("smtp.gmail.com", 587)
-        smtp.starttls()
-        smtp.login(
-            os.environ.get("EMAIL_USER"),
-            os.environ.get("EMAIL_PASS")
-        )
+    if not form.validate_on_submit():
+        return redirect(url_for('contact'))
 
-        smtp.send_message(msg)
-        smtp.quit()
-        return render_template('contact/result.html', form=form)
 
-    return redirect(url_for('contact'))
+
+
+    # 管理者宛
+    msg = MIMEText(f"""
+-------------------------
+資料請求: {', '.join(form.catalog.data) if form.catalog.data else 'なし'}
+件名: {form.title.data}
+お名前: {form.name.data}
+メール: {form.email.data}
+電話番号: {form.tel.data}
+住所: {form.address.data}
+お問い合わせ内容:
+{form.note.data}
+-------------------------
+""")
+    msg['Subject'] = 'お問い合わせ受信'
+    msg['From'] = os.environ.get("EMAIL_USER")
+    msg['To'] = 's10ak025@gmail.com'
+
+
+    # 自動返信
+    reply = MIMEText(f"""
+{form.name.data} 様
+
+
+このたびは福岡観光協会のお問い合わせフォームより
+お問い合わせいただきありがとうございます。
+
+
+以下の内容で受け付けました。
+
+
+-------------------------
+資料請求: {', '.join(form.catalog.data) if form.catalog.data else 'なし'}
+件名: {form.title.data}
+お問い合わせ内容:
+{form.note.data}
+-------------------------
+
+
+内容を確認のうえ、担当者より順次ご返信させていただきます。
+なお、内容によってはご返信まで数日いただく場合がございます。
+
+
+
+
+あらかじめご了承くださいますようお願い申し上げます。
+
+
+
+
+────────────────────
+福岡観光協会
+お問い合わせ窓口（自動返信メール）
+────────────────────
+""")
+
+
+    reply['Subject'] = '【福岡観光協会】お問い合わせ受付完了'
+    reply['From'] = os.environ.get("EMAIL_USER")
+    reply['To'] = form.email.data
+
+
+    try:
+        email_user = os.environ.get("EMAIL_USER")
+        email_pass = os.environ.get("EMAIL_PASS")
+
+
+        if not email_user or not email_pass:
+            return "メール設定が不足しています"
+
+
+        with smtplib.SMTP("smtp.gmail.com", 587, timeout=15) as smtp:
+            smtp.ehlo()      # サーバーに挨拶
+            smtp.starttls()  # 通信の暗号化（必須）
+            smtp.ehlo()      # 暗号化後にもう一度挨拶
+            smtp.login(email_user, email_pass)
+            smtp.send_message(msg)
+            smtp.send_message(reply)
+
+
+    except Exception as e:
+        print(f"Mail Error: {e}")
+        # 本来はここでユーザーにエラーを表示するなどの処理
+        return "メール送信に失敗しました。設定を確認してください。"
+
+
+    return redirect(url_for('result'))
+
+
+# 完了
+@app.route('/contact/result')
+def result():
+    return render_template('contact/result.html')
 
 
 # プライバシー

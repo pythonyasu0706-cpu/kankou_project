@@ -131,7 +131,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    /* padding: 0 20px; */
 }
 
 /* 各ページタイトル用ヘッダー 共通ページヘッダーの下に表示される */
@@ -156,6 +156,7 @@
     font-size: 0.95rem;
     font-weight: 300;
     color: var(--color-bg);
+    padding: 0 1em;
 }
 
 /* 各ページヘッダー終わり */
@@ -316,7 +317,8 @@ partials/footer.html 開始
     display: flex;
     justify-content: center;
     position: absolute;
-    right: 90px;
+    /* right: 90px; */
+    right: 50px;
     /* ハンバーガーとの距離 */
     top: 50%;
     transform: translateY(-50%);

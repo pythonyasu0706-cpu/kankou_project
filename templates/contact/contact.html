@@ -33,7 +33,7 @@
             ◇ 土日祝日、盆、年末年始をはさむ場合、お問い合わせの内容によっては、お返事までに日数がかかる場合がございます。<br>
             ◇ お問い合わせ内容によっては、電話や手紙で回答させていただく場合や、またお寄せいただいたすべてにお返事を差し上げられない場合がございます。<br>
             ◇ お返事は、お客様個人宛にお送りするものです。その一部または全部を転載、二次利用することはご遠慮ください。<br>
-            ◇ お客様からいただきました情報につきましては、当社からの回答およびサービス向上にのみご利用させていただきます。<br>
+            ◇ お客様からいただきました情報につきましては、当協会からの回答およびサービス向上にのみご利用させていただきます。<br>
             　 詳しくは<a href="{{ url_for('privacy') }}">「プライバシーポリシー」</a>をご覧ください。<br>
             ◇ 営業を目的としたお問い合わせにはお返事いたしかねる場合がございます。
         </p>
@@ -49,23 +49,33 @@
     <div class="catalog-box">
         {{ render_field(form.catalog) }}
     </div>
+    <div class="form-group error-field">
     {{ render_field(form.title) }}
     {{ render_field(form.note) }}
     {{ render_field(form.name) }}
     {{ render_field(form.kana) }}
-    <div class="form-group">
-        <label>郵便番号</label>
+    </div>
+    <div class="form-group error-field">
+        <label>郵便番号
+            <span class="required">必須</span>
+        </label>
         {{ form.zipcode(
         onKeyUp="AjaxZip3.zip2addr(this,'','area','address');"
         ) }}
+        {% for error in form.zipcode.errors %}
+            <p class="error error-msg">{{ error }}</p>
+        {% endfor %}
     </div>
-    <div class="form-group">
+    <div class="form-group error-field">
         <label>
             住所
             <span class="required">必須</span>
         </label>
         {{ form.area() }}<br>
         {{ form.address(class_="address-box") }}
+        {% for error in form.address.errors %}
+            <p class="error error-msg">{{ error }}</p>
+        {% endfor %}
     </div>
     {{ render_field(form.email) }}
     {{ render_field(form.tel) }}
@@ -75,6 +85,8 @@
             {{ form.agree.label.text }}
         </label>
     </div>
+    <br>
     <div class="submit">{{ form.submit(disabled=True, id="submit-btn") }}</div>
+    <br>
 </form>
 {% endblock %}
