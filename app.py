@@ -7,6 +7,8 @@ import smtplib
 from email.mime.text import MIMEText
 from email.utils import formatdate
 from db import get_db_connection
+import psycopg2.extras
+import psycopg2
 import os
 
 # Flozen-Flask
