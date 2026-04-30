@@ -7,7 +7,6 @@ import smtplib
 from email.mime.text import MIMEText
 from email.utils import formatdate
 from db import get_db_connection
-from db import get_db_connection
 import os
 
 # Flozen-Flask
@@ -344,7 +343,7 @@ def privacy():
 @app.route("/admin")
 def admin():
     conn = get_db_connection()
-    cursor = conn.cursor()
+    cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
     cursor.execute("SELECT * FROM contacts ORDER BY created_at DESC")
     contacts = cursor.fetchall()
