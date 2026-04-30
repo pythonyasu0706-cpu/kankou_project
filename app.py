@@ -6,7 +6,7 @@ from forms import UserInfoForm
 import smtplib
 from email.mime.text import MIMEText
 from email.utils import formatdate
-import mysql.connector
+from db import get_db_connection
 from db import get_db_connection
 import os
 
@@ -214,7 +214,24 @@ def send():
     if not form.validate_on_submit():
         return redirect(url_for('contact'))
 
+    conn = get_db_connection()
+    cursor = conn.cursor()
 
+    cursor.execute("""
+        INSERT INTO contacts (name, email, tel, address, title, note, catalog)
+        VALUES (%s, %s, %s, %s, %s, %s, %s)
+    """, (
+        form.name.data,
+        form.email.data,
+        form.tel.data,
+        form.address.data,
+        form.title.data,
+        form.note.data,
+        ','.join(form.catalog.data) if form.catalog.data else None
+    ))
+
+    conn.commit()
+    conn.close()
 
 
     # 管理者宛
@@ -323,10 +340,11 @@ def privacy():
         ]
     )
 
-# データ保存@app.route("/admin")
+# データ保存
+@app.route("/admin")
 def admin():
     conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
+    cursor = conn.cursor()
 
     cursor.execute("SELECT * FROM contacts ORDER BY created_at DESC")
     contacts = cursor.fetchall()
@@ -351,4 +369,8 @@ def delete(id):
 # ================
 if __name__ == '__main__':
     # freezer.freeze()
-    app.run(debug=True, port=5001)
+    # with app.app_context():
+    #     from init_db import create_table
+    #     create_table()
+    # app.run(debug=True, port=5001)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
