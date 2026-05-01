@@ -1,6 +1,11 @@
+from dotenv import load_dotenv
 from db import get_db_connection
+import psycopg2
+import os
+load_dotenv()
 
 def create_table():
+    print(os.environ.get("DATABASE_URL"))
     conn = get_db_connection()
     cursor = conn.cursor()
 

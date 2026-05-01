@@ -422,7 +422,7 @@ def admin():
     contacts = cursor.fetchall()
 
     conn.close()
-    return render_template("admin.html", contacts=contacts)
+    return render_template("contact/admin.html", contacts=contacts)
 
 # データ削除
 @app.route("/delete/<int:id>", methods=["POST"])
