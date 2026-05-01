@@ -12,14 +12,29 @@ import psycopg2
 # from flask_mailman import Mail, EmailMessage
 # import sqlite3
 from dotenv import load_dotenv
+import logging
 import os
 
 load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
 print("SECRET_KEY:", os.environ.get('SECRET_KEY'))
 print("API_KEY:", os.environ.get('API_KEY'))
 
+# ログ設定
+log_dir = "logs"
+os.makedirs(log_dir, exist_ok=True)
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler("logs/app.log", encoding="utf-8"),
+        logging.StreamHandler()  # Renderログにも出す
+    ]
+)
+
 # Flozen-Flask
 # from flask_frozen import Freezer
+
 # ================
 # インスタンス生成
 # ================
@@ -28,18 +43,6 @@ app = Flask(__name__)
 # freezer = Freezer(app)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['API_KEY'] = os.environ.get('API_KEY')
-# app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER', 'smtp.gmail.com')
-# app.config['MAIL_PORT'] = 587
-# app.config['MAIL_USE_TLS'] = True
-# app.config['MAIL_USERNAME'] = os.environ.get("EMAIL_USER")
-# app.config['MAIL_PASSWORD'] = os.environ.get("EMAIL_PASSWORD")
-# app.config['MAIL_DEFAULT_SENDER'] = os.environ.get("EMAIL_USER")
-
-# ★ここが重要：ローカルでは 'console' にすると、メールが飛ばずにターミナルに出力されます
-# Render本番では 'smtp' を指定してください
-# app.config['MAIL_BACKEND'] = os.environ.get('MAIL_BACKEND', 'console')
-
-# mail = Mail(app)
 
 # ================
 # ルーティング
@@ -194,69 +197,8 @@ def access():
     )
 
 # # お問い合わせ
-# @app.route('/contact/send', methods=['POST'])
-# def send():
-#     form = UserInfoForm()
-#     if not form.validate_on_submit():
-#         return redirect(url_for('contact'))
     
-@app.route("/init-db")
-def init_db():
-    conn = get_db_connection()
-    cur = conn.cursor()
-
-    cur.execute("""
-    CREATE TABLE IF NOT EXISTS contacts (
-        id SERIAL PRIMARY KEY,
-        name TEXT,
-        email TEXT,
-        tel TEXT,
-        address TEXT,
-        title TEXT,
-        note TEXT,
-        catalog TEXT,
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
-    """)
-
-    conn.commit()
-    conn.close()
-
-    return "DB initialized!"
-    # 1. SQLite3でデータベースに保存
-    # (今のままのコードでOK)
-    # conn = sqlite3.connect('your_database.db') # ファイル名を指定
-    # cursor = conn.cursor()
-    # cursor.execute("""
-    #     INSERT INTO contacts (name, email, tel, address, title, note, catalog)
-    #     VALUES (?, ?, ?, ?, ?, ?, ?)
-    # """, (
-    #     form.name.data, form.email.data, form.tel.data, form.address.data,
-    #     form.title.data, form.note.data,
-    #     ','.join(form.catalog.data) if form.catalog.data else None
-    # ))
-    # conn.commit()
-    # conn.close()
-
-    # 2. Flask-Mailmanでメールを送信
-    # データベースへの保存が終わった直後にメール送信を実行します
-    # admin_msg = EmailMessage(
-    #     subject='お問い合わせ受信',
-    #     body=f"お名前: {form.name.data}\n内容: {form.note.data}",
-    #     to=['s10ak025@gmail.com']
-    # )
-    
-    # reply_msg = EmailMessage(
-    #     subject='【福岡観光協会】お問い合わせ受付完了',
-    #     body=f"{form.name.data} 様\nお問い合わせありがとうございます。",
-    #     to=[form.email.data]
-    # )
-
-    # 送信！ (設定が 'console' ならターミナルに出力、'smtp' ならメール送信)
-    # mail.send_messages([admin_msg, reply_msg])
-
-    # return redirect(url_for('result'))
-
+# 
 # 入力ページ
 @app.route('/contact', methods=['GET','POST'])
 def contact():
@@ -388,6 +330,7 @@ def send():
 
 
         with smtplib.SMTP("smtp.gmail.com", 587, timeout=15) as smtp:
+            smtp.set_debuglevel(1)
             smtp.ehlo()      # サーバーに挨拶
             smtp.starttls()  # 通信の暗号化（必須）
             smtp.ehlo()      # 暗号化後にもう一度挨拶
@@ -416,6 +359,8 @@ def result():
 @app.route("/admin")
 def admin():
     conn = get_db_connection()
+    logging.info("DB CONNECT OK")
+
     cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
     cursor.execute("SELECT * FROM contacts ORDER BY created_at DESC")
@@ -436,6 +381,30 @@ def delete(id):
     conn.close()
     return redirect(url_for("admin"))
 
+# テーブル作成
+# @app.route("/init-db")
+# def init_db():
+#     conn = get_db_connection()
+#     cur = conn.cursor()
+
+#     cur.execute("""
+#     CREATE TABLE IF NOT EXISTS contacts (
+#         id SERIAL PRIMARY KEY,
+#         name TEXT,
+#         email TEXT,
+#         tel TEXT,
+#         address TEXT,
+#         title TEXT,
+#         note TEXT,
+#         catalog TEXT,
+#         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+#     );
+#     """)
+
+#     conn.commit()
+#     conn.close()
+
+#     return "DB initialized!"
 
 # プライバシー
 @app.route("/privacy")
