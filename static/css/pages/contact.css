@@ -407,6 +407,47 @@ input[type="hidden"] {
     text-decoration: none;
 }
 
+.detail-table {
+    width: 100%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.detail-table th {
+    width: 120px;
+    background: var(--color-main);
+    color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.detail-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+    vertical-align: top;
+    word-break: break-word;
+    overflow-wrap: break-word;
+}
+
+.box03 .btn-delete {
+    background: #666;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.box03 .btn-delete:hover {
+    background: #333;
+}
+
+
 /* ==================
     スマホ対応
 ================== */
@@ -472,4 +513,7 @@ input[type="hidden"] {
         /* ここは維持（ズーム防止） */
     }
 
-}
+    .detail-table th {
+    width: 30%;
+    }
+}}

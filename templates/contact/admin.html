@@ -1,79 +1,62 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>管理画面｜問い合わせ一覧</title>
+<!-- admin/contact.html -->
+{% extends "contact/base.html" %}
 
-    <style>
-        body { font-family: sans-serif; margin: 30px; background: #f5f5f5; }
-        h1 { margin-bottom: 20px; }
+{% set title = "管理画面" %}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: #fff;
-        }
+<!-- {% block page_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/contact.css') }}">
+{% endblock %} -->
 
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            vertical-align: top;
-        }
+{% block contact_content %}
 
-        th {
-            background: #333;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background: #f9f9f9;
-        }
-
-        .btn-delete {
-            background: red;
-            color: white;
-            padding: 5px 10px;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .btn-delete:hover {
-            background: darkred;
-        }
-    </style>
-</head>
-
-<body>
-
-<h1>問い合わせ一覧</h1>
-
-<table>
+<div class="box01">
+    <h1>問い合わせ一覧</h1>
+</div>
+<div class="box03">
+    <table>
+{% for c in contacts %}
+<table class="detail-table">
     <tr>
-        <th>日時</th>
-        <th>名前</th>
-        <th>件名</th>
-        <th>メール</th>
-        <th>内容</th>
-        <th>操作</th>
+        <th>問い合わせ番号</th>
+        <td>{{ c.id }}</td>
     </tr>
 
-    {% for c in contacts %}
     <tr>
+        <th>日時</th>
         <td>{{ c.created_at }}</td>
-        <td>{{ c.name }}</td>
-        <td>{{ c.subject }}</td>
-        <td>{{ c.email }}</td>
-        <td>{{ c.message }}</td>
+    </tr>
 
+    <tr>
+        <th>名前</th>
+        <td>{{ c.name }}</td>
+    </tr>
+
+    <tr>
+        <th>件名</th>
+        <td>{{ c.title }}</td>
+    </tr>
+
+    <tr>
+        <th>メール</th>
+        <td>{{ c.email }}</td>
+    </tr>
+
+    <tr>
+        <th>内容</th>
+        <td>{{ c.note }}</td>
+    </tr>
+
+    <tr>
+        <th>操作</th>
         <td>
-            <form action="/delete/{{ c.id }}" method="POST" onsubmit="return confirm('削除しますか？');">
+            <form action="/delete/{{ c.id }}" method="POST"
+                onsubmit="return confirm('削除しますか？');">
                 <button class="btn-delete">削除</button>
             </form>
         </td>
     </tr>
-    {% endfor %}
-</table>
 
-</body>
-</html>
+    </table>
+    {% endfor %}
+</div>
+{% endblock %}
