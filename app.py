@@ -11,7 +11,12 @@ import psycopg2.extras
 import psycopg2
 # from flask_mailman import Mail, EmailMessage
 # import sqlite3
+from dotenv import load_dotenv
 import os
+
+load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
+print("SECRET_KEY:", os.environ.get('SECRET_KEY'))
+print("API_KEY:", os.environ.get('API_KEY'))
 
 # Flozen-Flask
 # from flask_frozen import Freezer
@@ -92,7 +97,7 @@ def spots():
     return render_template(
         "spots.html", 
         spots=spots,
-        # API_KEY=os.environ.get("API_KEY"),
+        API_KEY=os.environ.get("API_KEY"),
         gallery=spots_gallery,
         breadcrumb_items=[
             {"label": "Home", "url": url_for("index")},

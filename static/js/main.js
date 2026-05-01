@@ -33,12 +33,11 @@
 =================== */
 
 const CITY = "Fukuoka";
-// const API_KEY = window.API_KEY;
+const API_KEY = window.API_KEY;
 
-// if (!API_KEY) {
-//     console.error("API_KEYが設定されていません");
-//     return;
-// }
+if (!API_KEY) {
+    console.error("API_KEYが設定されていません");
+}
 
 // ======================
 // ① ヘッダー用（都市）
