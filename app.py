@@ -20,17 +20,17 @@ print("SECRET_KEY:", os.environ.get('SECRET_KEY'))
 print("API_KEY:", os.environ.get('API_KEY'))
 
 # ログ設定
-log_dir = "logs"
-os.makedirs(log_dir, exist_ok=True)
+# log_dir = "logs"
+# os.makedirs(log_dir, exist_ok=True)
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
-    handlers=[
-        logging.FileHandler("logs/app.log", encoding="utf-8"),
-        logging.StreamHandler()  # Renderログにも出す
-    ]
-)
+# logging.basicConfig(
+#     level=logging.INFO,
+#     format="%(asctime)s [%(levelname)s] %(message)s",
+#     handlers=[
+#         logging.FileHandler("logs/app.log", encoding="utf-8"),
+#         logging.StreamHandler()  # Renderログにも出す
+#     ]
+# )
 
 # Flozen-Flask
 # from flask_frozen import Freezer
