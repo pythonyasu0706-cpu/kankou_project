@@ -9,6 +9,8 @@ from email.utils import formatdate
 from db import get_db_connection
 import psycopg2.extras
 import psycopg2
+# from flask_mailman import Mail, EmailMessage
+# import sqlite3
 import os
 
 # Flozen-Flask
@@ -20,7 +22,19 @@ app = Flask(__name__)
 # flozen-flask
 # freezer = Freezer(app)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
-# app.config['API_KEY'] = os.environ.get('API_KEY')
+app.config['API_KEY'] = os.environ.get('API_KEY')
+# app.config['MAIL_SERVER'] = os.environ.get('MAIL_SERVER', 'smtp.gmail.com')
+# app.config['MAIL_PORT'] = 587
+# app.config['MAIL_USE_TLS'] = True
+# app.config['MAIL_USERNAME'] = os.environ.get("EMAIL_USER")
+# app.config['MAIL_PASSWORD'] = os.environ.get("EMAIL_PASSWORD")
+# app.config['MAIL_DEFAULT_SENDER'] = os.environ.get("EMAIL_USER")
+
+# ★ここが重要：ローカルでは 'console' にすると、メールが飛ばずにターミナルに出力されます
+# Render本番では 'smtp' を指定してください
+# app.config['MAIL_BACKEND'] = os.environ.get('MAIL_BACKEND', 'console')
+
+# mail = Mail(app)
 
 # ================
 # ルーティング
@@ -174,7 +188,70 @@ def access():
         ]
     )
 
-# お問い合わせ
+# # お問い合わせ
+# @app.route('/contact/send', methods=['POST'])
+# def send():
+#     form = UserInfoForm()
+#     if not form.validate_on_submit():
+#         return redirect(url_for('contact'))
+    
+@app.route("/init-db")
+def init_db():
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS contacts (
+        id SERIAL PRIMARY KEY,
+        name TEXT,
+        email TEXT,
+        tel TEXT,
+        address TEXT,
+        title TEXT,
+        note TEXT,
+        catalog TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+    """)
+
+    conn.commit()
+    conn.close()
+
+    return "DB initialized!"
+    # 1. SQLite3でデータベースに保存
+    # (今のままのコードでOK)
+    # conn = sqlite3.connect('your_database.db') # ファイル名を指定
+    # cursor = conn.cursor()
+    # cursor.execute("""
+    #     INSERT INTO contacts (name, email, tel, address, title, note, catalog)
+    #     VALUES (?, ?, ?, ?, ?, ?, ?)
+    # """, (
+    #     form.name.data, form.email.data, form.tel.data, form.address.data,
+    #     form.title.data, form.note.data,
+    #     ','.join(form.catalog.data) if form.catalog.data else None
+    # ))
+    # conn.commit()
+    # conn.close()
+
+    # 2. Flask-Mailmanでメールを送信
+    # データベースへの保存が終わった直後にメール送信を実行します
+    # admin_msg = EmailMessage(
+    #     subject='お問い合わせ受信',
+    #     body=f"お名前: {form.name.data}\n内容: {form.note.data}",
+    #     to=['s10ak025@gmail.com']
+    # )
+    
+    # reply_msg = EmailMessage(
+    #     subject='【福岡観光協会】お問い合わせ受付完了',
+    #     body=f"{form.name.data} 様\nお問い合わせありがとうございます。",
+    #     to=[form.email.data]
+    # )
+
+    # 送信！ (設定が 'console' ならターミナルに出力、'smtp' ならメール送信)
+    # mail.send_messages([admin_msg, reply_msg])
+
+    # return redirect(url_for('result'))
+
 # 入力ページ
 @app.route('/contact', methods=['GET','POST'])
 def contact():
@@ -329,17 +406,6 @@ def result():
     return render_template('contact/result.html')
 
 
-# プライバシー
-@app.route("/privacy")
-def privacy():
-    return render_template(
-        "contact/privacy.html",
-        breadcrumb_items=[
-            {"label": "Home", "url": url_for("index")},
-            {"label": "お問い合わせフォーム", "url": url_for("contact")},
-            {"label": "プライバシーポリシー"}
-        ]
-    )
 
 # データ保存
 @app.route("/admin")
@@ -364,6 +430,19 @@ def delete(id):
 
     conn.close()
     return redirect(url_for("admin"))
+
+
+# プライバシー
+@app.route("/privacy")
+def privacy():
+    return render_template(
+        "contact/privacy.html",
+        breadcrumb_items=[
+            {"label": "Home", "url": url_for("index")},
+            {"label": "お問い合わせフォーム", "url": url_for("contact")},
+            {"label": "プライバシーポリシー"}
+        ]
+    )
 
 # ================
 # 実行
