@@ -423,6 +423,7 @@ input[type="hidden"] {
     border: 1px solid #ccc;
     padding: 10px;
     text-align: center;
+    vertical-align: middle;
 }
 
 .detail-table td {
@@ -432,20 +433,55 @@ input[type="hidden"] {
     vertical-align: top;
     word-break: break-word;
     overflow-wrap: break-word;
+    min-height: 1em;
 }
 
-.box03 .btn-delete {
-    background: #666;
-    color: white;
+.detail-table button {
+    margin: 3px auto;
+}
+
+
+.btn-archive, .btn-done, .btn-reopen {
+    background: white;
+    color: var(--color-main);
     padding: 5px 10px;
-    border: none;
+    border: 1px solid var(--color-main);
     cursor: pointer;
     border-radius: 4px;
 }
 
-.box03 .btn-delete:hover {
-    background: #333;
+.btn-archive:hover, .btn-done:hover, .btn-reopen:hover {
+    background: var(--color-main);
+    color: white;
 }
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    padding: 10px 16px;
+    border: none;
+    background: #eee;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.tab-btn.active {
+    background: #666;
+    color: white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
 
 
 /* ==================
@@ -515,5 +551,6 @@ input[type="hidden"] {
 
     .detail-table th {
     width: 30%;
+    padding: 0 8px;
     }
 }}

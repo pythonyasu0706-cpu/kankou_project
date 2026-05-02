@@ -1,62 +1,125 @@
 <!-- admin/contact.html -->
-{% extends "contact/base.html" %}
+{% extends "base.html" %}
 
 {% set title = "管理画面" %}
 
-<!-- {% block page_css %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/contact.css') }}">
-{% endblock %} -->
+{% block page_css %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/pages/contact.css') }}">
+<meta name="format-detection" content="telephone=no">
+{% endblock %}
 
-{% block contact_content %}
+{% block content %}
 
 <div class="box01">
     <h1>問い合わせ一覧</h1>
 </div>
 <div class="box03">
-    <table>
-{% for c in contacts %}
-<table class="detail-table">
-    <tr>
-        <th>問い合わせ番号</th>
-        <td>{{ c.id }}</td>
-    </tr>
+    <!-- ================= タブ ================= -->
+    <div id="tab-root" data-active-tab="{{ request.args.get('tab', 'new') }}">
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="new">新規</button>
+            <button class="tab-btn" data-tab="done">完了</button>
+            <button class="tab-btn" data-tab="archive">アーカイブ</button>
+        </div>
 
-    <tr>
-        <th>日時</th>
-        <td>{{ c.created_at }}</td>
-    </tr>
+        <!-- ================= 新規 ================= -->
+        <div class="tab-content active" id="new">
 
-    <tr>
-        <th>名前</th>
-        <td>{{ c.name }}</td>
-    </tr>
+        {% for c in contacts_new %}
+        <table class="detail-table">
 
-    <tr>
-        <th>件名</th>
-        <td>{{ c.title }}</td>
-    </tr>
+            <tr><th>問い合わせ番号</th><td>{{ c.id }}</td></tr>
+            <tr><th>日時</th><td>{{ c.created_at }}</td></tr>
+            <tr><th>名前</th><td>{{ c.name }}</td></tr>
+            <tr><th>件名</th><td>{{ c.title }}</td></tr>
+            <tr><th>メール</th><td>{{ c.email }}</td></tr>
+            <tr><th>内容</th><td>{{ c.note }}</td></tr>
 
-    <tr>
-        <th>メール</th>
-        <td>{{ c.email }}</td>
-    </tr>
+            <tr>
+                <th>操作</th>
+                <td>
 
-    <tr>
-        <th>内容</th>
-        <td>{{ c.note }}</td>
-    </tr>
+                    <form action="/complete/{{ c.id }}" method="POST" style="display:inline;">
+                        <button class="btn-done">完了</button>
+                    </form>
 
-    <tr>
-        <th>操作</th>
-        <td>
-            <form action="/delete/{{ c.id }}" method="POST"
-                onsubmit="return confirm('削除しますか？');">
-                <button class="btn-delete">削除</button>
-            </form>
-        </td>
-    </tr>
+                    <form action="/archive/{{ c.id }}" method="POST"
+                        onsubmit="return confirm('アーカイブしますか？');"
+                        style="display:inline;">
+                        <button class="btn-archive">アーカイブ</button>
+                    </form>
 
-    </table>
-    {% endfor %}
+                </td>
+            </tr>
+
+        </table>
+        {% endfor %}
+
+        </div>
+
+        <!-- ================= 完了 ================= -->
+        <div class="tab-content" id="done">
+
+        {% for c in contacts_done %}
+        <table class="detail-table">
+
+            <tr><th>問い合わせ番号</th><td>{{ c.id }}</td></tr>
+            <tr><th>日時</th><td>{{ c.created_at }}</td></tr>
+            <tr><th>名前</th><td>{{ c.name }}</td></tr>
+            <tr><th>件名</th><td>{{ c.title }}</td></tr>
+            <tr><th>メール</th><td>{{ c.email }}</td></tr>
+            <tr><th>内容</th><td>{{ c.note }}</td></tr>
+
+            <tr>
+                <th>操作</th>
+                <td>
+
+                    <form action="/reopen/{{ c.id }}" method="POST" style="display:inline;">
+                        <button class="btn-reopen">新規へ</button>
+                    </form>
+
+                    <form action="/archive/{{ c.id }}" method="POST" style="display:inline;">
+                        <button class="btn-archive">アーカイブ</button>
+                    </form>
+
+                </td>
+            </tr>
+
+        </table>
+        {% endfor %}
+        </div>
+    
+
+        <!-- ================= アーカイブ ================= -->
+        <div class="tab-content" id="archive">
+
+        {% for c in contacts_archived %}
+        <table class="detail-table">
+
+            <tr><th>問い合わせ番号</th><td>{{ c.id }}</td></tr>
+            <tr><th>日時</th><td>{{ c.created_at }}</td></tr>
+            <tr><th>名前</th><td>{{ c.name }}</td></tr>
+            <tr><th>件名</th><td>{{ c.title }}</td></tr>
+            <tr><th>メール</th><td>{{ c.email }}</td></tr>
+            <tr><th>内容</th><td>{{ c.note }}</td></tr>
+            <tr>
+                <th>操作</th>
+                <td>
+                    <form action="/reopen/{{ c.id }}" method="POST" style="display:inline;">
+                        <button class="btn-reopen">戻す</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+        {% endfor %}
+        </div>
+    </div>
 </div>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='js/form.js') }}"></script>
+<script src="https://ajaxzip3.github.io/ajaxzip3.js"></script>
 {% endblock %}

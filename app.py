@@ -427,31 +427,97 @@ def result():
     return render_template('contact/result.html')
 
 
-
-# データ保存
+#管理画面
 @app.route("/admin")
 def admin():
+    tab = request.args.get("tab", "new")
     conn = get_db_connection()
     logging.info("DB CONNECT OK")
 
     cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
 
-    cursor.execute("SELECT * FROM contacts ORDER BY created_at DESC")
-    contacts = cursor.fetchall()
+    # 新規
+    cursor.execute("""
+        SELECT * FROM contacts
+        WHERE status = 'new'
+        ORDER BY created_at DESC
+    """)
+    contacts_new = cursor.fetchall()
+
+    # 完了
+    cursor.execute("""
+        SELECT * FROM contacts
+        WHERE status = 'done'
+        ORDER BY created_at DESC
+    """)
+    contacts_done = cursor.fetchall()
+
+    # アーカイブ
+    cursor.execute("""
+        SELECT * FROM contacts
+        WHERE status = 'archived'
+        ORDER BY created_at DESC
+    """)
+    contacts_archived = cursor.fetchall()
 
     conn.close()
-    return render_template("contact/admin.html", contacts=contacts)
 
-# データ削除
-@app.route("/delete/<int:id>", methods=["POST"])
-def delete(id):
+    return render_template(
+        "contact/admin.html",
+        contacts_new=contacts_new,
+        contacts_done=contacts_done,
+        contacts_archived=contacts_archived
+    )
+
+# 完了
+@app.route("/complete/<int:id>", methods=["POST"])
+def complete_contact(id):
     conn = get_db_connection()
-    cursor = conn.cursor()
+    cur = conn.cursor()
 
-    cursor.execute("DELETE FROM contacts WHERE id = %s", (id,))
+    cur.execute("""
+        UPDATE contacts
+        SET status = 'done'
+        WHERE id = %s
+    """, (id,))
+
     conn.commit()
-
     conn.close()
+
+    return redirect(url_for("admin", tab="done"))
+
+# アーカイブ
+@app.route("/archive/<int:id>", methods=["POST"])
+def archive_contact(id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    cur.execute("""
+        UPDATE contacts
+        SET status = 'archived'
+        WHERE id = %s
+    """, (id,))
+
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for("admin"))
+
+# 新規に戻す
+@app.route("/reopen/<int:id>", methods=["POST"])
+def reopen_contact(id):
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    cur.execute("""
+        UPDATE contacts
+        SET status = 'new'
+        WHERE id = %s
+    """, (id,))
+
+    conn.commit()
+    conn.close()
+
     return redirect(url_for("admin"))
 
 # テーブル作成

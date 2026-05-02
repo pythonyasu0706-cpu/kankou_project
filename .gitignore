@@ -7,3 +7,5 @@ __pycache__/
 # APIキーなどの秘密情報を防止
 .env
 .vscode/
+logs/
+migrate_status/
