@@ -3,9 +3,10 @@ from flask import Flask, render_template, session, redirect, url_for, request
 from flask_wtf import FlaskForm
 # forms.pyをimport
 from forms import UserInfoForm
-import smtplib
-from email.mime.text import MIMEText
-from email.utils import formatdate
+# import smtplib
+# from email.mime.text import MIMEText
+# from email.utils import formatdate
+import resend
 from db import get_db_connection
 import psycopg2.extras
 import psycopg2
@@ -16,21 +17,19 @@ import logging
 import os
 
 load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
-print("SECRET_KEY:", os.environ.get('SECRET_KEY'))
-print("API_KEY:", os.environ.get('API_KEY'))
 
 # ログ設定
-# log_dir = "logs"
-# os.makedirs(log_dir, exist_ok=True)
+log_dir = "logs"
+os.makedirs(log_dir, exist_ok=True)
 
-# logging.basicConfig(
-#     level=logging.INFO,
-#     format="%(asctime)s [%(levelname)s] %(message)s",
-#     handlers=[
-#         logging.FileHandler("logs/app.log", encoding="utf-8"),
-#         logging.StreamHandler()  # Renderログにも出す
-#     ]
-# )
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=[
+        logging.FileHandler("logs/app.log", encoding="utf-8"),
+        logging.StreamHandler()
+    ]
+)
 
 # Flozen-Flask
 # from flask_frozen import Freezer
@@ -258,94 +257,168 @@ def send():
     conn.commit()
     conn.close()
 
+    # Resend APIキー
+    resend.api_key = os.environ.get("RESEND_API_KEY")
+    
+    success = True
+
+    try:
+        # 管理者宛メール
+        resend.Emails.send({
+            "from": "福岡観光協会 <contact@yasumasu.com>",
+            "to": ["python.yasu0706@gmail.com"],
+            "subject": "お問い合わせ通知",
+            "text": f"""
+    福岡観光協会のお問い合わせフォームより
+    以下の内容のお問い合わせがありました。
+
+
+    -------------------------
+    資料請求: {', '.join(form.catalog.data) if form.catalog.data else 'なし'}
+    件名: {form.title.data}
+    お名前: {form.name.data}
+    メール: {form.email.data}
+    電話番号: {form.tel.data}
+    住所: {form.address.data}
+    お問い合わせ内容:
+    {form.note.data}
+    -------------------------
+    """
+        })
+    except Exception as e:
+        print("管理者メール失敗:", e)
+        success = False
+
+    try:
+        # 自動返信メール
+        resend.Emails.send({
+            "from": "福岡観光協会 <contact@yasumasu.com>",
+            "to": [form.email.data],
+            "subject": "【福岡観光協会】お問い合わせ受付完了",
+            "text": f"""
+    {form.name.data} 様
+
+
+    このたびは福岡観光協会のお問い合わせフォームより
+    お問い合わせいただきありがとうございます。
+
+
+    以下の内容で受け付けました。
+
+
+    -------------------------
+    資料請求: {', '.join(form.catalog.data) if form.catalog.data else 'なし'}
+    件名: {form.title.data}
+    お問い合わせ内容:
+    {form.note.data}
+    -------------------------
+
+
+    内容確認後、担当者よりご連絡いたします。
+    しばらくお待ちください。
+
+
+    福岡観光協会
+    """
+        })
+
+    except Exception as e:
+        print("自動返信メール失敗:", e)
+        success = False
+
+    return render_template(
+        'contact/result.html',
+        form=form,
+        success=success
+    )
 
     # 管理者宛
-    msg = MIMEText(f"""
--------------------------
-資料請求: {', '.join(form.catalog.data) if form.catalog.data else 'なし'}
-件名: {form.title.data}
-お名前: {form.name.data}
-メール: {form.email.data}
-電話番号: {form.tel.data}
-住所: {form.address.data}
-お問い合わせ内容:
-{form.note.data}
--------------------------
-""")
-    msg['Subject'] = 'お問い合わせ受信'
-    msg['From'] = os.environ.get("EMAIL_USER")
-    msg['To'] = 's10ak025@gmail.com'
+#     msg = MIMEText(f"""
+# -------------------------
+# 資料請求: {', '.join(form.catalog.data) if form.catalog.data else 'なし'}
+# 件名: {form.title.data}
+# お名前: {form.name.data}
+# メール: {form.email.data}
+# 電話番号: {form.tel.data}
+# 住所: {form.address.data}
+# お問い合わせ内容:
+# {form.note.data}
+# -------------------------
+# """)
+#     msg['Subject'] = 'お問い合わせ受信'
+#     msg['From'] = os.environ.get("EMAIL_USER")
+#     msg['To'] = 's10ak025@gmail.com'
 
 
     # 自動返信
-    reply = MIMEText(f"""
-{form.name.data} 様
+#     reply = MIMEText(f"""
+# {form.name.data} 様
 
 
-このたびは福岡観光協会のお問い合わせフォームより
-お問い合わせいただきありがとうございます。
+# このたびは福岡観光協会のお問い合わせフォームより
+# お問い合わせいただきありがとうございます。
 
 
-以下の内容で受け付けました。
+# 以下の内容で受け付けました。
 
 
--------------------------
-資料請求: {', '.join(form.catalog.data) if form.catalog.data else 'なし'}
-件名: {form.title.data}
-お問い合わせ内容:
-{form.note.data}
--------------------------
+# -------------------------
+# 資料請求: {', '.join(form.catalog.data) if form.catalog.data else 'なし'}
+# 件名: {form.title.data}
+# お問い合わせ内容:
+# {form.note.data}
+# -------------------------
 
 
-内容を確認のうえ、担当者より順次ご返信させていただきます。
-なお、内容によってはご返信まで数日いただく場合がございます。
-
-
-
-
-あらかじめご了承くださいますようお願い申し上げます。
+# 内容を確認のうえ、担当者より順次ご返信させていただきます。
+# なお、内容によってはご返信まで数日いただく場合がございます。
 
 
 
 
-────────────────────
-福岡観光協会
-お問い合わせ窓口（自動返信メール）
-────────────────────
-""")
+# あらかじめご了承くださいますようお願い申し上げます。
 
 
-    reply['Subject'] = '【福岡観光協会】お問い合わせ受付完了'
-    reply['From'] = os.environ.get("EMAIL_USER")
-    reply['To'] = form.email.data
 
 
-    try:
-        email_user = os.environ.get("EMAIL_USER")
-        email_pass = os.environ.get("EMAIL_PASS")
+# ────────────────────
+# 福岡観光協会
+# お問い合わせ窓口（自動返信メール）
+# ────────────────────
+# """)
 
 
-        if not email_user or not email_pass:
-            return "メール設定が不足しています"
+#     reply['Subject'] = '【福岡観光協会】お問い合わせ受付完了'
+#     reply['From'] = os.environ.get("EMAIL_USER")
+#     reply['To'] = form.email.data
 
 
-        with smtplib.SMTP("smtp.gmail.com", 587, timeout=15) as smtp:
-            smtp.set_debuglevel(1)
-            smtp.ehlo()      # サーバーに挨拶
-            smtp.starttls()  # 通信の暗号化（必須）
-            smtp.ehlo()      # 暗号化後にもう一度挨拶
-            smtp.login(email_user, email_pass)
-            smtp.send_message(msg)
-            smtp.send_message(reply)
+#     try:
+#         email_user = os.environ.get("EMAIL_USER")
+#         email_pass = os.environ.get("EMAIL_PASS")
 
 
-    except Exception as e:
-        print(f"Mail Error: {e}")
-        # 本来はここでユーザーにエラーを表示するなどの処理
-        return "メール送信に失敗しました。設定を確認してください。"
+#         if not email_user or not email_pass:
+#             return "メール設定が不足しています"
 
 
-    return redirect(url_for('result'))
+#         with smtplib.SMTP("smtp.gmail.com", 587, timeout=15) as smtp:
+#             smtp.set_debuglevel(1)
+#             smtp.ehlo()      # サーバーに挨拶
+#             smtp.starttls()  # 通信の暗号化（必須）
+#             smtp.ehlo()      # 暗号化後にもう一度挨拶
+#             smtp.login(email_user, email_pass)
+#             smtp.send_message(msg)
+#             smtp.send_message(reply)
+
+
+#     except Exception as e:
+#         print(f"Mail Error: {e}")
+#         # 本来はここでユーザーにエラーを表示するなどの処理
+#         return "メール送信に失敗しました。設定を確認してください。"
+
+
+#     return redirect(url_for('result'))
 
 
 # 完了
