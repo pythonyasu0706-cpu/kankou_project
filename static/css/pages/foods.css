@@ -425,8 +425,8 @@ footer {
     }
 
     /* ▼ テキスト中央寄せ */
-    .col-md-7 {
-        text-align: center;
+    .col-md-7 p {
+        text-align: left;
     }
 
     /* ▼ 余白調整 */
