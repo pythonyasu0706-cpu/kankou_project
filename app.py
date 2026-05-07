@@ -77,13 +77,13 @@ def spots():
             "weather_id": "fukuokatower-weather"
         },
         {
-            "title": "太宰府天満宮",
-            "text": "学問の神様・菅原道真を祀る神社。受験シーズンには多くの参拝客が訪れ、周辺では名物の梅ヶ枝餅も楽しめます。",
-            "image": "spot/dazaifutenmangu.jpg",
-            "alt": "太宰府天満宮1",
+            "title": "櫛田神社",
+            "text": "博多の総鎮守として親しまれる櫛田神社。商売繁盛や不老長寿のご利益で知られ、夏には博多祇園山笠が行われます。",
+            "image": "spot/kushdajinjya.jpg",
+            "alt": "櫛田神社1",
             # 0502追記
-            "lat": 33.52178626549702,
-            "lon": 130.5348432124952,
+            "lat": 33.593106502185655,
+            "lon": 130.41040525150436,
             "weather_id": "dazaifu-weather"
         }
     ]
