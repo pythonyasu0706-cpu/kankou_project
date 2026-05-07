@@ -60,3 +60,16 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
         document.getElementById(tab).classList.add("active");
     });
 });
+
+// ===================
+// 最初のエラーへスクロール
+// ===================
+
+const firstError = document.querySelector(".error-msg");
+
+if (firstError) {
+    firstError.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+    });
+}
