@@ -98,3 +98,19 @@ body.rain { background: #d6e6ff; }
 .row h4 span {
   margin-left: auto;
 }
+
+/* ==========================================
+    ── ここから下がスマホ用 ──
+   ========================================= */
+@media (max-width: 760px) {
+
+
+  .weather-inline {
+    padding: -1px 0px !important;
+    margin: 0;
+    border: none !important;
+    box-shadow: none !important;
+    width: fit-content;
+    border-radius: 12px;
+  }
+}

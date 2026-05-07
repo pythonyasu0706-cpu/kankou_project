@@ -68,7 +68,7 @@ def spots():
         },
         {
             "title": "福岡タワー",
-            "text": "選び抜かれた新鮮な牛もつと、甘みを増した野菜が共演する滋味深い味わい。素材の旨みが溶け出した秘伝のスープが、二人の心と身体を芯から温めてくれます。",
+            "text": "福岡タワー は、全長234mを誇る日本一高い海浜タワーで、福岡のシンボルとして親しまれています。地上123mの展望室からは、福岡市街や博多湾を一望でき、夜景スポットとしても人気です。",
             "image": "spot/momochihama.jpg",
             "alt": "福岡タワー1",
             # 0502追記
@@ -106,7 +106,7 @@ def spots():
         API_KEY=os.environ.get("API_KEY"), # 0502追記
         gallery=spots_gallery,
         breadcrumb_items=[
-            {"label": "Home", "url": url_for("index")},
+            {"label": "Top", "url": url_for("index")},
             {"label": "スポット"}
         ]
     )
@@ -151,7 +151,7 @@ def foods():
         foods=foods, 
         gallery=foods_gallery,
         breadcrumb_items=[
-            {"label": "Home", "url": url_for("index")},
+            {"label": "Top", "url": url_for("index")},
             {"label": "グルメ"}
         ]
     )
@@ -162,8 +162,8 @@ def course():
     return render_template("" \
     "course.html",
     breadcrumb_items=[
-            {"label": "Home", "url": url_for("index")},
-            {"label": "モデルコース"}
+            {"label": "Top", "url": url_for("index")},
+            {"label": "コース"}
         ]
     )
 
@@ -172,8 +172,8 @@ def course_detail():
     return render_template(
         "course_detail.html",
         breadcrumb_items=[
-            {"label": "Home", "url": url_for("index")},
-            {"label": "モデルコース", "url": url_for("course")},
+            {"label": "Top", "url": url_for("index")},
+            {"label": "コース", "url": url_for("course")},
             {"label": "コースの詳細"}
         ]
     )
@@ -183,7 +183,7 @@ def access():
     return render_template(
         "access.html",
         breadcrumb_items=[
-            {"label": "Home", "url": url_for("index")},
+            {"label": "Top", "url": url_for("index")},
             {"label": "アクセス"}
         ]
     )
@@ -201,8 +201,8 @@ def contact():
         'contact/contact.html', 
         form=form,
         breadcrumb_items=[
-            {"label": "Home", "url": url_for("index")},
-            {"label": "お問い合わせフォーム"}
+            {"label": "Top", "url": url_for("index")},
+            {"label": "問い合わせフォーム"}
         ]
     )
 
@@ -428,8 +428,8 @@ def privacy():
     return render_template(
         "contact/privacy.html",
         breadcrumb_items=[
-            {"label": "Home", "url": url_for("index")},
-            {"label": "お問い合わせフォーム", "url": url_for("contact")},
+            {"label": "Top", "url": url_for("index")},
+            {"label": "問い合わせフォーム", "url": url_for("contact")},
             {"label": "プライバシーポリシー"}
         ]
     )
