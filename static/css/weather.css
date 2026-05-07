@@ -39,9 +39,12 @@ body.rain { background: #d6e6ff; }
   display: flex;
   align-items: center;
   gap: 5px;
-  background: none;  /* ←これ重要 */
-  padding: 0;        /* ←これ重要 */
-  box-shadow: none;  /* ←これ重要 */
+  background: none;
+  /* ←これ重要 */
+  padding: 0;
+  /* ←これ重要 */
+  box-shadow: none;
+  /* ←これ重要 */
 }
 
 .weather-inline {
@@ -60,6 +63,7 @@ body.rain { background: #d6e6ff; }
   width: fit-content;
   border-radius: 12px;
 }
+
 /* アイコン */
 .weather-inline img {
   width: 25px;
@@ -87,9 +91,10 @@ body.rain { background: #d6e6ff; }
 }
 
 .row h4 {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
+
 .row h4 span {
-    margin-left: auto;
+  margin-left: auto;
 }

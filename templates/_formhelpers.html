@@ -33,11 +33,11 @@
 
         {% else %}
 
-        {{ field(class_="field-input") }}
+        {{ field(**kwargs) }}
 
     {% endif %}
     {% for error in field.errors %}
-        <p class="error error-msg">{{ error }}</p>
+        <p class="error">{{ error }}</p>
     {% endfor %}
 
     </div>

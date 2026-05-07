@@ -1,24 +1,33 @@
 /* course_detail.css */
 
+a {
+    background-color: transparent;
+}
+
 /* 親要素を画面の高さ(100vh)いっぱいにする */
 .course-wrapper {
     display: flex;
-    height: 100vh; /* 画面の高さに合わせる */
+    height: 100vh;
+    /* 画面の高さに合わせる */
     width: 100%;
     position: relative;
     overflow: hidden;
+    margin: -15px;
 }
 
 /* リスト部分（左側またはマップの上に配置） */
 .route-list {
-    flex: 0 0 350px; /* 幅を350pxに固定 */
+    flex: 0 0 350px;
+    /* 幅を350pxに固定 */
     height: 100%;
     overflow-y: auto;
-    background: rgba(255, 255, 255, 0.9); /* 少し透過させるとオシャレ */
-    z-index: 10; /* マップより上に持ってくる */
-    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.9);
+    /* 少し透過させるとオシャレ */
+    z-index: 10;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    transition: all 0.3s ease; /* スライドのアニメーション */
+    transition: all 0.3s ease;
+    /* スライドのアニメーション */
     position: relative;
 }
 
@@ -28,23 +37,304 @@
 
 /* マップ部分 */
 #map {
-    flex: 1; /* 残りの幅をすべて使う */
+    flex: 1;
+    /* 残りの幅をすべて使う */
     height: 100%;
+    z-index: 1;
 }
 
 /* 閉じた状態のクラス */
 .route-list.closed {
-    margin-left: -350px; /* 幅の分だけ左に隠す */
+    margin-left: -350px;
+    /* 幅の分だけ左に隠す  */
     opacity: 0;
 }
+
+
+
+
+
+
+
+
+.gm-marker-wrapper {
+    position: absolute;
+}
+
+/* 吹き出しの共通スタイル */
+.gm-marker {
+    position: absolute;
+    left: 0;
+    top: 0;
+    min-width: 50px;
+    width: 50px;
+    min-height: 50px;
+    height: 50px;
+    border-radius: 50%;
+    padding: 10px;
+    color: #fff;
+    line-height: 1.4;
+    text-align: center;
+    white-space: nowrap;
+
+    transition: transform 0.2s ease, z-index 0.2s ease;
+}
+
+.gm-marker:hover {
+    transform: scale(1.2);
+}
+
+
+/* 左上の番号バッジ */
+.gm-marker::before {
+    content: attr(data-index);
+    position: absolute;
+    top: -6px;
+    left: 0;
+
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+
+    background: #333;
+    color: var(--color-white);
+
+    font-size: 12px;
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.gm-marker.is-origin,
+.gm-marker.is-dest,
+.is-waypoint-2,
+.is-waypoint-3,
+.is-waypoint-4 {
+    border: var(--color-main) 3px solid;
+}
+
+.is-origin,
+.is-waypoint-2,
+.is-waypoint-3,
+.is-waypoint-4,
+.is-dest {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.is-origin {
+    background: url("/static/images/course/date1.png") center/cover;
+}
+
+.is-waypoint-2 {
+    background: url("/static/images/course/date2.png") center/cover;
+}
+
+.is-waypoint-3 {
+    background: url("/static/images/course/date3.png") center/cover;
+}
+
+.is-waypoint-4 {
+    background: url("/static/images/course/date4.png") center/cover;
+}
+
+.is-dest {
+    background: url("/static/images/course/date5.png") center/cover;
+}
+
+.gm-marker-ttl {
+    top: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: fit-content;
+
+    background: #fff;
+    color: #333;
+
+    border: #333 1px solid;
+
+    padding: 6px 10px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    white-space: nowrap;
+}
+
+
+.gm-marker-ttl,
+.gm-marker-sub {
+    position: absolute;
+
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.gm-marker:hover .gm-marker-ttl,
+.gm-marker:hover .gm-marker-sub {
+    opacity: 1;
+}
+
+/* タイトルと補足 */
+.gm-marker-ttl {
+    font-size: 10px;
+}
+
+.gm-marker-sub {
+    font-size: 8px;
+}
+
+
+
+
+
+
+
+
 
 /* スマホ対応：リストを下に持ってくる、または隠す */
 @media screen and (max-width: 768px) {
     .course-wrapper {
         flex-direction: column;
     }
+
     .route-list {
         flex: 0 0 40%;
         width: 100%;
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.plan {
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.plan-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.plan-time {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.spot {
+    position: relative;
+    background: #fff;
+    padding: 20px 20px 20px 50px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 丸番号 */
+.spot::before {
+    content: attr(data-no);
+    position: absolute;
+    top: 16px;
+    left: 16px;
+
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+
+    background: #111;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spot-time {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.spot h3 {
+    margin: 0 0 5px;
+    font-size: 18px;
+}
+
+.spot p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.transit {
+    margin-left: 40px;
+    padding: 10px 0;
+}
+
+/* 縦ライン */
+.jc-plan-spot__transit-timetable::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 20px;
+    width: 2px;
+    height: 100%;
+    background: #ddd;
+    z-index: -100;
+}
+
+/* 
+.transit::before {
+    content: "";
+    position: absolute;
+    left: -26px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 10px;
+    height: 10px;
+    background: #999;
+    border-radius: 50%;
+} */
+
+svg {
+    width: 16px;
+    height: 16px;
+    display: block;
+}
+
+.jc-plan-spot__transit-badge-icon-circle {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.jc-plan-spot__transit-info {
+    display: flex;
+    justify-content: start;
 }

@@ -1,4 +1,5 @@
-/* 部品のCSS ハンバーガーメニュー, ヘッダー, ナビゲーション, パンくず, フッター, 天気予報 */
+/* 部品のCSS ハンバーガーメニュー, ヘッダー, ナビゲーション, パンくず, フッター, 天気予報
+0501時点での最新 */
 
 /* ===================
     partials/hamburger.html 開始
@@ -132,6 +133,7 @@
     align-items: center;
     justify-content: space-between;
     /* padding: 0 20px; */
+    /* ロゴが一番左になる */
 }
 
 /* 各ページタイトル用ヘッダー 共通ページヘッダーの下に表示される */
@@ -317,7 +319,6 @@ partials/footer.html 開始
     display: flex;
     justify-content: center;
     position: absolute;
-    /* right: 90px; */
     right: 50px;
     /* ハンバーガーとの距離 */
     top: 50%;
@@ -427,6 +428,43 @@ partials/footer.html 開始
 =================== */
 
 /* ===================
+    検索用CSS in partials/humberger.html 開始
+=================== */
+
+.header-search {
+    position: absolute;
+    right: 200px;
+    /* ←ここで位置調整（超重要） */
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.header-search input {
+    border: none;
+    outline: none;
+    padding: 5px 10px;
+    width: 110px;
+}
+
+.header-search button {
+    border: none;
+    background: #0ABAB5;
+    color: #fff;
+    padding: 5px 8px;
+}
+
+/* ===================
+    検索用CSS in partials/humberger.html 終了
+=================== */
+
+
+/* ===================
     パンくず in macros/breadcrumb.html 開始
 =================== */
 
@@ -464,3 +502,64 @@ partials/footer.html 開始
 /* ===================
     パンくず in macros/breadcrumb.html 終了
 =================== */
+
+/* ===================
+    スマホ用：ナビ内検索表示
+=================== */
+
+/* スマホはヘッダー検索消す */
+@media (max-width: 768px) {
+    .header-search {
+        display: none !important;
+    }
+
+    .nav-search {
+        display: block;
+    }
+}
+
+/* PCはナビ検索消す */
+@media (min-width: 769px) {
+    .nav-search {
+        display: none;
+    }
+}
+
+/* スマホはナビ検索デザイン */
+.nav-search {
+    margin: 15px;
+}
+
+/* 横並びキープ */
+.nav-search form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background: #fff;
+    border-radius: 999px;
+    /* ←丸く戻す */
+    overflow: hidden;
+}
+
+/* 入力 */
+.nav-search input {
+    flex: 1;
+    min-width: 0;
+
+    border: none;
+    outline: none;
+    padding: 8px 12px;
+
+    font-size: 14px;
+    background: transparent;
+}
+
+/* ボタン */
+.nav-search button {
+    border: none;
+    background: #0ABAB5;
+    color: #fff;
+
+    padding: 8px 12px;
+    cursor: pointer;
+}

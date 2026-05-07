@@ -38,7 +38,7 @@
 .pankz a,
 .box01 a,
 .box02 a,
-.box03 a{
+.box03 a {
     background: none;
     padding: 0;
     border: none;
@@ -55,7 +55,9 @@
     /* もし残ってたら消す */
 }
 
-.box01 h1,.box03 h1,.box04 h1 {
+.box01 h1,
+.box03 h1,
+.box04 h1 {
     text-align: center;
     background-color: rgb(245, 245, 245);
     padding: 10px 12px;
@@ -64,8 +66,9 @@
     letter-spacing: 10px;
 }
 
-.box01 h1, .box04 h1 {
-    color:var(--color-main);
+.box01 h1,
+.box04 h1 {
+    color: var(--color-main);
 }
 
 .box02 {
@@ -101,15 +104,15 @@ label {
     font-weight: bold;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-textarea {
+.contact-container input[type="text"],
+.contact-container input[type="email"],
+.contact-container input[type="tel"],
+.contact-container textarea {
+    width: 100%;
     border: 1px solid #bbb;
     border-radius: 10px;
     background: #fff;
     padding: 10px 12px;
-    width: 100%;
     box-sizing: border-box;
     outline: none;
     margin-top: 5px;
@@ -127,7 +130,7 @@ select {
 }
 
 /* フォーカス */
-input:focus,
+.contact-container input:focus,
 textarea:focus,
 select:focus {
     border-color: var(--color-main);
@@ -140,9 +143,10 @@ textarea {
     resize: vertical;
 }
 
+/* 0502変更 */
 /* ボタン */
-input[type="submit"],
-button[type="submit"] {
+.contact-container input[type="submit"],
+.contact-container button[type="submit"] {
     /* margin-top: 30px; */
     padding: 12px;
     width: 200px;
@@ -161,7 +165,7 @@ button[type="submit"] {
     color: #fff;
     cursor: not-allowed;
     opacity: 0.7;
-    border:none;
+    border: none;
 }
 
 /* チェック後（押せる状態） */
@@ -181,7 +185,7 @@ button[type="submit"] {
     margin-top: 5px;
 }
 
-input[type="checkbox"] {
+.contact-container input[type="checkbox"] {
     /* accent-color: #1e90ff;
     width: auto;
     margin-right: 8px; */
@@ -193,13 +197,13 @@ input[type="checkbox"] {
     cursor: pointer;
 }
 
-input[type="checkbox"]:checked {
+.contact-container input[type="checkbox"]:checked {
     background: none;
     border-color: none;
 }
 
 /* チェックマーク */
-input[type="checkbox"]:checked::after {
+.contact-container input[type="checkbox"]:checked::after {
     content: "";
     position: absolute;
     top: 1px;
@@ -297,7 +301,8 @@ input[type="checkbox"]:checked::after {
     /* もし残ってたら消す */
 }
 
-form {
+/* 0502変更 */
+.contact-container form {
     width: 90%;
     max-width: 600px;
     margin: 0 auto;
@@ -393,7 +398,8 @@ form {
     display: none;
 }
 
-input[type="hidden"] {
+/* 0502変更 */
+.contact-container input[type="hidden"] {
     display: none !important;
     background: transparent !important;
     color: transparent !important;
@@ -498,16 +504,18 @@ input[type="hidden"] {
         padding: 20px;
     }
 
+    /* 0502変更 */
     /* フォーム幅調整 */
-    form {
+    .contact-container form {
         max-width: 600px;
         margin: 0 auto;
         padding: 0 15px;
     }
 
+    /* 0502変更 */
     /* 入力欄をスマホで押しやすく */
-    input[type="text"],
-    input[type="email"],
+    .contact-container input[type="text"],
+    .contact-container input[type="email"],
     textarea,
     select {
         font-size: 16px;
@@ -516,8 +524,9 @@ input[type="hidden"] {
         border-radius: 6px;
     }
 
+    /* 0502変更 */
     /* ボタン大きく */
-    input[type="submit"] {
+    .contact-container input[type="submit"] {
         font-size: 16px;
         padding: 14px;
     }
@@ -532,25 +541,28 @@ input[type="hidden"] {
         font-size: 16px;
     }
 
-@media screen and (max-width: 768px) {
+    @media screen and (max-width: 768px) {
 
-    body {
-        font-size: 13px;
-    }
+        body {
+            font-size: 13px;
+        }
 
-    h3 {
-        font-size: 15px;
-    }
+        h3 {
+            font-size: 15px;
+        }
 
-    input,
-    textarea,
-    select {
-        font-size: 16px;
-        /* ここは維持（ズーム防止） */
-    }
+        /* 0502変更 */
+        .contact-container input,
+        textarea,
+        select {
+            font-size: 16px;
+            /* ここは維持（ズーム防止） */
+        }
 
-    .detail-table th {
-    width: 30%;
-    padding: 0 8px;
+
+        .detail-table th {
+        width: 30%;
+        padding: 0 8px;
+        }
     }
-}}
+}

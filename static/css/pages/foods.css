@@ -218,7 +218,6 @@ footer {
     gap: 40px;
     margin: 100px auto;
     max-width: 1200px;
-    align-items: flex-start;
 }
 
 .gallery-image {
@@ -243,7 +242,7 @@ footer {
     top: 10px;
     left: 10px;
     right: 10px;
-    bottom: 19px;
+    bottom: 10px;
     border: 2px solid white;
     pointer-events: none;
     z-index: 2;
@@ -291,11 +290,113 @@ footer {
 }
 
 
-/* ４月２４日iphoneX表示用に追記 */
+/* ==========================================
+　4月28日追記ギャラリータイトル
+   ========================================== */
+.gallery-title {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 6px 12px;
+    border-radius: 4px;
+    z-index: 3;
+    backdrop-filter: blur(4px);
+}
+
+
+/* ==========================================
+   4月30日追加　ギャラリー強化
+   ========================================== */
+
+/* メイン画像をアニメーション対応 */
+.gallery-image {
+    position: relative;
+    overflow: hidden;
+}
+
+.gallery-image img {
+    transition: opacity 0.3s ease;
+}
+
+/* ▼ 下からのグラデーション（ブランドカラー） */
+.gallery-image::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 45%;
+    background: linear-gradient(to top,
+            rgba(10, 186, 181, 0.6),
+            transparent);
+    z-index: 2;
+}
+
+/* ▼ タイトル（左下＋ブランドカラー） */
+.gallery-title {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: bold;
+
+    background: rgba(10, 186, 181, 0.85);
+    padding: 10px 16px;
+    border-radius: 8px;
+
+    z-index: 3;
+    backdrop-filter: blur(6px);
+    letter-spacing: 0.05em;
+}
+
+/* ▼ サムネイルリッチに */
+.gallery-thumbnails img {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.gallery-thumbnails img:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+}
+
+.gallery-title {
+    position: absolute;
+
+    /* ▼ 左下に移動 */
+    bottom: 20px;
+    left: 20px;
+    top: auto;
+    /* ←これ重要（上固定を解除） */
+
+    /* ▼ 見た目 */
+    color: #fff;
+    font-size: 1.3rem;
+    font-weight: bold;
+
+    /* ▼ 背景を“文字サイズだけ”にする */
+    display: inline-block;
+    /* ←これが超重要 */
+    width: auto;
+
+    background: rgba(10, 186, 181, 0.9);
+    padding: 8px 14px;
+    border-radius: 6px;
+
+    z-index: 3;
+}
+
+/* ４月２４日iphoneX表示用に追記
+5/1に480pxから760px以下に変更 */
 /* ==========================================
     iPhoneXなどスマホ最適化（追加のみ）
    ========================================== */
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 760px) {
 
     /* ▼ 横並び → 縦並び（ここが最重要） */
     .add-bg-history .row {

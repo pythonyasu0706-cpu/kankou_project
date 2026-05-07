@@ -10,13 +10,6 @@
     </div>
 
     <div class="header-wrapper-right">
-        <!-- 🔍 検索バー追加 -->
-        <form action="https://www.google.com/search" method="get" class="header-search">
-            <input type="text" name="q" placeholder="Google検索">
-            <button type="submit">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-        </form>
         <!-- 追加：天気 -->
         <div class="header-weather">
             <a href="https://weathernews.jp/onebox/tenki/fukuoka/" target="_blank" class="weather-header-link">
@@ -38,15 +31,6 @@
 <!-- メニュー -->
 <nav class="nav" id="nav">
     <ul>
-        <!-- 検索バー　ハンバーガーメニュー分 -->
-        <li class="nav-search">
-            <form action="https://www.google.com/search" method="get">
-                <input type="text" name="q" placeholder="Google検索">
-                <button type="submit"><i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </form>
-        </li>
-        <!-- 検索バー　ハンバーガーメニュー分 終了-->
         <li><a href="{{ url_for('index') }}">TOP</a></li>
         <li><a href="{{ url_for('spots') }}">おすすめスポット</a></li>
         <li><a href="{{ url_for('foods') }}">ご当地グルメ</a></li>

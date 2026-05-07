@@ -113,6 +113,15 @@
     border-radius: 15px 15px 0 0;
 }
 
+.card {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: inherit;
+}
+
+
 
 /* =========================
 波
@@ -443,7 +452,13 @@ iPhone X / スマホ 縦持ち用 (Portrait)
         width: 85%;
         /* タイトルロゴが画面いっぱいに広がりすぎないよう調整 */
     }
+
+    .card-couple .card-sla {
+        object-fit: cover;
+        object-position: right 20%;
+    }
 }
+
 
 /* =========================
 iPhone X / スマホ 横持ち用 (Landscape)

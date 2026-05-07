@@ -16,9 +16,10 @@ from dotenv import load_dotenv
 import logging
 import os
 
+# 0502 追記
 load_dotenv(os.path.join(os.path.dirname(__file__), '.env'))
 
-# ログ設定
+# ログ設定 0502追記
 log_dir = "logs"
 os.makedirs(log_dir, exist_ok=True)
 
@@ -33,13 +34,14 @@ logging.basicConfig(
 
 # Flozen-Flask
 # from flask_frozen import Freezer
-
 # ================
 # インスタンス生成
 # ================
 app = Flask(__name__)
+
 # flozen-flask
 # freezer = Freezer(app)
+
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
 app.config['API_KEY'] = os.environ.get('API_KEY')
 
@@ -59,6 +61,7 @@ def spots():
             "text": "福岡市中央区にある大きな池を中心とした公園。散歩やランニングコースとして人気があり、自然を感じながらゆったり過ごすことができます。",
             "image": "spot/ohorikouen.jpg",
             "alt": "大濠公園1",
+            # 0502追記
             "lat": 33.58650763843376,
             "lon": 130.3765841848311,
             "weather_id": "ohori-weather"
@@ -68,6 +71,7 @@ def spots():
             "text": "選び抜かれた新鮮な牛もつと、甘みを増した野菜が共演する滋味深い味わい。素材の旨みが溶け出した秘伝のスープが、二人の心と身体を芯から温めてくれます。",
             "image": "spot/momochihama.jpg",
             "alt": "福岡タワー1",
+            # 0502追記
             "lat": 33.593644949724855,
             "lon": 130.35168524200876,
             "weather_id": "fukuokatower-weather"
@@ -77,41 +81,35 @@ def spots():
             "text": "学問の神様・菅原道真を祀る神社。受験シーズンには多くの参拝客が訪れ、周辺では名物の梅ヶ枝餅も楽しめます。",
             "image": "spot/dazaifutenmangu.jpg",
             "alt": "太宰府天満宮1",
+            # 0502追記
             "lat": 33.52178626549702,
             "lon": 130.5348432124952,
             "weather_id": "dazaifu-weather"
-
         }
     ]
 
     spots_gallery = [
-        {"image": "spot/dontaku.jpg", "alt": "スポット2"},
-        {"image": "spot/jazz.jpg", "alt": "スポット3"},
-        {"image": "spot/kushdajinjya.jpg", "alt": "スポット4"},
-        {"image": "spot/maidurukouen.jpg", "alt": "スポット5"},
-        {"image": "spot/marineworld.jpg", "alt": "スポット6"},
-        {"image": "spot/nakasu.jpg", "alt": "スポット7"},
-        {"image": "spot/nemophila.jpg", "alt": "スポット8"},
-        {"image": "spot/nishinakasu.jpg", "alt": "スポット9"},
-        {"image": "spot/tenjinNishikouoen.jpg", "alt": "スポット10"}
+        {"image": "images/spot/dontaku.jpg", "alt": "博多どんたく", "title": "博多どんたく"},
+        {"image": "images/spot/jazz.jpg", "alt": "ジャズ", "title": "中州ジャズフェスティバル"},
+        {"image": "images/spot/kushdajinjya.jpg", "alt": "櫛田神社", "title": "櫛田神社"},
+        {"image": "images/spot/maidurukouen.jpg", "alt": "舞鶴公園", "title": "舞鶴公園"},
+        {"image": "images/spot/marineworld.jpg", "alt": "マリンワールド", "title": "マリンワールド"},
+        {"image": "images/spot/nakasu.jpg", "alt": "中洲", "title": "中洲"},
+        {"image": "images/spot/nemophila.jpg", "alt": "ネモフィラ", "title": "海の中道公園ネモフィラ"},
+        {"image": "images/spot/nishinakasu.jpg", "alt": "西中洲", "title": "西中洲"},
+        {"image": "images/spot/tenjinNishikouoen.jpg", "alt": "天神西公園", "title": "天神公園"}
     ]
 
     return render_template(
         "spots.html", 
-        spots=spots,
-        API_KEY=os.environ.get("API_KEY"),
+        spots=spots, 
+        API_KEY=os.environ.get("API_KEY"), # 0502追記
         gallery=spots_gallery,
         breadcrumb_items=[
             {"label": "Home", "url": url_for("index")},
             {"label": "スポット"}
         ]
     )
-
-@app.route("/spots/<name>")
-def spot_detail(name):
-    return f"{name}の詳細" 
-    # 上はテスト用本番は下を使用
-    # return render_template("spot_detail.html", name=name)
 
 @app.route("/foods")
 def foods():
@@ -137,15 +135,15 @@ def foods():
     ]
 
     foods_gallery = [
-        {"image": "food/ramen02.jpg", "alt": "グルメ2"},
-        {"image": "food/ramen03.jpg", "alt": "グルメ3"},
-        {"image": "food/ramen5000yen.jpg", "alt": "グルメ4"},
-        {"image": "food/motsunabe02.jpg", "alt": "グルメ5"},
-        {"image": "food/motsunabe03.jpg", "alt": "グルメ6"},
-        {"image": "food/motsunabe04.jpg", "alt": "グルメ7"},
-        {"image": "food/mentai02.jpg", "alt": "グルメ8"},
-        {"image": "food/mentai03.jpg", "alt": "グルメ9"},
-        {"image": "food/mentai04.jpg", "alt": "グルメ10"}
+        {"image": "images/food/ramen02.jpg", "alt": "グルメ2", "title": "屋台ラーメン"},
+        {"image": "images/food/ramen03.jpg", "alt": "グルメ3", "title": "ラーメン"},
+        {"image": "images/food/ramen5000yen.jpg", "alt": "グルメ4", "title": "おしゃれラーメン"},
+        {"image": "images/food/motsunabe02.jpg", "alt": "グルメ5", "title": "もつ鍋（具材）"},
+        {"image": "images/food/motsunabe03.jpg", "alt": "グルメ6", "title": "もつ鍋（スープ）"},
+        {"image": "images/food/motsunabe04.jpg", "alt": "グルメ7", "title": "もつ鍋完成"},
+        {"image": "images/food/mentai02.jpg", "alt": "グルメ8", "title": "明太子パスタ"},
+        {"image": "images/food/mentai03.jpg", "alt": "グルメ9", "title": "明太子フランス"},
+        {"image": "images/food/mentai04.jpg", "alt": "グルメ10", "title": "じゃが明太"}
     ]
 
     return render_template(
@@ -158,13 +156,8 @@ def foods():
         ]
     )
 
-@app.route("/foods/<name>")
-def food_detail(name):
-    return f"{name}の詳細" 
-    # 上はテスト用本番は下を使用
-    # return render_template("spot_detail.html", name=name)
 
-@app.route("/course")
+@app.route("/course/")
 def course():
     return render_template("" \
     "course.html",
@@ -195,21 +188,17 @@ def access():
         ]
     )
 
-# # お問い合わせ
-    
-# 
+# お問い合わせ
 # 入力ページ
 @app.route('/contact', methods=['GET','POST'])
 def contact():
     form = UserInfoForm()
 
-
     if form.validate_on_submit():
         return render_template('contact/confirm.html', form=form)
 
-
     return render_template(
-        'contact/contact.html',
+        'contact/contact.html', 
         form=form,
         breadcrumb_items=[
             {"label": "Home", "url": url_for("index")},
@@ -332,94 +321,6 @@ def send():
         success=success
     )
 
-    # 管理者宛
-#     msg = MIMEText(f"""
-# -------------------------
-# 資料請求: {', '.join(form.catalog.data) if form.catalog.data else 'なし'}
-# 件名: {form.title.data}
-# お名前: {form.name.data}
-# メール: {form.email.data}
-# 電話番号: {form.tel.data}
-# 住所: {form.address.data}
-# お問い合わせ内容:
-# {form.note.data}
-# -------------------------
-# """)
-#     msg['Subject'] = 'お問い合わせ受信'
-#     msg['From'] = os.environ.get("EMAIL_USER")
-#     msg['To'] = 's10ak025@gmail.com'
-
-
-    # 自動返信
-#     reply = MIMEText(f"""
-# {form.name.data} 様
-
-
-# このたびは福岡観光協会のお問い合わせフォームより
-# お問い合わせいただきありがとうございます。
-
-
-# 以下の内容で受け付けました。
-
-
-# -------------------------
-# 資料請求: {', '.join(form.catalog.data) if form.catalog.data else 'なし'}
-# 件名: {form.title.data}
-# お問い合わせ内容:
-# {form.note.data}
-# -------------------------
-
-
-# 内容を確認のうえ、担当者より順次ご返信させていただきます。
-# なお、内容によってはご返信まで数日いただく場合がございます。
-
-
-
-
-# あらかじめご了承くださいますようお願い申し上げます。
-
-
-
-
-# ────────────────────
-# 福岡観光協会
-# お問い合わせ窓口（自動返信メール）
-# ────────────────────
-# """)
-
-
-#     reply['Subject'] = '【福岡観光協会】お問い合わせ受付完了'
-#     reply['From'] = os.environ.get("EMAIL_USER")
-#     reply['To'] = form.email.data
-
-
-#     try:
-#         email_user = os.environ.get("EMAIL_USER")
-#         email_pass = os.environ.get("EMAIL_PASS")
-
-
-#         if not email_user or not email_pass:
-#             return "メール設定が不足しています"
-
-
-#         with smtplib.SMTP("smtp.gmail.com", 587, timeout=15) as smtp:
-#             smtp.set_debuglevel(1)
-#             smtp.ehlo()      # サーバーに挨拶
-#             smtp.starttls()  # 通信の暗号化（必須）
-#             smtp.ehlo()      # 暗号化後にもう一度挨拶
-#             smtp.login(email_user, email_pass)
-#             smtp.send_message(msg)
-#             smtp.send_message(reply)
-
-
-#     except Exception as e:
-#         print(f"Mail Error: {e}")
-#         # 本来はここでユーザーにエラーを表示するなどの処理
-#         return "メール送信に失敗しました。設定を確認してください。"
-
-
-#     return redirect(url_for('result'))
-
 
 # 完了
 @app.route('/contact/result')
@@ -520,30 +421,6 @@ def reopen_contact(id):
 
     return redirect(url_for("admin"))
 
-# テーブル作成
-# @app.route("/init-db")
-# def init_db():
-#     conn = get_db_connection()
-#     cur = conn.cursor()
-
-#     cur.execute("""
-#     CREATE TABLE IF NOT EXISTS contacts (
-#         id SERIAL PRIMARY KEY,
-#         name TEXT,
-#         email TEXT,
-#         tel TEXT,
-#         address TEXT,
-#         title TEXT,
-#         note TEXT,
-#         catalog TEXT,
-#         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-#     );
-#     """)
-
-#     conn.commit()
-#     conn.close()
-
-#     return "DB initialized!"
 
 # プライバシー
 @app.route("/privacy")
@@ -557,13 +434,11 @@ def privacy():
         ]
     )
 
+
 # ================
 # 実行
 # ================
 if __name__ == '__main__':
     # freezer.freeze()
-    # with app.app_context():
-    #     from init_db import create_table
-    #     create_table()
-    # app.run(debug=True, port=5001)
+
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))

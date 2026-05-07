@@ -22,7 +22,7 @@
         </div>
     </div>
 
-        <div class="container mgt50">
+    <div class="container mgt50">
         {% for food in foods %}
 
         <div class="row {% if not loop.first %}mgt50{% endif %}">
@@ -53,19 +53,26 @@
 </section>
 
 <!-- ギャラリー・グルメ -->
+
 <section class="gallery">
     <div class="gallery-image">
-        {{ image('food/ramen02.jpg', 'グルメ２', 'food-img') }}
+        <img id="main-image" class="spot-img">
+        <div class="gallery-title" id="gallery-title"></div>
+
     </div>
+
     <div class="gallery-content wrapper">
         <h2 class="title">～Gallery～</h2>
+
         <ul class="gallery-thumbnails">
             {% for g in gallery %}
             <li>
-                {{ image(g.image, g.alt, 'food-img') }}
+                <img src="{{ url_for('static', filename=g.image) }}" alt="{{ g.alt }}" class="spot-img"
+                    data-title="{{ g.title }}">
             </li>
             {% endfor %}
         </ul>
+
     </div>
 </section>
 

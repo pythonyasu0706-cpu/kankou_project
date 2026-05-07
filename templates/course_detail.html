@@ -1,11 +1,10 @@
 <!-- templates/partials/course_detail.html -->
 {% extends "base.html" %}
 
-{% set title = "福岡大人デートモデルコース" %}
+{% set title = "モデルコース詳細" %}
 
-{% block page_header %}
-{% include "partials/page_header.html" %}
-{% endblock %}
+<!-- TOPページは画像が大きく出るためヘッダー不要 -->
+{% set show_header = false %}
 
 {% block page_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/pages/course_detail.css') }}">
@@ -13,24 +12,211 @@
 
 {% block content %}
 <div class="course-wrapper">
+    <div id="map"></div>
     <div class="route-list">
-        <h1>このコースの詳細</h1>
-    
-        <button onclick="toggleRoute()" class="btn" style="width:100%; margin-bottom:20px;">
+
+        <button onclick="toggleRoute()" class="btn" style="width:fit-content; margin-bottom:20px;">
             ルートを表示/非表示
         </button>
-        
-        <ul>
-            <li>福岡空港:グルメ情報</li>
-            <li>ももち浜：夕方のおすすめ時間帯</li>
-            <li>福岡タワー：夜景ベストタイミング</li>
-        </ul>
+
+        <div class="plan">
+            <h2 class="plan-title">大人のデートプラン</h2>
+
+            <p class="plan-time">所要時間：4時間23分</p>
+
+            <div class="spot" data-no="1">
+                <div class="spot-time">12:00 - 13:00（60分）</div>
+                <h3>福岡空港：絶品ランチ</h3>
+                <p>旅の始まりは空港グルメから。洗練された店内で福岡の味を堪能。</p>
+            </div>
+
+            <!-- 移動UI Start -->
+            <div class="jc-plan-spot__transit">
+                <div class="jc-plan-spot__transit-timetable">
+                    <div class="jc-plan-spot__transit-timetable-line"></div>
+                    <!-- <div class="jc-plan-spot__transit-content-main"> -->
+                    <div class="jc-plan-spot__transit-view">
+                        <div class="jc-plan-spot__transit-info">
+                            <span class="jc-plan-spot__transit-badge-icon-circle"><svg
+                                    class="jc-icon jc-plan-spot__transit-badge-icon" data-icon-id="walking"
+                                    data-testid="walking" aria-hidden="true" focusable="false"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <g fill="currentColor">
+                                        <circle cx="325.55" cy="53.84" r="53.84"></circle>
+                                        <path
+                                            d="M315.85,482.66c-8.53-21.22-8-40.68-21.07-74.43-8.56-20.8-87.77-66.41-96.17-113.29s8.18-89.4,8.18-89.4l-25.6,11s-13.74,40-22.64,55.18S136,288,115.35,283.35c-17.24-10.6-16.91-24.31-12.85-37.2,10.19-26.05,19.66-54.67,43.82-82.75,12.77-15.3,18.72-19.82,60.47-35.15,32.35-6.78,39.11-8.49,65-7.15,27.67,1.33,18.69,1.53,35,3.14,27.29,3.54,48.36,26.92,59,48.42,9.84,19.94,14,49.83,25.54,67.54.19.31,20.58,3.3,36.78,20.24A31.76,31.76,0,0,1,438.54,284a30.8,30.8,0,0,1-30.71,30.91c-12.91,0-39.55-8.35-60.23-31.54s-26.47-53.2-26.47-53.2l-28.91,69.57s59.62,56.84,66.61,68.79c5,8.5,24.78,87,26.59,108.51,0,9.07-4.53,32.08-26.59,34.47S328.14,508.25,315.85,482.66Z">
+                                        </path>
+                                        <path
+                                            d="M174.25,321.76c7.15-15.74,18.24,8.66,32.77,26.8s32.18,9.23,31.59,22.54S215.43,421.29,191.67,446c-10,10.42-63.81,50.9-63.81,50.9s-30.43,11.41-44.61,0c-16-14.67-8.58-29.74-4.14-41.92s65.32-53.14,65.32-53.14S167.1,337.5,174.25,321.76Z">
+                                        </path>
+                                    </g>
+                                </svg></span><span class="jc-plan-spot__transit-info-text">5分</span>
+                        </div>
+                    </div>
+                    <!-- </div> -->
+                    <!-- <div><a class="jc-plan-spot__direction-btn" target="_blank"
+                            href="https://www.google.com/maps/dir/?api=1&amp;destination=33.591625%2C130.404426&amp;origin=33.591454%2C130.402435&amp;travelmode=walking"
+                            rel="noreferrer"><svg class="jc-icon jc-plan-spot__direction-btn-icon"
+                                data-icon-id="map-location" data-testid="map-location" aria-hidden="true"
+                                focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
+                                <path fill="currentColor"
+                                    d="M11.375,8.75H8.75A.875.875,0,0,1,8.75,7h2.625S14,4.074,14,2.625a2.625,2.625,0,0,0-5.25,0A5.768,5.768,0,0,0,9.989,5.25H8.75a2.625,2.625,0,0,0,0,
+                                    5.25h2.625a.875.875,0,0,1,0,1.75h-6.3A18.878,18.878,0,0,1,3.779,14h7.6a2.625,2.625,0,0,0,0-5.25Zm0-7a.875.875,0,1,1-.875.875A.874.874,0,0,1,11.375,
+                                    1.75ZM2.625,7A2.626,2.626,0,0,0,0,9.625C0,11.074,2.625,14,2.625,14S5.25,11.074,5.25,9.625A2.626,2.626,0,0,0,2.625,7Zm0,3.5A.875.875,0,1,1,3.5,9.625.874.874,0,0,1,2.625,10.5Z">
+                                </path>
+                            </svg><span>行き方</span></a></div> -->
+                </div>
+            </div>
+            <!-- 移動UI Finish -->
+
+
+            <div class="spot" data-no="2">
+                <div class="spot-time">13:40 - 14:25（45分）</div>
+                <h3>シーサイドももち</h3>
+                <p>海風を感じながら、人気のクレープやソフトクリームでリフレッシュ。</p>
+            </div>
+
+            <!-- 移動UI Start -->
+            <div class="jc-plan-spot__transit">
+                <div class="jc-plan-spot__transit-timetable">
+                    <div class="jc-plan-spot__transit-timetable-line"></div>
+                    <!-- <div class="jc-plan-spot__transit-content-main"> -->
+                    <div class="jc-plan-spot__transit-view">
+                        <div class="jc-plan-spot__transit-info">
+                            <span
+                                class="jc-plan-spot__transit-badge-icon-circle">
+                                <!-- <svg
+                                    class="jc-icon jc-plan-spot__transit-badge-icon" data-icon-id="walking"
+                                    data-testid="walking" aria-hidden="true" focusable="false"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <g fill="currentColor">
+                                        <circle cx="325.55" cy="53.84" r="53.84"></circle>
+                                    </g>
+                                </svg> -->
+                                <img src="" alt="地下鉄のアイコン">
+                                <img src="" alt="バスのアイコン">
+                            </span>
+                            <span class="jc-plan-spot__transit-info-text">40分</span>
+                        </div>
+                    </div>
+                    <!-- </div> -->
+                    <!-- <div><a class="jc-plan-spot__direction-btn" target="_blank"
+                            href="https://www.google.com/maps/dir/?api=1&amp;destination=33.591625%2C130.404426&amp;origin=33.591454%2C130.402435&amp;travelmode=walking"
+                            rel="noreferrer"><svg class="jc-icon jc-plan-spot__direction-btn-icon"
+                                data-icon-id="map-location" data-testid="map-location" aria-hidden="true"
+                                focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
+                                <path fill="currentColor"
+                                    d="M11.375,8.75H8.75A.875.875,0,0,1,8.75,7h2.625S14,4.074,14,2.625a2.625,2.625,0,0,0-5.25,0A5.768,5.768,0,0,0,9.989,5.25H8.75a2.625,2.625,0,0,0,0,
+                                    5.25h2.625a.875.875,0,0,1,0,1.75h-6.3A18.878,18.878,0,0,1,3.779,14h7.6a2.625,2.625,0,0,0,0-5.25Zm0-7a.875.875,0,1,1-.875.875A.874.874,0,0,1,11.375,
+                                    1.75ZM2.625,7A2.626,2.626,0,0,0,0,9.625C0,11.074,2.625,14,2.625,14S5.25,11.074,5.25,9.625A2.626,2.626,0,0,0,2.625,7Zm0,3.5A.875.875,0,1,1,3.5,9.625.874.874,0,0,1,2.625,10.5Z">
+                                </path>
+                            </svg><span>行き方</span></a></div> -->
+                </div>
+            </div>
+            <!-- 移動UI Finish -->
+
+            <div class="spot" data-no="3">
+                <div class="spot-time">14:30 - 15:30（60分）</div>
+                <h3>福岡タワー</h3>
+                <p>地上123mの展望室から、刻々と変わる福岡の街並みを一望。</p>
+            </div>
+
+            <!-- 移動UI Start -->
+            <div class="jc-plan-spot__transit">
+                <div class="jc-plan-spot__transit-timetable">
+                    <div class="jc-plan-spot__transit-timetable-line"></div>
+                    <!-- <div class="jc-plan-spot__transit-content-main"> -->
+                    <div class="jc-plan-spot__transit-view">
+                        <div class="jc-plan-spot__transit-info"><span
+                                class="jc-plan-spot__transit-badge-icon-circle"><svg
+                                    class="jc-icon jc-plan-spot__transit-badge-icon" data-icon-id="walking"
+                                    data-testid="walking" aria-hidden="true" focusable="false"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <g fill="currentColor">
+                                        <circle cx="325.55" cy="53.84" r="53.84"></circle>
+                                        <path
+                                            d="M315.85,482.66c-8.53-21.22-8-40.68-21.07-74.43-8.56-20.8-87.77-66.41-96.17-113.29s8.18-89.4,8.18-89.4l-25.6,11s-13.74,40-22.64,55.18S136,288,115.35,283.35c-17.24-10.6-16.91-24.31-12.85-37.2,10.19-26.05,19.66-54.67,43.82-82.75,12.77-15.3,18.72-19.82,60.47-35.15,32.35-6.78,39.11-8.49,65-7.15,27.67,1.33,18.69,1.53,35,3.14,27.29,3.54,48.36,26.92,59,48.42,9.84,19.94,14,49.83,25.54,67.54.19.31,20.58,3.3,36.78,20.24A31.76,31.76,0,0,1,438.54,284a30.8,30.8,0,0,1-30.71,30.91c-12.91,0-39.55-8.35-60.23-31.54s-26.47-53.2-26.47-53.2l-28.91,69.57s59.62,56.84,66.61,68.79c5,8.5,24.78,87,26.59,108.51,0,9.07-4.53,32.08-26.59,34.47S328.14,508.25,315.85,482.66Z">
+                                        </path>
+                                        <path
+                                            d="M174.25,321.76c7.15-15.74,18.24,8.66,32.77,26.8s32.18,9.23,31.59,22.54S215.43,421.29,191.67,446c-10,10.42-63.81,50.9-63.81,50.9s-30.43,11.41-44.61,0c-16-14.67-8.58-29.74-4.14-41.92s65.32-53.14,65.32-53.14S167.1,337.5,174.25,321.76Z">
+                                        </path>
+                                    </g>
+                                </svg></span><span class="jc-plan-spot__transit-info-text">5分</span></div>
+                    </div>
+                    <!-- </div> -->
+                    <!-- <div><a class="jc-plan-spot__direction-btn" target="_blank"
+                            href="https://www.google.com/maps/dir/?api=1&amp;destination=33.591625%2C130.404426&amp;origin=33.591454%2C130.402435&amp;travelmode=walking"
+                            rel="noreferrer"><svg class="jc-icon jc-plan-spot__direction-btn-icon"
+                                data-icon-id="map-location" data-testid="map-location" aria-hidden="true"
+                                focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
+                                <path fill="currentColor"
+                                    d="M11.375,8.75H8.75A.875.875,0,0,1,8.75,7h2.625S14,4.074,14,2.625a2.625,2.625,0,0,0-5.25,0A5.768,5.768,0,0,0,9.989,5.25H8.75a2.625,2.625,0,0,0,0,
+                                    5.25h2.625a.875.875,0,0,1,0,1.75h-6.3A18.878,18.878,0,0,1,3.779,14h7.6a2.625,2.625,0,0,0,0-5.25Zm0-7a.875.875,0,1,1-.875.875A.874.874,0,0,1,11.375,
+                                    1.75ZM2.625,7A2.626,2.626,0,0,0,0,9.625C0,11.074,2.625,14,2.625,14S5.25,11.074,5.25,9.625A2.626,2.626,0,0,0,2.625,7Zm0,3.5A.875.875,0,1,1,3.5,9.625.874.874,0,0,1,2.625,10.5Z">
+                                </path>
+                            </svg><span>行き方</span></a></div> -->
+                </div>
+            </div>
+            <!-- 移動UI Finish -->
+
+            <div class="spot" data-no="4">
+                <div class="spot-time">15:50 - 11:39（30分）</div>
+                <h3>天神：大人の隠れ家ディナー</h3>
+                <p>落ち着いたビストロやイタリアンで、上質な夜のひとときを。</p>
+            </div>
+
+            <!-- 移動UI Start -->
+            <div class="jc-plan-spot__transit">
+                <div class="jc-plan-spot__transit-timetable">
+                    <div class="jc-plan-spot__transit-timetable-line"></div>
+                    <!-- <div class="jc-plan-spot__transit-content-main"> -->
+                    <div class="jc-plan-spot__transit-view">
+                        <div class="jc-plan-spot__transit-info"><span
+                                class="jc-plan-spot__transit-badge-icon-circle"><svg
+                                    class="jc-icon jc-plan-spot__transit-badge-icon" data-icon-id="walking"
+                                    data-testid="walking" aria-hidden="true" focusable="false"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                    <g fill="currentColor">
+                                        <circle cx="325.55" cy="53.84" r="53.84"></circle>
+                                        <path
+                                            d="M315.85,482.66c-8.53-21.22-8-40.68-21.07-74.43-8.56-20.8-87.77-66.41-96.17-113.29s8.18-89.4,8.18-89.4l-25.6,11s-13.74,40-22.64,55.18S136,288,115.35,283.35c-17.24-10.6-16.91-24.31-12.85-37.2,10.19-26.05,19.66-54.67,43.82-82.75,12.77-15.3,18.72-19.82,60.47-35.15,32.35-6.78,39.11-8.49,65-7.15,27.67,1.33,18.69,1.53,35,3.14,27.29,3.54,48.36,26.92,59,48.42,9.84,19.94,14,49.83,25.54,67.54.19.31,20.58,3.3,36.78,20.24A31.76,31.76,0,0,1,438.54,284a30.8,30.8,0,0,1-30.71,30.91c-12.91,0-39.55-8.35-60.23-31.54s-26.47-53.2-26.47-53.2l-28.91,69.57s59.62,56.84,66.61,68.79c5,8.5,24.78,87,26.59,108.51,0,9.07-4.53,32.08-26.59,34.47S328.14,508.25,315.85,482.66Z">
+                                        </path>
+                                        <path
+                                            d="M174.25,321.76c7.15-15.74,18.24,8.66,32.77,26.8s32.18,9.23,31.59,22.54S215.43,421.29,191.67,446c-10,10.42-63.81,50.9-63.81,50.9s-30.43,11.41-44.61,0c-16-14.67-8.58-29.74-4.14-41.92s65.32-53.14,65.32-53.14S167.1,337.5,174.25,321.76Z">
+                                        </path>
+                                    </g>
+                                </svg></span><span class="jc-plan-spot__transit-info-text">5分</span></div>
+                    </div>
+                    <!-- </div> -->
+                    <!-- <div><a class="jc-plan-spot__direction-btn" target="_blank"
+                            href="https://www.google.com/maps/dir/?api=1&amp;destination=33.591625%2C130.404426&amp;origin=33.591454%2C130.402435&amp;travelmode=walking"
+                            rel="noreferrer"><svg class="jc-icon jc-plan-spot__direction-btn-icon"
+                                data-icon-id="map-location" data-testid="map-location" aria-hidden="true"
+                                focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 14">
+                                <path fill="currentColor"
+                                    d="M11.375,8.75H8.75A.875.875,0,0,1,8.75,7h2.625S14,4.074,14,2.625a2.625,2.625,0,0,0-5.25,0A5.768,5.768,0,0,0,9.989,5.25H8.75a2.625,2.625,0,0,0,0,
+                                    5.25h2.625a.875.875,0,0,1,0,1.75h-6.3A18.878,18.878,0,0,1,3.779,14h7.6a2.625,2.625,0,0,0,0-5.25Zm0-7a.875.875,0,1,1-.875.875A.874.874,0,0,1,11.375,
+                                    1.75ZM2.625,7A2.626,2.626,0,0,0,0,9.625C0,11.074,2.625,14,2.625,14S5.25,11.074,5.25,9.625A2.626,2.626,0,0,0,2.625,7Zm0,3.5A.875.875,0,1,1,3.5,9.625.874.874,0,0,1,2.625,10.5Z">
+                                </path>
+                            </svg><span>行き方</span></a></div> -->
+                </div>
+            </div>
+            <!-- 移動UI Finish -->
+
+            <div class="spot" data-no="5">
+                <div class="spot-time">12:21 - 12:51（30分）</div>
+                <h3>福岡空港：国内線展望デッキ</h3>
+                <p>旅の締めくくりは滑走路の夜景。宝石のような光に包まれる特別な時間。</p>
+            </div>
+        </div>
     </div>
-    <div id="map"></div>
 </div>
 {% endblock %}
 
 {% block scripts %}
 <script src="{{ url_for('static', filename='js/map_course.js') }}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2n1f9uxcxM_PZL1qtcRyWEQ8ZMO4v7qg&callback=initMap" async defer></script>
+<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2n1f9uxcxM_PZL1qtcRyWEQ8ZMO4v7qg&callback=initMap&libraries=marker"
+    async defer></script>
+{{ super() }}
 {% endblock %}

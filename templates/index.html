@@ -136,9 +136,7 @@
 
             <div class="info-item">
                 <span class="info-date" data-date="2026-04-28">2026.05.03</span>
-                <p class="info-text">
                 <p class="info-text">博多どんたく港まつり開催｜約200万人が訪れる福岡最大の祭り</p>
-                </p>
             </div>
 
 
@@ -176,16 +174,20 @@
     <img class="pick-logo" src="static/images/top/pick.png">
     <section class="section">
 
-        <div class="card">
-            <img class="card-sla" src="static/images/top/couple.jpg">
-            <h3>福岡１日デートプラン</h3>
-            <p>迷ったらこれ。昼は自然・夜は夜景、20代カップル向け絶景スポットを巡る、大人の王道デートコース。</p>
+        <div class="card card-couple">
+            <a href="{{ url_for('course') }}" class="card">
+                <img class="card-sla" src="static/images/top/couple.jpg">
+                <h3>福岡１日デートプラン</h3>
+                <p>迷ったらこれ。昼は自然・夜は夜景、20代カップル向け絶景スポットを巡る、大人の王道デートコース。</p>
+            </a>
         </div>
 
         <div class="card">
-            <img class="card-sla" src="static/images/top/yata.jpg">
-            <h3>絶対外さない福岡ご当地グルメ</h3>
-            <p>博多ラーメンやもつ鍋など、地元で愛される名店を厳選。</p>
+            <a href="{{ url_for('foods') }}" class="card">
+                <img class="card-sla" src="static/images/top/yata.jpg">
+                <h3>絶対外さない福岡ご当地グルメ</h3>
+                <p>博多ラーメンやもつ鍋など、地元で愛される名店を厳選。</p>
+            </a>
         </div>
     </section>
 </div>

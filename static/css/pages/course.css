@@ -212,6 +212,17 @@
     display: none;
 }
 
+
+
+.detail-link {
+    width: fit-content;
+    transition: transform 0.2s ease;
+}
+
+.detail-link:hover {
+    transform: translateX(10px);
+}
+
 /* ==========================================
     ── ここから下がスマホ用 ──
    ========================================= */
@@ -272,10 +283,11 @@
         /* 絶対に改行させない指定 */
     }
 
+
+    /* mapに行くボタン */
     .detail-link {
-        width: 60%;
+        /* width: 60%; */
         padding: 0 auto;
         margin: 0 auto;
     }
-
 }
