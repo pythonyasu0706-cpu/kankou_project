@@ -17,7 +17,7 @@
 .container-fluid {
     max-width: 1000px;
     margin: 0 auto;
-    padding: var(--space-lg) 20px;
+    /* padding: var(--space-lg) 20px; */
 }
 
 /* 導入文の装飾 */
