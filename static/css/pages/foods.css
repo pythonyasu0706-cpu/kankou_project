@@ -420,7 +420,8 @@ footer {
     .add-bg-history img {
         width: 100%;
         height: auto;
-        margin-bottom: 15px;
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
 
     /* ▼ テキスト中央寄せ */
