@@ -65,11 +65,66 @@ document.querySelectorAll(".tab-btn").forEach(btn => {
 // 最初のエラーへスクロール
 // ===================
 
-const firstError = document.querySelector(".error-msg");
+document.addEventListener("DOMContentLoaded", function () {
 
-if (firstError) {
-    firstError.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-    });
-}
+    const firstError = document.querySelector(".error-msg");
+
+    // if (firstError) {
+
+    //     // スクロール
+    //     const y = firstError.getBoundingClientRect().top
+    //             + window.pageYOffset - 300;
+
+    //     window.scrollTo({
+    //         top: y,
+    //         behavior: "smooth"
+    //     });
+
+    //     // 同じform-group内の入力欄
+    //     const formGroup = firstError.closest(".form-group");
+
+    //     if (formGroup) {
+
+    //         // textarea → input → select の順で探す
+    //         const input =
+    //             formGroup.querySelector("textarea") ||
+    //             formGroup.querySelector("input") ||
+    //             formGroup.querySelector("select");
+
+    //         if (input) {
+    //             input.focus();
+    //         }
+    //     }
+    // }
+    if (firstError) {
+
+        // form-group取得
+        const formGroup = firstError.closest(".form-group");
+
+        if (formGroup) {
+
+            // ナビ高さ
+            const navHeight = 150;
+
+            // ナビ下へスクロール
+            const y = formGroup.getBoundingClientRect().top
+                    + window.pageYOffset
+                    - navHeight;
+
+            window.scrollTo({
+                top: y,
+                behavior: "smooth"
+            });
+
+            // 入力欄へフォーカス
+            const input =
+                formGroup.querySelector("textarea") ||
+                formGroup.querySelector("input") ||
+                formGroup.querySelector("select");
+
+            if (input) {
+                input.focus({ preventScroll: true });
+            }
+        }
+    }
+});
